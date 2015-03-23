@@ -1,5 +1,5 @@
 
-public class Clente {
+public class Cliente {
 	
 	public int nome;
 
