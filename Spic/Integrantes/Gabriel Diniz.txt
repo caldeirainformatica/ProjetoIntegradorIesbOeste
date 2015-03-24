@@ -1,0 +1,4 @@
+Nome: Gabriel Fernandes Diniz Bandeira
+Matricula: 14214290022
+Pontos Fortes: conhecimentos iniciais de MySQL.
+Pontos Fracos: pouco quase nenhum conhecimento em java.
