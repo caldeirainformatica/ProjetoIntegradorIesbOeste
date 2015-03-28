@@ -10,11 +10,16 @@ package Cadastro;
 
 public class CapituraFuncionario  {
 	
-//	int idFuncionario, cpfFuncionario;
-//	String nomeFuncionario, telefoneFuncionario, enderecoFuncionario, funcaoFuncionario;
+	int idFuncionario, cpfFuncionario;
+	String nomeFuncionario, telefoneFuncionario, enderecoFuncionario, funcaoFuncionario;
 
-public CapituraFuncionario(int idFuncionario, int cpfFuncionario, String nomeFuncionario, String telefoneFuncionario, String enderecoFuncionario, String funcaoFuncionario){
-	
+public CapituraFuncionario(int IdFuncionario, int CpfFuncionario, String NomeFuncionario, String TelefoneFuncionario, String EnderecoFuncionario, String FuncaoFuncionario){
+	idFuncionario = IdFuncionario;
+	cpfFuncionario = CpfFuncionario;
+	nomeFuncionario = NomeFuncionario;
+	telefoneFuncionario = TelefoneFuncionario;
+	enderecoFuncionario = EnderecoFuncionario;
+	funcaoFuncionario = FuncaoFuncionario;
 
 
 	private int getIdFuncionario() {
