@@ -9,20 +9,15 @@ package Cadastro;
  */
 public class Servicos {
 	private String nomeServico;
-	private String descricao;
-	private double preco;
+	private String descricaoServico;
+	private double precoServico;
 	/**
 	 * @return the nomeServico
 	 */
 	public String getNomeServico() {
 		return nomeServico;
 	}
-	public Servicos(String nomeServico, String descricao, double preco) {
-		super();
-		this.nomeServico = nomeServico;
-		this.descricao = descricao;
-		this.preco = preco;
-	}
+	
 	/**
 	 * @param nomeServico the nomeServico to set
 	 */
@@ -33,29 +28,34 @@ public class Servicos {
 	 * @return the descricao
 	 */
 	public String getDescricao() {
-		return descricao;
+		return descricaoServico;
 	}
 	/**
 	 * @param descricao the descricao to set
 	 */
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDescricaoServico(String descricaoServico) {
+		this.descricaoServico = descricaoServico;
 	}
 	/**
 	 * @return the preco
 	 */
-	public double getPreco() {
-		return preco;
+	public double getPrecoServico() {
+		return precoServico;
 	}
 	/**
 	 * @param preco the preco to set
 	 */
-	public void setPreco(double preco) {
-		this.preco = preco;
+	public void setPrecoServico(double preco) {
+		this.precoServico = preco;
 	}
 	
-		
-	
+	//metodo construtor do serviço com os parametros nomeServico, descricaoServico e preçoServico	
+	public Servicos(String nomeServico, String descricaoServico, double precoServico) {
+		super();
+		this.nomeServico = nomeServico;
+		this.descricaoServico = descricaoServico;
+		this.precoServico = precoServico;
+	}	
 	
 
 }
