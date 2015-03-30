@@ -8,5 +8,7 @@ package Cadastro;
  *
  */
 public class Produtos {
+	
+	int idProdutos;
 
 }
