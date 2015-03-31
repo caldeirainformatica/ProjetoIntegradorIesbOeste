@@ -3,64 +3,89 @@
  */
 package Cadastro;
 
+import java.sql.Date;
+
 /**
  * @author RicardoNote
  *
  */
 public class Produtos {
 	
-	public class Servicos {
-		private String nomeServico;
-		private String descricao;
-		private double preco;
-		/**
-		 * @return the nomeServico
-		 */
-		public String getNomeServico() {
-			return nomeServico;
-		}
-		public Servicos(String nomeServico, String descricao, double preco) {
-			super();
-			this.nomeServico = nomeServico;
-			this.descricao = descricao;
-			this.preco = preco;
-		}
-		/**
-		 * @param nomeServico the nomeServico to set
-		 */
-		public void setNomeServico(String nomeServico) {
-			this.nomeServico = nomeServico;
-		}
-		/**
-		 * @return the descricao
-		 */
-		public String getDescricao() {
-			return descricao;
-		}
-		/**
-		 * @param descricao the descricao to set
-		 */
-		public void setDescricao(String descricao) {
-			this.descricao = descricao;
-		}
-		/**
-		 * @return the preco
-		 */
-		public double getPreco() {
-			return preco;
-		}
-		/**
-		 * @param preco the preco to set
-		 */
-		public void setPreco(double preco) {
-			this.preco = preco;
-		}
-		
-			
-		
-		
-
+	private String descricao;
+	private String aplicacao;
+	private String medida;
+	private Boolean ativo;
+	private Date dataValidade;
+	private Date dataFabricacao;
+	private String lote;
+	
+	//getters and setters
+	private int codigoBarras;
+	public int getCodigoBarras() {
+		return codigoBarras;
 	}
+	public void setCodigoBarras(int codigoBarras) {
+		this.codigoBarras = codigoBarras;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	public String getAplicacao() {
+		return aplicacao;
+	}
+	public void setAplicacao(String aplicacao) {
+		this.aplicacao = aplicacao;
+	}
+	public String getMedida() {
+		return medida;
+	}
+	public void setMedida(String medida) {
+		this.medida = medida;
+	}
+	public Boolean getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+	public Date getDataValidade() {
+		return dataValidade;
+	}
+	public void setDataValidade(Date dataValidade) {
+		this.dataValidade = dataValidade;
+	}
+	public Date getDataFabricacao() {
+		return dataFabricacao;
+	}
+	public void setDataFabricacao(Date dataFabricacao) {
+		this.dataFabricacao = dataFabricacao;
+	}
+	public String getLote() {
+		return lote;
+	}
+	public void setLote(String lote) {
+		this.lote = lote;
+	}
+	
+	//método construtor
+	
+	public Produtos(int codigoBarras,String descricao,String aplicacao,String medida,Boolean ativo,Date dataValidade,Date dataFabricacao,String lote) {
+		
+		this.codigoBarras = codigoBarras;
+		this.descricao = descricao;
+		this.aplicacao = aplicacao;
+		this.medida =medida;
+		this.ativo = ativo;
+		this.dataValidade = dataValidade;
+		this.dataFabricacao = dataFabricacao;
+		this.lote = lote;
+	}
+	
+	
+	
 
 
 }
