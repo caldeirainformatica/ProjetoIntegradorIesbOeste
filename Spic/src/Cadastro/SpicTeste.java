@@ -1,7 +1,8 @@
 package Cadastro;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
+
+import conexoesBd.ArrayProdutos;
 
 public class SpicTeste {
 	
@@ -11,6 +12,9 @@ public class SpicTeste {
 		
 		Produtos prod = new Produtos(394843492," Molas para caminhão", "Fiat", "9mm", true,new Date(2015,3,2),new Date(1111,2,3) , "sdfs");
 		prod.mostraProduto();
+		ArrayProdutos bd = new ArrayProdutos();// classe que possui tabela de produtos.
+		 bd.adicionaProduto(prod);
+		 bd.pesquisarProdutos(prod,123123123);// Método da classe ArrayProdutos que procura cadastro pelo codigo de barras
 		
 	}
 
