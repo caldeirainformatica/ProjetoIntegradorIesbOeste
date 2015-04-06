@@ -2,7 +2,7 @@ package conexoesBd;
 
 import java.util.ArrayList;
 
-import Cadastro.Produtos;
+import Persistence.Produtos;
 
 /*
  * @author: Daniel Fiuza
@@ -38,7 +38,7 @@ public class ArrayProdutos {
 			}else{
 				
 				
-				System.out.println("Cadastro de produtos não encontrado!!");
+				System.out.println("Persistence de produtos não encontrado!!");
 			}
 			
 			

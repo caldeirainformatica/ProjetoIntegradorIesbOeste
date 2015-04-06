@@ -1,4 +1,4 @@
-package Cadastro;
+package Persistence;
 
 public class Funcionario {
 	

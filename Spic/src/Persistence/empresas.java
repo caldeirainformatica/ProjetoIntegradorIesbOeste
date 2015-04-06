@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Cadastro;
+package Persistence;
 
 /**
  * @author Ricardo Caldeira

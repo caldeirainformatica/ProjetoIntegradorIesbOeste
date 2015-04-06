@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Cadastro;
+package Persistence;
 
 
 import java.util.Date;

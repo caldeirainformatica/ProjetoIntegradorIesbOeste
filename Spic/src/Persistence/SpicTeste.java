@@ -1,4 +1,4 @@
-package Cadastro;
+package Persistence;
 
 import java.sql.Date;
 
