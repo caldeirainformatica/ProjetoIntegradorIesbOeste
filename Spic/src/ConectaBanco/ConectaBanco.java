@@ -13,7 +13,7 @@ public class ConectaBanco
     //private String senha = "";
     //*/
     //* String para conexão NAS NUVENS
-    private String caminho = "jdbc:mysql://db4free.net/banco";
+    private String caminho = "jdbc:mysql://db4free.net/spic";
     private String usuario = "masterspic"; 
     private String senha = "masterspic";
    // */
@@ -26,7 +26,7 @@ public class ConectaBanco
             conn = DriverManager.getConnection(caminho, usuario, senha);
             //JOptionPane.showMessageDialog(null, "Conectado com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro de conexão!\n Erro: "+ex.getMessage());
+           // JOptionPane.showMessageDialog(null, "Erro de conexão!\n Erro: "+ex.getMessage());
         }
     }
     public void desconectata()
@@ -35,7 +35,7 @@ public class ConectaBanco
             conn.close();
             //JOptionPane.showMessageDialog(null, "Desconectado com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro dao fechar a conexão!\n Erro: "+ex.getMessage());
+        //    JOptionPane.showMessageDialog(null, "Erro dao fechar a conexão!\n Erro: "+ex.getMessage());
         }
     }
     
@@ -46,7 +46,7 @@ public class ConectaBanco
             rs = stm.executeQuery(sql);
             return rs;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro de ExecutaSQL!\n Erro: "+ex.getMessage());
+         //   JOptionPane.showMessageDialog(null, "Erro de ExecutaSQL!\n Erro: "+ex.getMessage());
         }
         return null;
         

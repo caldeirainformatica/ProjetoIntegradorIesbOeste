@@ -79,35 +79,7 @@ public class Produtos {
 		return lote;
 	}
 	
-	// inicio dos setters 
-	
-	public void setCodigoBarras(int codigoBarras) {
 		
-		this.codigoBarras = codigoBarras;
-		
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	public void setAplicacao(String aplicacao) {
-		this.aplicacao = aplicacao;
-	}
-	public void setMedida(String medida) {
-		this.medida = medida;
-	}
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
-	public void setDataValidade(Date dataValidade) {
-		this.dataValidade = dataValidade;
-	}
-	public void setDataFabricacao(Date dataFabricacao) {
-		this.dataFabricacao = dataFabricacao;
-	}
-	public void setLote(String lote) {
-		this.lote = lote;
-	}
-	
 	
 	void mostraProduto(){
 		
