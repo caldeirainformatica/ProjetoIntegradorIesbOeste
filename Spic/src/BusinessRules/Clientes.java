@@ -1,19 +1,19 @@
 /**
  * 
  */
-package Persistence;
+package BusinessRules;
 
 /**
  * @author Geisson
  *
  */
 public class Clientes {
-	private String razãoSocial;
-	public Clientes(String razãoSocial, String cnpj_cpf, String ie_rg, String endereço, String numero,
-			String complemento, String telComercial, String telCelular, String contato, String situação,
+	private String razaoSocial;
+	public Clientes(String razaoSocial, String cnpj_cpf, String ie_rg, String endereço, String numero,
+			String complemento, String telComercial, String telCelular, String contato, String situacao,
 			String nomeCliente) {
 		super();
-		this.razãoSocial = razãoSocial;
+		this.razaoSocial = razaoSocial;
 		this.cnpj_cpf = cnpj_cpf;
 		this.ie_rg = ie_rg;
 		this.endereço = endereço;
@@ -22,7 +22,7 @@ public class Clientes {
 		this.telComercial = telComercial;
 		this.telCelular = telCelular;
 		this.contato = contato;
-		this.situação = situação;
+		this.situacao = situacao;
 		this.nomeCliente = nomeCliente;
 	}
 	private String cnpj_cpf;
@@ -33,7 +33,7 @@ public class Clientes {
 	private String telComercial;
 	private String telCelular;
 	private String contato;
-	private String situação;
+	private String situacao;
 	
 	private String nomeCliente;
 	/**
@@ -52,13 +52,13 @@ public class Clientes {
 	 * @return the razãoSocial
 	 */
 	public String getRazãoSocial() {
-		return razãoSocial;
+		return razaoSocial;
 	}
 	/**
 	 * @param razãoSocial the razãoSocial to set
 	 */
 	public void setRazãoSocial(String razãoSocial) {
-		this.razãoSocial = razãoSocial;
+		this.razaoSocial = razãoSocial;
 	}
 	/**
 	 * @return the cnpj_cpf
@@ -159,14 +159,14 @@ public class Clientes {
 	/**
 	 * @return the situação
 	 */
-	public String getSituação() {
-		return situação;
+	public String getSituacao() {
+		return situacao;
 	}
 	/**
 	 * @param situação the situação to set
 	 */
-	public void setSituação(String situação) {
-		this.situação = situação;
+	public void setSituação(String situacao) {
+		this.situacao = situacao;
 	}
 	
 	

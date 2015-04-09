@@ -1,4 +1,4 @@
-package Persistence;
+package BusinessRules;
 
 public class Funcionario {
 	

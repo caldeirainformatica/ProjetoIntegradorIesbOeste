@@ -1,6 +1,8 @@
-package ConectaBanco;
+package Persistence;
 
 import java.sql.*;
+
+import javax.swing.JOptionPane;
 
 public class ConectaBanco
 {
@@ -24,7 +26,7 @@ public class ConectaBanco
         try {
             System.setProperty("jdbc.Drivers", drive);
             conn = DriverManager.getConnection(caminho, usuario, senha);
-            //JOptionPane.showMessageDialog(null, "Conectado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Conectado com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro de conexão!\n Erro: "+ex.getMessage());
         }
@@ -33,7 +35,7 @@ public class ConectaBanco
     {
         try {
             conn.close();
-            //JOptionPane.showMessageDialog(null, "Desconectado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Desconectado com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro dao fechar a conexão!\n Erro: "+ex.getMessage());
         }

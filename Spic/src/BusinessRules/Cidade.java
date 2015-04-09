@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Persistence;
+package BusinessRules;
 
 /**
  * @author Ricardo Caldeira

@@ -1,13 +1,13 @@
 /**
  * 
  */
-package Persistence;
+package BusinessRules;
 
 /**
  * @author Ricardo Caldeira
  *
  */
-public class empresas {
+public class Empresas {
 	/**
 	 * @param idempresas
 	 * @param fantasia
@@ -23,7 +23,7 @@ public class empresas {
 	 * @param bairro_idbairro
 	 * @param cidades_idcidades
 	 */
-	public empresas(int idempresas, String fantasia, int cnpj, int ie,
+	public Empresas(int idempresas, String fantasia, int cnpj, int ie,
 			String endereco, int numero, String complemento, int telefone,
 			int celular, String contato, String endereco_idEndereco,
 			String bairro_idbairro, String cidades_idcidades) {
