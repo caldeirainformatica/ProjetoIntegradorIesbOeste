@@ -26,7 +26,9 @@ public class Produtos {
 	private String lote;
 	
 	//método construtor
-	
+	public Produtos(){
+		
+	}
 	
 	public Produtos(int idProdutos,int codigoBarras,String descricao,String aplicacao,String medida,Boolean ativo, Calendar dataValidade,  Calendar dataFabricacao,String lote) {
 		this.idProdutos = idProdutos;
