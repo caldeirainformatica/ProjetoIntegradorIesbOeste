@@ -14,7 +14,7 @@ public class ConectaBanco
    // private String usuario = "root";
     //private String senha = "";
     //*/
-    //* String para conexão NAS NUVENS
+    //* String para conexao NAS NUVENS
     private String caminho = "jdbc:mysql://db4free.net/banco";
     private String usuario = "masterspic"; 
     private String senha = "masterspic";

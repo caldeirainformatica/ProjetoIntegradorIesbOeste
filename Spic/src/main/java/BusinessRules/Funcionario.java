@@ -1,6 +1,6 @@
 package BusinessRules;
 
-public class Funcionario {
+public abstract class Funcionario {
 	
 	
 	

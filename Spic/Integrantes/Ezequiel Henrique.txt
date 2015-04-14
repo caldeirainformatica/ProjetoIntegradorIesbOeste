@@ -1,11 +1,7 @@
 Nome: Ezequiel Henrique Araujo
 Matricula: 14214290031  
 Pontos Fortes: disposto a aprender, pois ainda estou iniciando na area.
-<<<<<<< HEAD
-Pontos Fracos: Sou inexperiente com programacao...
-=======
 Pontos Fracos: Sou inexperiente com programacao...
 
 
 O eclipse no IESB não estava funcionando, impossível instalar GitHub. Farei o mesmo em casa.
->>>>>>> branch 'master' of https://github.com/ricardocaldeira/Spic.git

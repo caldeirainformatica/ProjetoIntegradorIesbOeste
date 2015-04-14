@@ -3,6 +3,8 @@
  */
 package BusinessRules;
 
+import java.util.InputMismatchException;
+
 /**
  * @author Ricardo Caldeira
  *
@@ -23,11 +25,30 @@ public class Empresas {
 	 * @param bairro_idbairro
 	 * @param cidades_idcidades
 	 */
+	private int idempresas;
+	private String fantasia;
+	private long cnpj;
+	private int ie;
+	private String endereco;
+	private int numero;
+	private String complemento;
+	private int telefone;
+	private int celular;
+	private String contato;
+	private String endereco_idEndereco;
+	private String bairro_idbairro;
+	private String cidades_idcidades;
+	
+	public Empresas(){ 
+		
+	}
+		
+	
 	public Empresas(int idempresas, String fantasia, int cnpj, int ie,
 			String endereco, int numero, String complemento, int telefone,
 			int celular, String contato, String endereco_idEndereco,
 			String bairro_idbairro, String cidades_idcidades) {
-		super();
+	super();
 		this.idempresas = idempresas;
 		this.fantasia = fantasia;
 		this.cnpj = cnpj;
@@ -42,19 +63,7 @@ public class Empresas {
 		this.bairro_idbairro = bairro_idbairro;
 		this.cidades_idcidades = cidades_idcidades;
 	}
-	private int idempresas;
-	private String fantasia;
-	private int cnpj;
-	private int ie;
-	private String endereco;
-	private int numero;
-	private String complemento;
-	private int telefone;
-	private int celular;
-	private String contato;
-	private String endereco_idEndereco;
-	private String bairro_idbairro;
-	private String cidades_idcidades;
+
 	/**
 	 * @return the idempresas
 	 */
@@ -65,6 +74,7 @@ public class Empresas {
 	 * @param idempresas the idempresas to set
 	 */
 	public void setIdempresas(int idempresas) {
+		
 		this.idempresas = idempresas;
 	}
 	/**
@@ -82,15 +92,20 @@ public class Empresas {
 	/**
 	 * @return the cnpj
 	 */
-	public int getCnpj() {
+	public long getCnpj() {
 		return cnpj;
 	}
 	/**
 	 * @param cnpj the cnpj to set
 	 */
-	public void setCnpj(int cnpj) {
-		this.cnpj = cnpj;
-	}
+	public void setCnpj(long cnpj) {
+		
+			this.cnpj = cnpj;
+	
+
+		}	
+	
+	
 	/**
 	 * @return the ie
 	 */

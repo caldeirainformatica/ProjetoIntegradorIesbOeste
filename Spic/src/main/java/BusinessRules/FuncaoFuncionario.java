@@ -7,7 +7,7 @@ package BusinessRules;
  * @author RicardoNote
  *
  */
-public class FuncaoFuncionario {
+public class FuncaoFuncionario extends Funcionario{
 	private String descricaoFuncao;
 
 	/**

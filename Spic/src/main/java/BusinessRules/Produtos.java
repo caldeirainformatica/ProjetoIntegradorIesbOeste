@@ -4,7 +4,9 @@
 package BusinessRules;
 
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 /**
@@ -19,14 +21,14 @@ public class Produtos {
 	private String aplicacao;
 	private String medida;
 	private Boolean ativo;
-	private Date dataValidade;
+	private Calendar dataValidade;
 	private Date dataFabricacao;
 	private String lote;
 	
 	//método construtor
 	
 	
-	public Produtos(int idProdutos,int codigoBarras,String descricao,String aplicacao,String medida,Boolean ativo, Date dataValidade,  Date dataFabricacao,String lote) {
+	public Produtos(int idProdutos,int codigoBarras,String descricao,String aplicacao,String medida,Boolean ativo, Calendar dataValidade,  Date dataFabricacao,String lote) {
 		this.idProdutos = idProdutos;
 		this.codigoBarras = codigoBarras;
 		this.descricao = descricao;
@@ -72,7 +74,7 @@ public class Produtos {
 		return ativo;
 	}
 
-	public Date getDataValidade() {
+	public Calendar getDataValidade() {
 		return dataValidade;
 	}
 
@@ -107,9 +109,6 @@ public class Produtos {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	public void setDataValidade(Date dataValidade) {
-		this.dataValidade = dataValidade;
-	}
 	public void setDataFabricacao(Date dataFabricacao) {
 		this.dataFabricacao = dataFabricacao;
 	}
@@ -125,6 +124,9 @@ public class Produtos {
 		System.out.println();
 		
 	
+	}
+	public void setDataValidade(int dia, int mes, int ano) {
+		this.dataValidade = new GregorianCalendar(ano, mes, dia);
 	}
 	
 	
