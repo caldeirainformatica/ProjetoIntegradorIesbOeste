@@ -22,13 +22,13 @@ public class Produtos {
 	private String medida;
 	private Boolean ativo;
 	private Calendar dataValidade;
-	private Date dataFabricacao;
+	private Calendar dataFabricacao;
 	private String lote;
 	
 	//método construtor
 	
 	
-	public Produtos(int idProdutos,int codigoBarras,String descricao,String aplicacao,String medida,Boolean ativo, Calendar dataValidade,  Date dataFabricacao,String lote) {
+	public Produtos(int idProdutos,int codigoBarras,String descricao,String aplicacao,String medida,Boolean ativo, Calendar dataValidade,  Calendar dataFabricacao,String lote) {
 		this.idProdutos = idProdutos;
 		this.codigoBarras = codigoBarras;
 		this.descricao = descricao;
@@ -39,17 +39,8 @@ public class Produtos {
 		this.dataFabricacao = dataFabricacao;
 		this.lote = lote;	
 	}
-	public Produtos() {
-		this.codigoBarras = 0;
-		this.descricao = null;
-		this.aplicacao = null;
-		this.medida =medida;
-		this.ativo = ativo;
-		this.dataValidade = dataValidade;
-		this.dataFabricacao = dataFabricacao;
-		this.lote = lote;	
-	}
-	
+
+
 // inicio dos getters
 	public int getIdProdutos() {
 		return idProdutos;
@@ -78,7 +69,7 @@ public class Produtos {
 		return dataValidade;
 	}
 
-	public Date getDataFabricacao() {
+	public Calendar getDataFabricacao() {
 		return dataFabricacao;
 	}
 
@@ -109,12 +100,16 @@ public class Produtos {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	public void setDataFabricacao(Date dataFabricacao) {
-		this.dataFabricacao = dataFabricacao;
+	public void setDataFabricacao(int dia, int mes, int ano) {
+		this.dataFabricacao = new GregorianCalendar(ano, mes, dia);
 	}
 	public void setLote(String lote) {
 		this.lote = lote;
 	}
+	public void setDataValidade(int dia, int mes, int ano) {
+		this.dataValidade = new GregorianCalendar(ano, mes, dia);
+	}
+	
 	
 	
 	void mostraProduto(){
@@ -125,10 +120,6 @@ public class Produtos {
 		
 	
 	}
-	public void setDataValidade(int dia, int mes, int ano) {
-		this.dataValidade = new GregorianCalendar(ano, mes, dia);
-	}
-	
 	
 
 
