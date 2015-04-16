@@ -1,14 +1,14 @@
 import java.io.ObjectInputStream.GetField;
 import java.util.InputMismatchException;
 
-import controle.ConEmpresa;
+import controle.ConEmpresas;
 import BusinessRules.Empresas;
 
 
 public class Teste {
 	public static void main(String[] args) {
 		Empresas empresa = new Empresas();
-		ConEmpresa validacoes = new ConEmpresa();
+		ConEmpresas validacoes = new ConEmpresas();
 		
 		try {
 			validacoes.validaCnpj(" ");

@@ -25,7 +25,7 @@ public class Empresas {
 	 * @param bairro_idbairro
 	 * @param cidades_idcidades
 	 */
-	private int idempresas;
+	private int idEmpresas;
 	private String fantasia;
 	private long cnpj;
 	private int ie;
@@ -44,12 +44,12 @@ public class Empresas {
 	}
 		
 	
-	public Empresas(int idempresas, String fantasia, int cnpj, int ie,
+	public Empresas(int idEmpresas, String fantasia, int cnpj, int ie,
 			String endereco, int numero, String complemento, int telefone,
 			int celular, String contato, String endereco_idEndereco,
 			String bairro_idbairro, String cidades_idcidades) {
 	super();
-		this.idempresas = idempresas;
+		this.idEmpresas = idEmpresas;
 		this.fantasia = fantasia;
 		this.cnpj = cnpj;
 		this.ie = ie;
@@ -65,17 +65,17 @@ public class Empresas {
 	}
 
 	/**
-	 * @return the idempresas
+	 * @return the idEmpresas
 	 */
 	public int getIdempresas() {
-		return idempresas;
+		return idEmpresas;
 	}
 	/**
-	 * @param idempresas the idempresas to set
+	 * @param idempresas the idEmpresas to set
 	 */
-	public void setIdempresas(int idempresas) {
+	public void setIdempresas(int idEmpresas) {
 		
-		this.idempresas = idempresas;
+		this.idEmpresas = idEmpresas;
 	}
 	/**
 	 * @return the fantasia
