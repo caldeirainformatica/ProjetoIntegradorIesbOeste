@@ -9,8 +9,8 @@ package BusinessRules;
  */
 public class Clientes {
 	private String razaoSocial;
-	public Clientes(String razaoSocial, String cnpj_cpf, String ie_rg, String endereço, String numero,
-			String complemento, String telComercial, String telCelular, String contato, String situacao,
+	public Clientes(String razaoSocial, long cnpj_cpf, long ie_rg, String endereço, int numero,
+			String complemento, int telComercial, int telCelular, int contato, String situacao,
 			String nomeCliente) {
 		super();
 		this.razaoSocial = razaoSocial;
@@ -25,16 +25,18 @@ public class Clientes {
 		this.situacao = situacao;
 		this.nomeCliente = nomeCliente;
 	}
-	private String cnpj_cpf;
-	private String ie_rg;
+	public Clientes() {
+		
+	}
+	private long cnpj_cpf;
+	private long ie_rg;
 	private String endereço;
-	private String numero;
+	private int numero;
 	private String complemento;
-	private String telComercial;
-	private String telCelular;
-	private String contato;
+	private int telComercial;
+	private int telCelular;
+	private int contato;
 	private String situacao;
-	
 	private String nomeCliente;
 	/**
 	 * @return the nomeCliente
@@ -63,25 +65,25 @@ public class Clientes {
 	/**
 	 * @return the cnpj_cpf
 	 */
-	public String getCnpj_cpf() {
+	public long getCnpj_cpf() {
 		return cnpj_cpf;
 	}
 	/**
 	 * @param cnpj_cpf the cnpj_cpf to set
 	 */
-	public void setCnpj_cpf(String cnpj_cpf) {
+	public void setCnpj_cpf(long cnpj_cpf) {
 		this.cnpj_cpf = cnpj_cpf;
 	}
 	/**
 	 * @return the ie_rg
 	 */
-	public String getIe_rg() {
+	public long getIe_rg() {
 		return ie_rg;
 	}
 	/**
 	 * @param ie_rg the ie_rg to set
 	 */
-	public void setIe_rg(String ie_rg) {
+	public void setIe_rg(long ie_rg) {
 		this.ie_rg = ie_rg;
 	}
 	/**
@@ -99,13 +101,13 @@ public class Clientes {
 	/**
 	 * @return the numero
 	 */
-	public String getNumero() {
+	public int getNumero() {
 		return numero;
 	}
 	/**
 	 * @param numero the numero to set
 	 */
-	public void setNumero(String numero) {
+	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 	/**
@@ -123,37 +125,37 @@ public class Clientes {
 	/**
 	 * @return the telComercial
 	 */
-	public String getTelComercial() {
+	public int getTelComercial() {
 		return telComercial;
 	}
 	/**
 	 * @param telComercial the telComercial to set
 	 */
-	public void setTelComercial(String telComercial) {
+	public void setTelComercial(int telComercial) {
 		this.telComercial = telComercial;
 	}
 	/**
 	 * @return the telCelular
 	 */
-	public String getTelCelular() {
+	public int getTelCelular() {
 		return telCelular;
 	}
 	/**
 	 * @param telCelular the telCelular to set
 	 */
-	public void setTelCelular(String telCelular) {
+	public void setTelCelular(int telCelular) {
 		this.telCelular = telCelular;
 	}
 	/**
 	 * @return the contato
 	 */
-	public String getContato() {
+	public int getContato() {
 		return contato;
 	}
 	/**
 	 * @param contato the contato to set
 	 */
-	public void setContato(String contato) {
+	public void setContato(int contato) {
 		this.contato = contato;
 	}
 	/**

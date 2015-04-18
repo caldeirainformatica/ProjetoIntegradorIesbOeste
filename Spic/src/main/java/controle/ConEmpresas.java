@@ -5,19 +5,25 @@ import java.util.InputMismatchException;
 
 import BusinessRules.Empresas;
 
-public class ConEmpresa {
+public class ConEmpresas {
 
 	Empresas empresa = new Empresas();
 
+	
+	//Validcao fantasia
 	public void validaFantasia(String fantasia) throws Exception {
 
 		if (fantasia == null || fantasia.trim().equals("")) {
-			Exception ex = new Exception("Fantasia inválida");
+			Exception ex = new Exception("Campo fantasia em branco!!");
 			throw ex;
 		}
-		;
+		else{
+			
+			empresa.setFantasia(fantasia.trim());
+		}
 		
 	}
+	//Fim da validacao fantasia
 
 	// verifica se não está sendo inserido caracteres inválidos
 	public void validaCnpj(String cnpj) throws Exception {

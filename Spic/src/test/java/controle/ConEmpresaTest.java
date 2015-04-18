@@ -7,43 +7,48 @@ import javax.swing.JOptionPane;
 
 import org.junit.Test;
 
-public class ConEmpresaTest extends ConEmpresa {
+public class ConEmpresaTest extends ConEmpresas {
 
+	
+	
+	//Teste fantasia
 	@Test
 	public void deveAceitarNomeValidoENaoLancarExcecao() throws Exception {
-		ConEmpresa c = new ConEmpresa();
+		ConEmpresas c = new ConEmpresas();
 		c.validaFantasia("Teste");
 	}
 
 	@Test
 	public void naoDeveAceitarNomeNulo() throws Exception {
-		ConEmpresa c = new ConEmpresa();
+		ConEmpresas c = new ConEmpresas();
 		try {
 			c.validaFantasia(null);
 		} catch (Exception ex) {
-			assertEquals("Fantasia inválida", ex.getMessage());
+			assertEquals("Campo fantasia em branco!!", ex.getMessage());
 		}
 	}
 
 	@Test
 	public void naoDeveAceitarNomeVazio() throws Exception {
-		ConEmpresa c = new ConEmpresa();
+		ConEmpresas c = new ConEmpresas();
 		try {
 			c.validaFantasia("");
 		} catch (Exception ex) {
-			assertEquals("Fantasia inválida", ex.getMessage());
+			assertEquals("Campo fantasia em branco!!", ex.getMessage());
 		}
 	}
 
+	
+	//Campo Cnpj
 	@Test
 	public void deveAceitarUmCnpjValido() throws Exception {
-		ConEmpresa c = new ConEmpresa();
+		ConEmpresas c = new ConEmpresas();
 		c.validaCnpj("000000000000000");
 	}
 
 	@Test
 	public void naoDeveAceitarUmCnpjCom14Caracteres() {
-		ConEmpresa c = new ConEmpresa();
+		ConEmpresas c = new ConEmpresas();
 		try {
 			c.validaCnpj("00000000000000");
 			fail("Devia lançar exceção");
@@ -54,14 +59,14 @@ public class ConEmpresaTest extends ConEmpresa {
 
 	@Test
 	public void deveAceitarCnpjValido() throws Exception {
-		ConEmpresa c = new ConEmpresa();
+		ConEmpresas c = new ConEmpresas();
 		c.validaCnpj("100000000000000");
 		assertEquals("100.000.000/0000-00", c.mostraCnpj());
 	}
 	
 	@Test
 	public void deveAceitarCnpjValidoComecandoPorZero() throws Exception {
-		ConEmpresa c = new ConEmpresa();
+		ConEmpresas c = new ConEmpresas();
 		c.validaCnpj("000000000000000");
 		assertEquals("000.000.000/0000-00", c.mostraCnpj());
 	}
