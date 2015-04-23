@@ -43,14 +43,14 @@ public class ConEmpresaTest extends ConEmpresas {
 	@Test
 	public void deveAceitarUmCnpjValido() throws Exception {
 		ConEmpresas c = new ConEmpresas();
-		c.validaCnpj("000000000000000");
+		c.validaCnpj("000000000000");
 	}
 
 	@Test
-	public void naoDeveAceitarUmCnpjCom14Caracteres() {
+	public void naoDeveAceitarUmCnpjCom13Caracteres() {
 		ConEmpresas c = new ConEmpresas();
 		try {
-			c.validaCnpj("00000000000000");
+			c.validaCnpj("0000000000000");
 			fail("Devia lançar exceção");
 		} catch (Exception e) {
 			assertEquals("Número de CNPJ inválido!!", e.getMessage());
@@ -60,15 +60,15 @@ public class ConEmpresaTest extends ConEmpresas {
 	@Test
 	public void deveAceitarCnpjValido() throws Exception {
 		ConEmpresas c = new ConEmpresas();
-		c.validaCnpj("100000000000000");
-		assertEquals("100.000.000/0000-00", c.mostraCnpj());
+		c.validaCnpj("10000000000000");
+		assertEquals("10.000.000/0000-00", c.mostraCnpj());
 	}
 	
 	@Test
 	public void deveAceitarCnpjValidoComecandoPorZero() throws Exception {
 		ConEmpresas c = new ConEmpresas();
-		c.validaCnpj("000000000000000");
-		assertEquals("000.000.000/0000-00", c.mostraCnpj());
+		c.validaCnpj("00000000000000");
+		assertEquals("00.000.000/0000-00", c.mostraCnpj());
 	}
 
 }

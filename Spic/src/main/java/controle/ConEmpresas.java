@@ -26,25 +26,30 @@ public class ConEmpresas {
 	//Fim da validacao fantasia
 
 	// verifica se não está sendo inserido caracteres inválidos
-	public void validaCnpj(String cnpj) throws Exception {
-
+	public boolean validaCnpj(String cnpj) throws Exception {
+		
 		try {
-
-			empresa.setCnpj(Long.valueOf(cnpj));
-			String pj = cnpj.substring(0, 3) + "." + cnpj.substring(3, 6) + "."
-					+ cnpj.substring(6, 9) + "/" + cnpj.substring(9, 13) + "-"
-					+ cnpj.substring(13, 15);
+			
+			Long.valueOf(cnpj);
+			if(cnpj.length() != 11|| cnpj == null||cnpj =="" ){
+				
+				throw new Exception("CPF inválido!");
+				
+				
+			}
+			else{
+				
+				Long.parseLong(cnpj);
+				return true;
+				
+			}
 			//System.out.pintln("Recebido sem erro");
 
 		} catch (NumberFormatException e) {
 
 			throw new Exception("Caracteres inválidos");
 
-		} catch (StringIndexOutOfBoundsException e) {
-
-			throw new Exception("Número de CNPJ inválido!!");
-
-		}
+		} 
 
 	}
 
@@ -52,18 +57,76 @@ public class ConEmpresas {
 	public String mostraCnpj() throws Exception {
 
 		try {
-			String cnpj = String.format("%015d", empresa.getCnpj());
-			System.out.println(cnpj.substring(0, 3) + "."
-					+ cnpj.substring(3, 6) + "." + cnpj.substring(6, 9) + "/"
-					+ cnpj.substring(9, 13) + "-" + cnpj.substring(13, 15));
-			return cnpj.substring(0, 3) + "." + cnpj.substring(3, 6) + "."
-					+ cnpj.substring(6, 9) + "/" + cnpj.substring(9, 13) + "-"
-					+ cnpj.substring(13, 15);
+			String cnpj = String.format("%014d", empresa.getCnpj());
+			System.out.println(cnpj.substring(0, 2) + "."+ cnpj.substring(2, 5) + "." + cnpj.substring(5, 8) + "/"+ cnpj.substring(8, 12) + "-" + cnpj.substring(12, 14));
+			
+			return cnpj.substring(0, 2) + "."+ cnpj.substring(2, 5) + "." + cnpj.substring(5, 8) + "/"+ cnpj.substring(8, 12) + "-" + cnpj.substring(12, 14);
 		} catch (StringIndexOutOfBoundsException e) {
 
 			throw new Exception("Número de CNPJ inválido!!");
 
 		}
 	}
+	
+	//Valida ie
+	public boolean validaIe(String ie){
+		if(ie.length()!= 13){
+			return false;	
+		}
+		else{
+			empresa.setIe(Integer.parseInt(ie));
+			return true;
+		}	
+	}
+	//Fim da validação ie
+	
+	
+	public boolean validaEndereco(String endereco) throws Exception{
+		
+		if(endereco.isEmpty()|| endereco.equals("")){
+			throw new Exception("Digite o endereço!");
+		}
+		else{
+			empresa.setEndereco(endereco);
+			return true;
+			
+			
+			
+		}
+		
+		
+	}
+	
+	public boolean validaNumero(String numero){
+		
+		try{
+			
+			
+			if(){
+				
+				
+			}else{
+				
+				return true;
+				
+			}
+			
+			
+		}catch(NumberFormatException n){
+			
+			throw new Exception("Digite apenas números!");
+			
+			
+		}
+	
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }
