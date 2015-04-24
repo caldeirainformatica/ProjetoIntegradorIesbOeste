@@ -13,6 +13,7 @@ public class TesteContato {
 		contato.setDataNascimento(Calendar.getInstance());
 		
 		ContatoDAO dao = new ContatoDAO();
+		dao.ContatoDao();
 		dao.adiciona(contato);
 		System.out.println("gravado");
 		
