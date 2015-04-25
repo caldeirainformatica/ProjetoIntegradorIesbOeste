@@ -17,6 +17,7 @@ public class ContatoDAO {
 				+ "(nome, email, endereco, dataNascimento)"
 				+ "values (?,?,?,?)";
 		try {
+			ContatoDao();
 			PreparedStatement stmt = connection.prepareStatement(sql);
 
 			stmt.setString(1, contato.getNome());
