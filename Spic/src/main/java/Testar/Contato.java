@@ -5,16 +5,26 @@
  */
 package Testar;
 
+import java.time.Clock;
+import java.util.Calendar;
+
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+
+import Persistence.*;
+
 /**
  *
  * @author RicardoNote
  */
-public class TestarLayoutContato extends javax.swing.JFrame {
+
+
+public class Contato extends javax.swing.JFrame {
 
     /**
-     * Creates new form TestarLayoutContato
+     * Creates new form Contato
      */
-    public TestarLayoutContato() {
+    public Contato() {
         initComponents();
     }
 
@@ -34,6 +44,7 @@ public class TestarLayoutContato extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JFormattedTextField();
+        okbortao = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,26 +68,38 @@ public class TestarLayoutContato extends javax.swing.JFrame {
 
         jLabel3.setText("Telefone");
 
+        okbortao.setLabel("ok");
+        okbortao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okbortaoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(36, 36, 36)
-                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(166, 166, 166))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(36, 36, 36)
+                                .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(166, 166, 166))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(80, 80, 80)
+                        .addComponent(okbortao, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(253, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -94,7 +117,9 @@ public class TestarLayoutContato extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(288, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(okbortao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(233, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -112,12 +137,34 @@ public class TestarLayoutContato extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        // TODO add your handling code here:
+        
     }                                       
 
     private void txtEnderecoActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
     }                                           
+
+    private void okbortaoActionPerformed(java.awt.event.ActionEvent evt) {                                         
+      
+        String nome = null;
+        String endereco = null;
+//        String email = null;
+//        String dataNascimento = null;
+        
+        nome = String.valueOf(txtNome.getText());
+        endereco = String.valueOf(txtEndereco.getText());
+      //  email = String.valueOf(txt)
+        
+        Persistence.Contato contato = new Persistence.Contato();
+        contato.setNome(nome);
+        contato.setEndereco(endereco);
+    	contato.setDataNascimento(Calendar.getInstance());
+        
+        ContatoDAO dao = new ContatoDAO();
+		dao.ContatoDao();
+		dao.adiciona(contato);
+		System.out.println("gravado");
+    }                                        
 
     /**
      * @param args the command line arguments
@@ -136,20 +183,20 @@ public class TestarLayoutContato extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TestarLayoutContato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Contato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TestarLayoutContato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Contato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TestarLayoutContato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Contato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TestarLayoutContato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Contato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TestarLayoutContato().setVisible(true);
+                new Contato().setVisible(true);
             }
         });
     }
@@ -159,6 +206,7 @@ public class TestarLayoutContato extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private java.awt.Button okbortao;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNome;
     private javax.swing.JFormattedTextField txtTelefone;
