@@ -15,7 +15,7 @@ public class DAOProdutos {
 
 	// Comando sql para inclusão de produtos, deixando bem generico para incluir
 	// qualquer tipo de dados
-	public void adiciona(ConstrutorProduto p) {
+	public void insert(ConstrutorProduto p) {
 		String sql = "insert into produtos"
 				+ "(codigoBarras, descricao, aplicacao, medida, dataValidade, dataFabricacao, lote"
 				+ "values (?,?,?,?,?,?,?)"; // metodo generico para variaveis
@@ -50,7 +50,7 @@ public class DAOProdutos {
 
 	// Comando sql para alteração de produtos, deixando bem generico para
 	// incluir qualquer tipo de dados
-	public void alterar(ConstrutorProduto p) {
+	public void update(ConstrutorProduto p) {
 		String sql = "update produtos set codigoBarras=?, descricao=?, aplicacao=?, medida=?"
 				+ "dataValidade=?, dataFabricacao=?, lote=? where id=?";
 
@@ -66,8 +66,39 @@ public class DAOProdutos {
 			stmt.setString(7, p.getLote());
 			stmt.setLong(8, p.getIdProdutos());
 
-		} catch (SQLException e) {
+			stmt.execute();
+			stmt.close();
+		}
+
+		catch (SQLException e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	public void delet(ConstrutorProduto p) {
+		String sql = "delete from produtos set id=?";
+		try {
+			this.connection = new ConnectionFactory().getConnection();
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setLong(1, p.getCodigoBarras());
+
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+		}
+	}
+
+	public void select(ConstrutorProduto p) {
+		String sql = "select * from produtos";
+
+		try {
+			this.connection = new ConnectionFactory().getConnection();
+			PreparedStatement stmt = connection.prepareStatement(sql);
+
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+
 		}
 	}
 }
