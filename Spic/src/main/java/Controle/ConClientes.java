@@ -1,4 +1,4 @@
-package controle;
+package Controle;
 
 import BusinessRules.Clientes;
 

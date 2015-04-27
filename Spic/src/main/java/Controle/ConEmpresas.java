@@ -1,4 +1,4 @@
-package controle;
+package Controle;
 
 import java.beans.ExceptionListener;
 import java.util.InputMismatchException;

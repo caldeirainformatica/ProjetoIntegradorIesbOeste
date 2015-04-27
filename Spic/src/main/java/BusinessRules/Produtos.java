@@ -104,6 +104,7 @@ public class Produtos {
 	}
 	public void setDataFabricacao(int dia, int mes, int ano) {
 		this.dataFabricacao = new GregorianCalendar(ano, mes, dia);
+		
 	}
 	public void setLote(String lote) {
 		this.lote = lote;

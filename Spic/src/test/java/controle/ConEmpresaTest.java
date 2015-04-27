@@ -1,4 +1,4 @@
-package controle;
+package Controle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -6,6 +6,8 @@ import static org.junit.Assert.fail;
 import javax.swing.JOptionPane;
 
 import org.junit.Test;
+
+import Controle.ConEmpresas;
 
 public class ConEmpresaTest extends ConEmpresas {
 
