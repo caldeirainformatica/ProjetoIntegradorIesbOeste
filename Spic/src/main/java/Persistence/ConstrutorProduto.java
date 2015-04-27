@@ -17,6 +17,22 @@ public class ConstrutorProduto {
 	private Calendar dataFabricacao;
 	private String lote;
 
+	
+	//Metodo construtor para ser utilizado pelo pacote de Regras de Negócios (BusinessRules)
+	public ConstrutorProduto(int idProdutos, int codigoBarras,
+			String descricao, String aplicacao, String medida,
+			Calendar dataValidade, Calendar dataFabricacao, String lote) {
+		super();
+		this.idProdutos = idProdutos;
+		this.codigoBarras = codigoBarras;
+		this.descricao = descricao;
+		this.aplicacao = aplicacao;
+		this.medida = medida;
+		this.dataValidade = dataValidade;
+		this.dataFabricacao = dataFabricacao;
+		this.lote = lote;
+	}
+
 	public int getIdProdutos() {
 		return idProdutos;
 	}
@@ -47,38 +63,6 @@ public class ConstrutorProduto {
 
 	public String getLote() {
 		return lote;
-	}
-
-	public void setIdProdutos(int idProdutos) {
-		this.idProdutos = idProdutos;
-	}
-
-	public void setCodigoBarras(int codigoBarras) {
-		this.codigoBarras = codigoBarras;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public void setAplicacao(String aplicacao) {
-		this.aplicacao = aplicacao;
-	}
-
-	public void setMedida(String medida) {
-		this.medida = medida;
-	}
-
-	public void setDataValidade(Calendar dataValidade) {
-		this.dataValidade = dataValidade;
-	}
-
-	public void setDataFabricacao(Calendar dataFabricacao) {
-		this.dataFabricacao = dataFabricacao;
-	}
-
-	public void setLote(String lote) {
-		this.lote = lote;
 	}
 
 }
