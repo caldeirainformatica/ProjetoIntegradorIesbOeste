@@ -1,4 +1,4 @@
-package Controle;
+package controle;
 
 import java.beans.ExceptionListener;
 import java.util.InputMismatchException;
@@ -97,31 +97,31 @@ public class ConEmpresas {
 		
 	}
 	
-	public boolean validaNumero(String numero){
-		
-		try{
-			
-			
-			if(){
-				
-				
-			}else{
-				
-				return true;
-				
-			}
-			
-			
-		}catch(NumberFormatException n){
-			
-			throw new Exception("Digite apenas números!");
-			
-			
-		}
-	
-		
-	}
-	
+//	public boolean validaNumero(String numero){
+//		
+//		try{
+//			
+//			
+//			if(){
+//				
+//				
+//			}else{
+//				
+//				return true;
+//				
+//			}
+//			
+//			
+//		}catch(NumberFormatException n){
+//			
+//			throw new Exception("Digite apenas números!");
+//			
+//			
+////		}
+//	
+//		
+//	}
+//	
 	
 	
 	
