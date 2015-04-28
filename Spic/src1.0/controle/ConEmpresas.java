@@ -3,7 +3,7 @@ package Controle;
 import java.beans.ExceptionListener;
 import java.util.InputMismatchException;
 
-import BusinessRules.Empresas;
+import model.Empresas;
 
 public class ConEmpresas {
 

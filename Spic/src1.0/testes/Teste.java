@@ -1,8 +1,9 @@
+package testes;
 import java.io.ObjectInputStream.GetField;
 import java.util.InputMismatchException;
 
+import model.Empresas;
 import controle.ConEmpresas;
-import BusinessRules.Empresas;
 
 
 public class Teste {

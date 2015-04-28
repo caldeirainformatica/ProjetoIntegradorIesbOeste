@@ -1,11 +1,11 @@
-package Testar;
+package testes;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import Persistence.ConnectionFactory;
+import model.ConnectionFactory;
 
-public class TesteConn {
+public class TesteConexao {
 
 	public static void main(String[] args) throws SQLException {
 		Connection conn = new ConnectionFactory().getConnection();

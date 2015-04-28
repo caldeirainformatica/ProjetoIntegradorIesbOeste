@@ -1,4 +1,4 @@
-package Persistence;
+package persistencia;
 
 import java.util.Calendar;
 
@@ -6,7 +6,7 @@ import java.util.Calendar;
  * com variaveis privadas e proibindo qualquer contato com as mesmas, caso seja necessário qualquer dado
  * solicitar utilizando gets and sets
  */
-public class ConstrutorProduto {
+public class ProdutosFactory {
 
 	private int idProdutos;
 	private int codigoBarras;
@@ -19,7 +19,7 @@ public class ConstrutorProduto {
 
 	
 	//Metodo construtor para ser utilizado pelo pacote de Regras de Negócios (BusinessRules)
-	public ConstrutorProduto(int idProdutos, int codigoBarras,
+	public ProdutosFactory(int idProdutos, int codigoBarras,
 			String descricao, String aplicacao, String medida,
 			Calendar dataValidade, Calendar dataFabricacao, String lote) {
 		super();

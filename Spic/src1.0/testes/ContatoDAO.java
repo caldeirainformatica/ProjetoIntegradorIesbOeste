@@ -1,9 +1,11 @@
-package Persistence;
+package testes;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import model.ConnectionFactory;
 
 public class ContatoDAO {
 	private Connection connection;

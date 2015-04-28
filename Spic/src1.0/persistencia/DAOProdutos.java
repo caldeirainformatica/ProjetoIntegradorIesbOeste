@@ -1,4 +1,4 @@
-package Persistence;
+package persistencia;
 
 //importes necessários para está classe funcionar utilizando conexão com o banco de dados
 
@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import model.ConnectionFactory;
 
 //Classe especifica para conexão com o atuação direta no banco de dados
 //com a utilização de inclusão de produtos, alteração e outros
@@ -15,7 +17,7 @@ public class DAOProdutos {
 
 	// Comando sql para inclusão de produtos, deixando bem generico para incluir
 	// qualquer tipo de dados
-	public void insert(ConstrutorProduto p) {
+	public void insert(ProdutosFactory p) {
 		String sql = "insert into produtos"
 				+ "(codigoBarras, descricao, aplicacao, medida, dataValidade, dataFabricacao, lote"
 				+ "values (?,?,?,?,?,?,?)"; // metodo generico para variaveis
@@ -50,7 +52,7 @@ public class DAOProdutos {
 
 	// Comando sql para alteração de produtos, deixando bem generico para
 	// incluir qualquer tipo de dados
-	public void update(ConstrutorProduto p) {
+	public void update(ProdutosFactory p) {
 		String sql = "update produtos set codigoBarras=?, descricao=?, aplicacao=?, medida=?"
 				+ "dataValidade=?, dataFabricacao=?, lote=? where id=?";
 
@@ -75,7 +77,7 @@ public class DAOProdutos {
 		}
 	}
 
-	public void delet(ConstrutorProduto p) {
+	public void delet(ProdutosFactory p) {
 		String sql = "delete from produtos set id=?";
 		try {
 			this.connection = new ConnectionFactory().getConnection();
@@ -88,7 +90,7 @@ public class DAOProdutos {
 		}
 	}
 
-	public void select(ConstrutorProduto p) {
+	public void select(ProdutosFactory p) {
 		String sql = "select * from produtos";
 
 		try {

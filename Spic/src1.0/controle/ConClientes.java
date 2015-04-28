@@ -1,6 +1,6 @@
 package Controle;
 
-import BusinessRules.Clientes;
+import model.Clientes;
 
 public class ConClientes {
 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package BusinessRules;
+package businessRules;
 
 
 import java.text.DateFormat;

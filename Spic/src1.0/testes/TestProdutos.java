@@ -1,4 +1,4 @@
-package controle;
+package testes;
 
 import static org.junit.Assert.*;
 
@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 
 import org.junit.Test;
 
-import BusinessRules.Produtos;
+import businessRules.Produtos;
 
 public class TestProdutos {
 

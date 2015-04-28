@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import BusinessRules.Produtos;
+import businessRules.Produtos;
 
 public class ConProdutos {
 

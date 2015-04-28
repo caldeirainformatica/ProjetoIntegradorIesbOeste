@@ -1,8 +1,6 @@
-package Testar;
+package testes;
 
 import java.util.Calendar;
-import Persistence.Contato;
-import Persistence.ContatoDAO;
 
 public class TesteContato {
 	public static void main(String[] args) {

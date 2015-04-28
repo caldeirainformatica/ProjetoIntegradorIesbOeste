@@ -1,7 +1,7 @@
 /**
  * 
  */
-package BusinessRules;
+package model;
 
 /**
  * @author Geisson
