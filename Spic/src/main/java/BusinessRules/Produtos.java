@@ -132,7 +132,7 @@ public class Produtos {
 		dataValidade.set(Calendar.MONTH, mes);
 		dataValidade.set(Calendar.DAY_OF_MONTH, dia);
 	}
-	public void setDataFabricacao(int dia, int mes, int ano) {
+	public void setDataFabricacao(int ano, int mes, int dia) {
 		this.dataFabricacao = new GregorianCalendar(ano, mes, dia);
 		Calendar dataFabricacao = Calendar.getInstance(); 
 		dataFabricacao.set(Calendar.YEAR, ano);

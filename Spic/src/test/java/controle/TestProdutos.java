@@ -15,9 +15,9 @@ public class TestProdutos {
 	@Test
 	public void deveImprimirDataEmFormatoBrasileiro() throws ParseException {
 		Produtos p = new Produtos();
-		p.setDataValidade(21, 04, 2015);
-		Calendar c =  new GregorianCalendar(2015, 04, 21);	
-		assertEquals(c, p.getDataValidade());
+		p.setDataValidade(2015,04,15);
+		p.setDataFabricacao(2015,04,15);
+		assertEquals(p.getDataFabricacao(), p.getDataValidade());
 	}
 
 }
