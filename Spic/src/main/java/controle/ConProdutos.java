@@ -150,6 +150,7 @@ public class ConProdutos {
             return(false);  
         }  
 
+        
         return(true);                          
     }  
 
@@ -194,7 +195,7 @@ public class ConProdutos {
 
 	
 	boolean validarLote(String lote){
-		if(){
+		if(lote == ""||lote== null||lote.trim()==""){
 			
 			
 			return false;

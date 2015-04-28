@@ -4,6 +4,9 @@
 package BusinessRules;
 
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -67,18 +70,37 @@ public class Produtos {
 		return ativo;
 	}
 
-	public Calendar getDataValidade() {
-		return dataValidade;
+	
+	public String getDataValidade() throws ParseException{
+		
+		int ano = dataValidade.get(Calendar.YEAR);
+		int mes = dataValidade.get(Calendar.MONTH );
+		int dia = dataValidade.get(Calendar.DAY_OF_MONTH);
+		String dataFormatada = dia +"/"+mes+"/" + ano ;
+		DateFormat df = new SimpleDateFormat("dd/MM/yyy");
+		Date dataConvertida = df.parse(dataFormatada) ;
+		return df.format(dataConvertida);
+		
+		
 	}
 
-	public Calendar getDataFabricacao() {
-		return dataFabricacao;
+	public String getDataFabricacao() throws ParseException {
+		int ano = dataFabricacao.get(Calendar.YEAR);
+		int mes = dataFabricacao.get(Calendar.MONTH );
+		int dia = dataFabricacao.get(Calendar.DAY_OF_MONTH);
+		String dataFormatada = dia +"/"+mes+"/" + ano ;
+		DateFormat df = new SimpleDateFormat("dd/MM/yyy");
+		Date dataConvertida = df.parse(dataFormatada) ;
+		return df.format(dataConvertida);
 	}
 
 	public String getLote() {
 		return lote;
 	}
 	
+	
+	
+
 	// inicio dos setters 
 	
 	public void setIdProdutos(int idProdutos) {
@@ -102,15 +124,24 @@ public class Produtos {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
+	public void setDataValidade(int ano,int mes, int dia){
+		
+		this.dataValidade = new GregorianCalendar(ano, mes, dia);
+		Calendar dataValidade = Calendar.getInstance(); 
+		dataValidade.set(Calendar.YEAR, ano);
+		dataValidade.set(Calendar.MONTH, mes);
+		dataValidade.set(Calendar.DAY_OF_MONTH, dia);
+	}
 	public void setDataFabricacao(int dia, int mes, int ano) {
 		this.dataFabricacao = new GregorianCalendar(ano, mes, dia);
+		Calendar dataFabricacao = Calendar.getInstance(); 
+		dataFabricacao.set(Calendar.YEAR, ano);
+		dataFabricacao.set(Calendar.MONTH, mes);
+		dataFabricacao.set(Calendar.DAY_OF_MONTH, dia);
 		
 	}
 	public void setLote(String lote) {
 		this.lote = lote;
-	}
-	public void setDataValidade(int dia, int mes, int ano) {
-		this.dataValidade = new GregorianCalendar(ano, mes, dia);
 	}
 	
 	
