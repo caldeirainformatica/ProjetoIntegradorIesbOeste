@@ -33,7 +33,7 @@ public class Produtos {
 		
 	}
 	
-	//Método construtor aprimorado
+	/*//Método construtor aprimorado
 	public Produtos(int idProdutos,int codigoBarras,String descricao,String aplicacao,String medida,Boolean ativo, String dataValidade,  String dataFabricacao,String lote) throws ParseException {
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyy");
 		
@@ -46,7 +46,7 @@ public class Produtos {
 		this.dataValidade = df.parse(dataValidade);
 		this.dataFabricacao = df.parse(dataFabricacao);
 		this.lote = lote;	
-	}
+	}*/
 
 
 // inicio dos getters
@@ -81,7 +81,7 @@ public class Produtos {
 		
 	}
 
-	public Date getDataFabricacao() throws ParseException {
+	public Date getDataFabricacao() {
 		return dataFabricacao;
 	}
 
@@ -117,7 +117,8 @@ public class Produtos {
 	}
 	public void setDataValidade(String dataValidade) throws ParseException{
 		
-		
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyy");
+		this.dataValidade = df.parse(dataValidade);
 		
 	}
 	public void setDataFabricacao(String dataFabricacao) throws ParseException {

@@ -15,8 +15,8 @@ public class TestProdutos {
 	@Test
 	public void deveImprimirDataEmFormatoBrasileiro() throws ParseException {
 		Produtos p = new Produtos();
-		p.setDataValidade(2015,04,15);
-		p.setDataFabricacao(2015,04,15);
+		p.setDataValidade("12/04/2015");
+		p.setDataFabricacao("12/04/2015");
 		assertEquals(p.getDataFabricacao(), p.getDataValidade());
 	}
 
