@@ -15,12 +15,14 @@ public class DAOProdutos {
 
 	private Connection connection;
 
+	boolean retorno = false;
 	// Comando sql para inclusão de produtos, deixando bem generico para incluir
 	// qualquer tipo de dados
 	public void insert(ProdutosFactory p) {
 		String sql = "insert into produtos"
 				+ "(codigoBarras, descricao, aplicacao, medida, dataValidade, dataFabricacao, lote"
 				+ "values (?,?,?,?,?,?,?)"; // metodo generico para variaveis
+	
 		try {
 			this.connection = new ConnectionFactory().getConnection();
 			/*
@@ -45,17 +47,19 @@ public class DAOProdutos {
 			// comando para fechar a conexão com o bd
 			stmt.execute();
 			stmt.close();
+			retorno = true;
 		} catch (SQLException e) { // se existir erros, devem ser tratados aqui
+			retorno = false;
 			throw new RuntimeException(e);
 		}
 	}
 
 	// Comando sql para alteração de produtos, deixando bem generico para
 	// incluir qualquer tipo de dados
-	public void update(ProdutosFactory p) {
+	public boolean update(ProdutosFactory p) {
 		String sql = "update produtos set codigoBarras=?, descricao=?, aplicacao=?, medida=?"
 				+ "dataValidade=?, dataFabricacao=?, lote=? where id=?";
-
+	
 		try {
 			this.connection = new ConnectionFactory().getConnection();
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -70,15 +74,21 @@ public class DAOProdutos {
 
 			stmt.execute();
 			stmt.close();
+
+			retorno = true;
 		}
 
 		catch (SQLException e) {
+			retorno = false;
 			throw new RuntimeException(e);
 		}
+		return retorno;
 	}
 
-	public void delet(ProdutosFactory p) {
+	public boolean delet(ProdutosFactory p) {
 		String sql = "delete from produtos set id=?";
+
+
 		try {
 			this.connection = new ConnectionFactory().getConnection();
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -86,12 +96,18 @@ public class DAOProdutos {
 
 			stmt.execute();
 			stmt.close();
+			retorno = true;
+
 		} catch (SQLException e) {
+			retorno = false;
+			throw new RuntimeException(e);
 		}
+		return retorno;
 	}
 
-	public void select(ProdutosFactory p) {
+	public boolean select(ProdutosFactory p) {
 		String sql = "select * from produtos";
+	
 
 		try {
 			this.connection = new ConnectionFactory().getConnection();
@@ -99,8 +115,11 @@ public class DAOProdutos {
 
 			stmt.execute();
 			stmt.close();
+			retorno = true;
 		} catch (SQLException e) {
-
+			retorno = false;
+			throw new RuntimeException(e);
 		}
+		return retorno;
 	}
 }
