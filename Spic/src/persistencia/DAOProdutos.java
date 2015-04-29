@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import model.ConnectionFactory;
 
 //Classe especifica para conexão com o atuação direta no banco de dados
