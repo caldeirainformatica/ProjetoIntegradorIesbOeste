@@ -24,8 +24,8 @@ public class Produtos {
 	private String aplicacao;
 	private String medida;
 	private Boolean ativo;
-	private Calendar dataValidade;
-	private Calendar dataFabricacao;
+	private Date dataValidade;
+	private Date dataFabricacao;
 	private String lote;
 	
 	//método construtor
@@ -33,17 +33,20 @@ public class Produtos {
 		
 	}
 	
-	public Produtos(int idProdutos,int codigoBarras,String descricao,String aplicacao,String medida,Boolean ativo, Calendar dataValidade,  Calendar dataFabricacao,String lote) {
+	/*//Método construtor aprimorado
+	public Produtos(int idProdutos,int codigoBarras,String descricao,String aplicacao,String medida,Boolean ativo, String dataValidade,  String dataFabricacao,String lote) throws ParseException {
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyy");
+		
 		this.idProdutos = idProdutos;
 		this.codigoBarras = codigoBarras;
 		this.descricao = descricao;
 		this.aplicacao = aplicacao;
 		this.medida =medida;
 		this.ativo = ativo;
-		this.dataValidade = dataValidade;
-		this.dataFabricacao = dataFabricacao;
+		this.dataValidade = df.parse(dataValidade);
+		this.dataFabricacao = df.parse(dataFabricacao);
 		this.lote = lote;	
-	}
+	}*/
 
 
 // inicio dos getters
@@ -71,27 +74,15 @@ public class Produtos {
 	}
 
 	
-	public String getDataValidade() throws ParseException{
+	public Date getDataValidade() {
 		
-		int ano = dataValidade.get(Calendar.YEAR);
-		int mes = dataValidade.get(Calendar.MONTH );
-		int dia = dataValidade.get(Calendar.DAY_OF_MONTH);
-		String dataFormatada = dia +"/"+mes+"/" + ano ;
-		DateFormat df = new SimpleDateFormat("dd/MM/yyy");
-		Date dataConvertida = df.parse(dataFormatada) ;
-		return df.format(dataConvertida);
+		return dataValidade;
 		
 		
 	}
 
-	public String getDataFabricacao() throws ParseException {
-		int ano = dataFabricacao.get(Calendar.YEAR);
-		int mes = dataFabricacao.get(Calendar.MONTH );
-		int dia = dataFabricacao.get(Calendar.DAY_OF_MONTH);
-		String dataFormatada = dia +"/"+mes+"/" + ano ;
-		DateFormat df = new SimpleDateFormat("dd/MM/yyy");
-		Date dataConvertida = df.parse(dataFormatada) ;
-		return df.format(dataConvertida);
+	public Date getDataFabricacao() {
+		return dataFabricacao;
 	}
 
 	public String getLote() {
@@ -124,37 +115,20 @@ public class Produtos {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	public void setDataValidade(int ano,int mes, int dia){
+	public void setDataValidade(String dataValidade) throws ParseException{
 		
-		this.dataValidade = new GregorianCalendar(ano, mes, dia);
-		Calendar dataValidade = Calendar.getInstance(); 
-		dataValidade.set(Calendar.YEAR, ano);
-		dataValidade.set(Calendar.MONTH, mes);
-		dataValidade.set(Calendar.DAY_OF_MONTH, dia);
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyy");
+		this.dataValidade = df.parse(dataValidade);
+		
 	}
-	public void setDataFabricacao(int ano, int mes, int dia) {
-		this.dataFabricacao = new GregorianCalendar(ano, mes, dia);
-		Calendar dataFabricacao = Calendar.getInstance(); 
-		dataFabricacao.set(Calendar.YEAR, ano);
-		dataFabricacao.set(Calendar.MONTH, mes);
-		dataFabricacao.set(Calendar.DAY_OF_MONTH, dia);
+	public void setDataFabricacao(String dataFabricacao) throws ParseException {
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyy");
+		this.dataFabricacao = df.parse(dataFabricacao);
 		
 	}
 	public void setLote(String lote) {
 		this.lote = lote;
 	}
 	
-	
-	
-	void mostraProduto(){
-		
-		
-		
-		System.out.println();
-		
-	
-	}
-	
-
 
 }
