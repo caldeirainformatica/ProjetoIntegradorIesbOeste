@@ -5,26 +5,30 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import businessRules.Produtos;
+import model.Produtos;
+
+
+/*
+ * 
+ * 
+ *@author Daniel Fiuza
+ * 
+ * 
+ * 
+ */
+
+
+
+
 
 public class ConProdutos {
 
 	
-	Produtos produto = new Produtos();
-	/*
-	private int idProdutos;
-	private int codigoBarras;
-	private String descricao;
-	private String aplicacao;
-	private String medida;
-	private Boolean ativo;
-	private Calendar dataValidade;
-	private Calendar dataFabricacao;
-	private String lote;
-	*/
+	public Produtos produto = new Produtos();
+	
 	
 	//Validar codigoBarras
-	boolean validarCodigoBarras(String codigoBarras) throws Exception{
+	 public boolean validarCodigoBarras(String codigoBarras) throws Exception{
 		
 		try{
 		if(codigoBarras == ""||codigoBarras== null||codigoBarras.trim()==""||codigoBarras.length()<13){
@@ -35,7 +39,7 @@ public class ConProdutos {
 		}else{
 			
 			
-			
+			produto.setCodigoBarras(Integer.parseInt(codigoBarras));
 			return true;
 			
 		}
@@ -50,7 +54,7 @@ public class ConProdutos {
 	
 	}
 	
-	boolean validarDescricao(String descricao){
+	public boolean validarDescricao(String descricao){
 		
 		if(descricao == ""||descricao== null||descricao.trim()==""){
 			
@@ -60,7 +64,7 @@ public class ConProdutos {
 		}else{
 			
 			
-			
+			produto.setDescricao(descricao);
 			return true;
 			
 		}
@@ -69,7 +73,7 @@ public class ConProdutos {
 		
 	}
 
-	boolean validarAplicacao(String aplicacao){
+	public boolean validarAplicacao(String aplicacao){
 		
 		if(aplicacao == ""||aplicacao== null||aplicacao.trim()==""){
 			
@@ -79,14 +83,14 @@ public class ConProdutos {
 		}else{
 			
 			
-			
+			produto.setAplicacao(aplicacao);
 			return true;
 			
 		}
 		
 	}
 
-	boolean validarMedida(String medida){
+	public boolean validarMedida(String medida){
 		
 		if(medida == ""||medida== null||medida.trim()==""){
 			
@@ -96,13 +100,13 @@ public class ConProdutos {
 		}else{
 			
 			
-			
+			produto.setMedida(medida);
 			return true;
 			
 		}
 	}
 
-	boolean validarAtivo(String ativo){
+	public boolean validarAtivo(String ativo){
 		
 		if(ativo == ""||ativo== null||ativo.trim()==""){
 			
@@ -119,7 +123,7 @@ public class ConProdutos {
 		
 	}
 	
-	boolean validarDataValidade(String dataValidade)throws java.text.ParseException{  
+	public boolean validarDataValidade(String dataValidade)throws java.text.ParseException{  
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");  
         Calendar cal = new GregorianCalendar();  
 
@@ -150,14 +154,14 @@ public class ConProdutos {
             return(false);  
         }  
 
-        
+        produto.setDataValidade(dataValidade);
         return(true);                          
     }  
 
 
 
 
-	boolean validarDataFabricacao(String dataFabricacao)throws java.text.ParseException {  
+	public boolean validarDataFabricacao(String dataFabricacao)throws java.text.ParseException {  
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");  
         Calendar cal = new GregorianCalendar();  
 
@@ -187,14 +191,14 @@ public class ConProdutos {
                 // ano nao casou  
             return(false);  
         }  
-
+        produto.setDataFabricacao(dataFabricacao);
         return(true);                          
     }  
 
 
 
 	
-	boolean validarLote(String lote){
+	public boolean validarLote(String lote){
 		if(lote == ""||lote== null||lote.trim()==""){
 			
 			
@@ -203,7 +207,7 @@ public class ConProdutos {
 		}else{
 			
 			
-			
+			produto.setLote(lote);
 			return true;
 			
 		}
