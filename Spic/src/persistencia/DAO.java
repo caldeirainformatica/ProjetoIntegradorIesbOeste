@@ -10,7 +10,7 @@ import model.ConnectionFactory;
 
 //Classe especifica para conexão com o atuação direta no banco de dados
 //com a utilização de inclusão de produtos, alteração e outros
-public class DAOProdutos {
+public class DAO {
 
 	private Connection connection;
 
