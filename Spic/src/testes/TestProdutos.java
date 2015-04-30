@@ -10,11 +10,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import model.Produtos;
-import persistencia.DAOProdutos;
+
 
 import org.junit.Test;
 
-import persistencia.DAOProdutos;
+
 
 public class TestProdutos {
 

@@ -3,7 +3,7 @@ import java.io.ObjectInputStream.GetField;
 import java.text.ParseException;
 import java.util.InputMismatchException;
 
-import persistencia.DAOProdutos;
+import persistencia.DAO;
 import model.Empresas;
 import model.Produtos;
 import controle.ConEmpresas;
@@ -11,11 +11,11 @@ import controle.ConProdutos;
 
 
 public class Teste {
-	
+	//Os testes estão funcionando
 	public static void main(String[] args) throws Exception {
 		
 		ConProdutos pro = new ConProdutos();
-		DAOProdutos dao = new DAOProdutos();
+		DAO dao = new DAO();
 		
 		pro.validarCodigoBarras("12323435");
 		pro.validarDescricao("sdfsdksdfjsdfdsf");

@@ -7,13 +7,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import controle.ConProdutos;
 import model.ConnectionFactory;
 import model.Produtos;
 
 //Classe especifica para conexão com o atuação direta no banco de dados
 //com a utilização de inclusão de produtos, alteração e outros
-public class DAOProdutos {
+public class DAO {
 
 	private Connection connection;
 
@@ -40,7 +39,6 @@ public class DAOProdutos {
 			 * PreparedStatement em outras palavras, prepare o comando sql para
 			 * ser enviado ao banco de dados
 			 */
-		
 			stmt.setString(4, p.getMedida());
 			stmt.setDate(5, p.getDataValidade());
 			stmt.setDate(6, p.getDataFabricacao());

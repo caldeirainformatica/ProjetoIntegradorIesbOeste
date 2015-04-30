@@ -18,7 +18,7 @@ import java.sql.Date;
 public class Produtos {
 	//declaração de variaves
 	private int idProdutos;
-	private int codigoBarras;
+	private long codigoBarras;
 	private String descricao;
 	private String aplicacao;
 	private String medida;
@@ -52,7 +52,7 @@ public class Produtos {
 	public int getIdProdutos() {
 		return idProdutos;
 	}
-	public int getCodigoBarras() {
+	public long getCodigoBarras() {
 		return codigoBarras;
 	}
 
@@ -97,7 +97,7 @@ public class Produtos {
 		this.idProdutos = idProdutos;
 	}
 	
-	public void setCodigoBarras(int codigoBarras) {
+	public void setCodigoBarras(long codigoBarras) {
 		
 		this.codigoBarras = codigoBarras;
 		

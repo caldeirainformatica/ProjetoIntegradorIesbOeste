@@ -31,7 +31,7 @@ public class ConProdutos {
 	 public boolean validarCodigoBarras(String codigoBarras) throws Exception{
 		
 		try{
-		if(codigoBarras == ""||codigoBarras== null||codigoBarras.trim()==""||codigoBarras.length()<13){
+		if(codigoBarras == ""||codigoBarras== null||codigoBarras.trim()==""||codigoBarras.length()>13){
 			
 			Exception campoVazioException = new Exception("Valor incorreto!");
 			return false;
@@ -39,7 +39,7 @@ public class ConProdutos {
 		}else{
 			
 			
-			produto.setCodigoBarras(Integer.parseInt(codigoBarras));
+			produto.setCodigoBarras(Long.parseLong(codigoBarras));
 			return true;
 			
 		}
