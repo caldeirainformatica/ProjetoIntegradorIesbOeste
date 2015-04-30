@@ -15,7 +15,7 @@ public class FrmProdutos extends javax.swing.JFrame {
         initComponents();
     }
 /**
- * @author Ricardo Caldeira
+ * @author Ricardo Caldeira 
  * 
  */
     
