@@ -1,15 +1,14 @@
 /**
  * 
  */
-package businessRules;
+package model;
 
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.sql.Date;
+
 
 
 /**
@@ -19,13 +18,13 @@ import java.util.GregorianCalendar;
 public class Produtos {
 	//declaração de variaves
 	private int idProdutos;
-	private int codigoBarras;
+	private long codigoBarras;
 	private String descricao;
 	private String aplicacao;
 	private String medida;
-	private Boolean ativo;
-	private Date dataValidade;
-	private Date dataFabricacao;
+	private String ativo;
+	private java.sql.Date dataValidade;
+	private java.sql.Date dataFabricacao;
 	private String lote;
 	
 	//método construtor
@@ -53,7 +52,7 @@ public class Produtos {
 	public int getIdProdutos() {
 		return idProdutos;
 	}
-	public int getCodigoBarras() {
+	public long getCodigoBarras() {
 		return codigoBarras;
 	}
 
@@ -69,7 +68,7 @@ public class Produtos {
 		return medida;
 	}
 
-	public Boolean getAtivo() {
+	public String getAtivo() {
 		return ativo;
 	}
 
@@ -98,7 +97,7 @@ public class Produtos {
 		this.idProdutos = idProdutos;
 	}
 	
-	public void setCodigoBarras(int codigoBarras) {
+	public void setCodigoBarras(long codigoBarras) {
 		
 		this.codigoBarras = codigoBarras;
 		
@@ -112,18 +111,20 @@ public class Produtos {
 	public void setMedida(String medida) {
 		this.medida = medida;
 	}
-	public void setAtivo(Boolean ativo) {
+	public void setAtivo(String ativo) {
 		this.ativo = ativo;
 	}
 	public void setDataValidade(String dataValidade) throws ParseException{
 		
-		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyy");
-		this.dataValidade = df.parse(dataValidade);
+		DateFormat df = new SimpleDateFormat("dd/MM/yyy");
+		java.util.Date data = df.parse(dataValidade);
+		this.dataValidade =new java.sql.Date(data.getTime());
 		
 	}
 	public void setDataFabricacao(String dataFabricacao) throws ParseException {
-		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyy");
-		this.dataFabricacao = df.parse(dataFabricacao);
+		DateFormat df = new SimpleDateFormat("dd/MM/yyy");
+		java.util.Date data = df.parse(dataFabricacao);
+		this.dataFabricacao = new java.sql.Date(data.getTime());
 		
 	}
 	public void setLote(String lote) {

@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
 import model.ConnectionFactory;
+import model.Produtos;
 
 //Classe especifica para conexão com o atuação direta no banco de dados
 //com a utilização de inclusão de produtos, alteração e outros
@@ -17,9 +19,9 @@ public class DAO {
 	boolean retorno = false;
 	// Comando sql para inclusão de produtos, deixando bem generico para incluir
 	// qualquer tipo de dados
-	public void insert(ProdutosFactory p) {
+	public void insert(Produtos p) {
 		String sql = "insert into produtos"
-				+ "(codigoBarras, descricao, aplicacao, medida, dataValidade, dataFabricacao, lote"
+				+ "(codigoBarras, descricao, aplicacao, medida, dataValidade, dataFabricacao, lote)"
 				+ "values (?,?,?,?,?,?,?)"; // metodo generico para variaveis
 	
 		try {
@@ -38,8 +40,8 @@ public class DAO {
 			 * ser enviado ao banco de dados
 			 */
 			stmt.setString(4, p.getMedida());
-			stmt.setDate(5, new Date(p.getDataValidade().getTimeInMillis()));
-			stmt.setDate(6, new Date(p.getDataFabricacao().getTimeInMillis()));
+			stmt.setDate(5, p.getDataValidade());
+			stmt.setDate(6, p.getDataFabricacao());
 			stmt.setString(7, p.getLote());
 
 			// stmt.execute tem a função de executar o comando no bd, em seguida
@@ -55,7 +57,7 @@ public class DAO {
 
 	// Comando sql para alteração de produtos, deixando bem generico para
 	// incluir qualquer tipo de dados
-	public boolean update(ProdutosFactory p) {
+	public boolean update(Produtos p) {
 		String sql = "update produtos set codigoBarras=?, descricao=?, aplicacao=?, medida=?"
 				+ "dataValidade=?, dataFabricacao=?, lote=? where id=?";
 	
@@ -66,8 +68,8 @@ public class DAO {
 			stmt.setString(2, p.getDescricao());
 			stmt.setString(3, p.getAplicacao());
 			stmt.setString(4, p.getMedida());
-			stmt.setDate(5, new Date(p.getDataValidade().getTimeInMillis()));
-			stmt.setDate(6, new Date(p.getDataFabricacao().getTimeInMillis()));
+			stmt.setDate(5, p.getDataValidade());
+			stmt.setDate(6, p.getDataFabricacao());
 			stmt.setString(7, p.getLote());
 			stmt.setLong(8, p.getIdProdutos());
 
@@ -84,7 +86,7 @@ public class DAO {
 		return retorno;
 	}
 
-	public boolean delet(ProdutosFactory p) {
+	public boolean delet(Produtos p) {
 		String sql = "delete from produtos set id=?";
 
 
@@ -104,7 +106,7 @@ public class DAO {
 		return retorno;
 	}
 
-	public boolean select(ProdutosFactory p) {
+	public boolean select(Produtos p) {
 		String sql = "select * from produtos";
 	
 
