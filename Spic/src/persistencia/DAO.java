@@ -5,6 +5,7 @@ package persistencia;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.ConnectionFactory;
@@ -14,16 +15,17 @@ import model.Produtos;
 //com a utilização de inclusão de produtos, alteração e outros
 public class DAO {
 
-	private Connection connection;
+	private static Connection connection;
 
-	boolean retorno = false;
+	static boolean retorno = false;
+
 	// Comando sql para inclusão de produtos, deixando bem generico para incluir
 	// qualquer tipo de dados
 	public void insert(Produtos p) {
 		String sql = "insert into produtos"
 				+ "(codigoBarras, descricao, aplicacao, medida, dataValidade, dataFabricacao, lote)"
 				+ "values (?,?,?,?,?,?,?)"; // metodo generico para variaveis
-	
+
 		try {
 			this.connection = new ConnectionFactory().getConnection();
 			/*
@@ -60,7 +62,7 @@ public class DAO {
 	public boolean update(Produtos p) {
 		String sql = "update produtos set codigoBarras=?, descricao=?, aplicacao=?, medida=?"
 				+ "dataValidade=?, dataFabricacao=?, lote=? where id=?";
-	
+
 		try {
 			this.connection = new ConnectionFactory().getConnection();
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -89,7 +91,6 @@ public class DAO {
 	public boolean delet(Produtos p) {
 		String sql = "delete from produtos set id=?";
 
-
 		try {
 			this.connection = new ConnectionFactory().getConnection();
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -106,21 +107,22 @@ public class DAO {
 		return retorno;
 	}
 
-	public boolean select(Produtos p) {
+	public static ResultSet rs;
+
+	public static ResultSet select() {
 		String sql = "select * from produtos";
-	
 
 		try {
-			this.connection = new ConnectionFactory().getConnection();
+			connection = new ConnectionFactory().getConnection();
 			PreparedStatement stmt = connection.prepareStatement(sql);
 
 			stmt.execute();
+			rs.getStatement().getResultSet();
 			stmt.close();
-			retorno = true;
-		} catch (SQLException e) {
-			retorno = false;
+			} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		return retorno;
+		return rs;
 	}
+
 }
