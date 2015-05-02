@@ -1,20 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view;
 
-import java.awt.FlowLayout;
+import java.sql.Connection;
 import java.text.ParseException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.text.MaskFormatter;
 
-import model.ConnectionFactory;
 import model.Produtos;
+
+import java.awt.Color;
+import java.awt.Panel;
+
+import javax.swing.JLabel;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.BevelBorder;
+
+import persistencia.DAO;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -22,15 +30,22 @@ import model.Produtos;
  */
 public class PnlCadastroProdutos extends javax.swing.JPanel {
 	
-	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Creates new form PnlCadastroProdutos
-	 * @throws ParseException 
+	 * 
+	 * @throws ParseException
 	 */
 	public PnlCadastroProdutos() throws ParseException {
+		setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		setBackground(Color.WHITE);
 		initComponents();
-		
+
 		/**
 		 * Criação dos campos formatados.
 		 */
@@ -42,8 +57,11 @@ public class PnlCadastroProdutos extends javax.swing.JPanel {
 		valorCusto.setColumns(14);
 		add(valorVenda);
 		add(valorCusto);
+		
+		txtAplicacao.disable();
+		
+
 	}
-	
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -57,6 +75,7 @@ public class PnlCadastroProdutos extends javax.swing.JPanel {
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jTable1 = new javax.swing.JTable();
 		jPanel1 = new javax.swing.JPanel();
+		jPanel1.setBackground(Color.WHITE);
 		lbtDescricao = new javax.swing.JLabel();
 		lbtCodigoBarras = new javax.swing.JLabel();
 		lbtMedida = new javax.swing.JLabel();
@@ -172,318 +191,145 @@ public class PnlCadastroProdutos extends javax.swing.JPanel {
 
 		lbtValorCusto.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 		lbtValorCusto.setText("Valor Custo");
+		
+		JLabel lblPrimeiro = new JLabel("Primeiro");
+		lblPrimeiro.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				try {
+					String sql = "select *from produtos";
+					this.
+					connection.prepareStatement(sql);
+								
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		});
+		
+		lblUltimo = new JLabel("Ultimo");
+		
+		lblProximo = new JLabel("Proximo");
+		
+		lblAnterior = new JLabel("Anterior");
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(
 				jPanel1);
+		jPanel1Layout.setHorizontalGroup(
+			jPanel1Layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+						.addGroup(jPanel1Layout.createSequentialGroup()
+							.addGap(187)
+							.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
+							.addGap(26)
+							.addComponent(btnPesquisar, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+							.addGap(26)
+							.addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnSair, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))
+						.addGroup(jPanel1Layout.createSequentialGroup()
+							.addComponent(btnIncluir, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnAlterar, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))
+						.addGroup(jPanel1Layout.createSequentialGroup()
+							.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+								.addComponent(lbtDescricao)
+								.addComponent(lbtCodigoBarras)
+								.addComponent(lbtAplicacao)
+								.addComponent(lbtValidade)
+								.addComponent(lbtValorVenda))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+								.addGroup(jPanel1Layout.createSequentialGroup()
+									.addComponent(txtCodigoBarras, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+									.addGap(47)
+									.addComponent(lbtMedida)
+									.addGap(18)
+									.addComponent(txtMedida, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(lblPrimeiro)
+									.addGap(10)
+									.addComponent(lblProximo)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(lblAnterior)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblUltimo))
+								.addComponent(txtDescricao, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 457, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtAplicacao, GroupLayout.PREFERRED_SIZE, 457, GroupLayout.PREFERRED_SIZE)
+								.addGroup(jPanel1Layout.createSequentialGroup()
+									.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(ftxtValorVenda, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+										.addComponent(txtValidade))
+									.addGap(45)
+									.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(jPanel1Layout.createSequentialGroup()
+											.addComponent(lbtFabricacao)
+											.addGap(18)
+											.addComponent(txtFabricacao, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE))
+										.addGroup(jPanel1Layout.createSequentialGroup()
+											.addComponent(lbtValorCusto)
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addComponent(ftxtValorCusto)))
+									.addGap(40)
+									.addComponent(lbtLote)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(txtLote)))))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		jPanel1Layout.setVerticalGroup(
+			jPanel1Layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+						.addGroup(jPanel1Layout.createSequentialGroup()
+							.addGap(14)
+							.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lbtCodigoBarras)
+								.addComponent(txtCodigoBarras, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lbtMedida)
+								.addComponent(txtMedida, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(jPanel1Layout.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblProximo)
+								.addComponent(lblAnterior)
+								.addComponent(lblUltimo)
+								.addComponent(lblPrimeiro))))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtDescricao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lbtDescricao))
+					.addGap(18)
+					.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lbtAplicacao)
+						.addComponent(txtAplicacao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lbtValidade)
+						.addComponent(txtValidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lbtFabricacao)
+						.addComponent(txtFabricacao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtLote, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lbtLote))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(ftxtValorVenda, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lbtValorVenda)
+						.addComponent(ftxtValorCusto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lbtValorCusto))
+					.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(btnExcluir)
+						.addComponent(btnPesquisar)
+						.addComponent(btnAlterar)
+						.addComponent(btnIncluir, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnSalvar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnSair, Alignment.TRAILING))
+					.addGap(22))
+		);
 		jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout
-				.setHorizontalGroup(jPanel1Layout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								jPanel1Layout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addGroup(
-																jPanel1Layout
-																		.createSequentialGroup()
-																		.addGap(115,
-																				115,
-																				115)
-																		.addGap(72,
-																				72,
-																				72)
-																		.addComponent(
-																				btnExcluir,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				72,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)
-																		.addGap(26,
-																				26,
-																				26)
-																		.addComponent(
-																				btnPesquisar,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				70,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)
-																		.addGap(26,
-																				26,
-																				26)
-																		.addComponent(
-																				btnSalvar,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				76,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																		.addGap(10,
-																				10,
-																				10)
-																		.addComponent(
-																				btnSair,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				71,
-																				javax.swing.GroupLayout.PREFERRED_SIZE))
-														.addGroup(
-																jPanel1Layout
-																		.createSequentialGroup()
-																		.addComponent(
-																				btnIncluir,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				71,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)
-																		.addGap(18,
-																				18,
-																				18)
-																		.addComponent(
-																				btnAlterar,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				71,
-																				javax.swing.GroupLayout.PREFERRED_SIZE))
-														.addGroup(
-																jPanel1Layout
-																		.createSequentialGroup()
-																		.addGroup(
-																				jPanel1Layout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING)
-																						.addComponent(
-																								lbtDescricao)
-																						.addComponent(
-																								lbtCodigoBarras)
-																						.addComponent(
-																								lbtAplicacao)
-																						.addComponent(
-																								lbtValidade)
-																						.addComponent(
-																								lbtValorVenda))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addGroup(
-																				jPanel1Layout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING,
-																								false)
-																						.addGroup(
-																								jPanel1Layout
-																										.createSequentialGroup()
-																										.addComponent(
-																												txtCodigoBarras,
-																												javax.swing.GroupLayout.PREFERRED_SIZE,
-																												91,
-																												javax.swing.GroupLayout.PREFERRED_SIZE)
-																										.addGap(47,
-																												47,
-																												47)
-																										.addComponent(
-																												lbtMedida)
-																										.addGap(18,
-																												18,
-																												18)
-																										.addComponent(
-																												txtMedida,
-																												javax.swing.GroupLayout.PREFERRED_SIZE,
-																												44,
-																												javax.swing.GroupLayout.PREFERRED_SIZE))
-																						.addComponent(
-																								txtDescricao,
-																								javax.swing.GroupLayout.Alignment.TRAILING,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								457,
-																								javax.swing.GroupLayout.PREFERRED_SIZE)
-																						.addComponent(
-																								txtAplicacao,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								457,
-																								javax.swing.GroupLayout.PREFERRED_SIZE)
-																						.addGroup(
-																								jPanel1Layout
-																										.createSequentialGroup()
-																										.addGroup(
-																												jPanel1Layout
-																														.createParallelGroup(
-																																javax.swing.GroupLayout.Alignment.TRAILING,
-																																false)
-																														.addComponent(
-																																ftxtValorVenda,
-																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																81,
-																																Short.MAX_VALUE)
-																														.addComponent(
-																																txtValidade))
-																										.addGap(45,
-																												45,
-																												45)
-																										.addGroup(
-																												jPanel1Layout
-																														.createParallelGroup(
-																																javax.swing.GroupLayout.Alignment.LEADING,
-																																false)
-																														.addGroup(
-																																jPanel1Layout
-																																		.createSequentialGroup()
-																																		.addComponent(
-																																				lbtFabricacao)
-																																		.addGap(18,
-																																				18,
-																																				18)
-																																		.addComponent(
-																																				txtFabricacao,
-																																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																																				86,
-																																				javax.swing.GroupLayout.PREFERRED_SIZE))
-																														.addGroup(
-																																jPanel1Layout
-																																		.createSequentialGroup()
-																																		.addComponent(
-																																				lbtValorCusto)
-																																		.addPreferredGap(
-																																				javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																																		.addComponent(
-																																				ftxtValorCusto)))
-																										.addGap(40,
-																												40,
-																												40)
-																										.addComponent(
-																												lbtLote)
-																										.addPreferredGap(
-																												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																										.addComponent(
-																												txtLote)))))
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
-		jPanel1Layout
-				.setVerticalGroup(jPanel1Layout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								jPanel1Layout
-										.createSequentialGroup()
-										.addGap(14, 14, 14)
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																lbtCodigoBarras)
-														.addComponent(
-																txtCodigoBarras,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(lbtMedida)
-														.addComponent(
-																txtMedida,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																txtDescricao,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																lbtDescricao))
-										.addGap(18, 18, 18)
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																lbtAplicacao)
-														.addComponent(
-																txtAplicacao,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addGap(18, 18, 18)
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																lbtValidade)
-														.addComponent(
-																txtValidade,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																lbtFabricacao)
-														.addComponent(
-																txtFabricacao,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																txtLote,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(lbtLote))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																ftxtValorVenda,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																lbtValorVenda)
-														.addGroup(
-																jPanel1Layout
-																		.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.BASELINE)
-																		.addComponent(
-																				ftxtValorCusto,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)
-																		.addComponent(
-																				lbtValorCusto)))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-												35, Short.MAX_VALUE)
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING,
-																false)
-														.addComponent(
-																btnExcluir)
-														.addComponent(
-																btnPesquisar)
-														.addComponent(
-																btnAlterar)
-														.addComponent(
-																btnIncluir,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE)
-														.addComponent(
-																btnSalvar,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE)
-														.addComponent(
-																btnSair,
-																javax.swing.GroupLayout.Alignment.TRAILING))
-										.addGap(22, 22, 22)));
 
 		lbtCabecalho.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 		lbtCabecalho.setForeground(new java.awt.Color(102, 102, 255));
@@ -491,54 +337,32 @@ public class PnlCadastroProdutos extends javax.swing.JPanel {
 		lbtCabecalho.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		layout.setHorizontalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+					.addGap(141)
+					.addComponent(lbtCabecalho, GroupLayout.PREFERRED_SIZE, 327, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		layout.setVerticalGroup(
+			layout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lbtCabecalho)
+					.addGap(18)
+					.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 301, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(60, Short.MAX_VALUE))
+		);
 		this.setLayout(layout);
-		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addContainerGap()
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(
-														jPanel1,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addGroup(
-														layout.createSequentialGroup()
-																.addGap(134,
-																		134,
-																		134)
-																.addComponent(
-																		lbtCabecalho,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		327,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)))
-								.addContainerGap(
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						javax.swing.GroupLayout.Alignment.TRAILING,
-						layout.createSequentialGroup()
-								.addContainerGap(
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)
-								.addComponent(lbtCabecalho)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jPanel1,
-										javax.swing.GroupLayout.PREFERRED_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addContainerGap()));
 	}// </editor-fold>
 
 	private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
-		
+
 	}
 
 	private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -567,11 +391,16 @@ public class PnlCadastroProdutos extends javax.swing.JPanel {
 					"O campo Descrição e obrigatório");
 		}
 
-		 
 	}
 
 	private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja "
+				+ "sair????", "Fechar Tela", JOptionPane.YES_NO_CANCEL_OPTION)==0){
+	
+		FrmCadastroProdutos.fechar();
+		
+		}
+		
 	}
 
 	// Variables declaration - do not modify
@@ -603,5 +432,7 @@ public class PnlCadastroProdutos extends javax.swing.JPanel {
 	private javax.swing.JTextField txtLote;
 	private javax.swing.JTextField txtMedida;
 	private javax.swing.JTextField txtValidade;
-	// End of variables declaration
+	private JLabel lblUltimo;
+	private JLabel lblProximo;
+	private JLabel lblAnterior;
 }

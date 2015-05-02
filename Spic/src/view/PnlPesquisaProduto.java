@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package view;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  * 
@@ -16,6 +21,8 @@ public class PnlPesquisaProduto extends javax.swing.JPanel {
      * Creates new form PnlPesquisaProduto
      */
     public PnlPesquisaProduto() {
+    	setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+    	setBackground(Color.WHITE);
         initComponents();
     }
 
@@ -30,6 +37,7 @@ public class PnlPesquisaProduto extends javax.swing.JPanel {
 
         lbtCabecalho = new javax.swing.JLabel();
         pnlDadosPesquisa = new javax.swing.JPanel();
+        pnlDadosPesquisa.setBackground(Color.WHITE);
         lbtPesquisaDescricao = new javax.swing.JLabel();
         lbtPesquisaCodigoBarras = new javax.swing.JLabel();
         lbtPesquisaMedida = new javax.swing.JLabel();
@@ -41,6 +49,7 @@ public class PnlPesquisaProduto extends javax.swing.JPanel {
         btnPesquisar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         pnlResultadoPesquisa = new javax.swing.JPanel();
+        pnlResultadoPesquisa.setBackground(Color.WHITE);
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResultadoPesquisa = new javax.swing.JTable();
 
@@ -163,36 +172,33 @@ public class PnlPesquisaProduto extends javax.swing.JPanel {
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(143, 143, 143)
-                                .addComponent(lbtCabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(pnlDadosPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnlResultadoPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+        					.addComponent(lbtCabecalho, GroupLayout.PREFERRED_SIZE, 327, GroupLayout.PREFERRED_SIZE)
+        					.addGap(116))
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(pnlDadosPesquisa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(pnlResultadoPesquisa, GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+        					.addContainerGap())))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbtCabecalho)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlDadosPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pnlResultadoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+        	layout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(lbtCabecalho)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(pnlDadosPesquisa, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addComponent(pnlResultadoPesquisa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(30, Short.MAX_VALUE))
         );
+        this.setLayout(layout);
     }// </editor-fold>                        
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {                                        
