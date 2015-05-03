@@ -6,11 +6,15 @@
 package view;
 
 import java.awt.Color;
+
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
+
+import persistencia.ConectaBanco;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -20,6 +24,7 @@ import java.awt.event.ActionEvent;
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
+	ConectaBanco conecta = new ConectaBanco(); // variavel global de conexão com o banco de dados
 	/**
 	 * 
 	 */
@@ -33,9 +38,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 		setBackground(Color.WHITE);
 		getContentPane().setBackground(Color.WHITE);
 		initComponents();
+		
 		setLocation(500, 5);
 		setSize(400, 100);
 		setAlwaysOnTop(true);
+		conecta.conexao();
 
 	}
 
@@ -63,7 +70,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 		JButton button = new JButton("");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			conecta.desconecta();
+				System.exit(0);
 			}
 		});
 		button.setIcon(new ImageIcon(FrmPrincipal.class
