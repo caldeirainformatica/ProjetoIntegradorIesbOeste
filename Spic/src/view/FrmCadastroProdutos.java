@@ -47,6 +47,7 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 	 * Creates new form FrmCadastroProdutos
 	 */
 	public FrmCadastroProdutos() {
+		setResizable(false);
 		setPreferredSize(new Dimension(650, 430));
 
 		initComponents();
@@ -71,18 +72,39 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 		jTabbedPane1 = new javax.swing.JTabbedPane();
 		pnlCadastroProduto = new javax.swing.JPanel();
 		btnAlterar = new javax.swing.JButton();
+		btnAlterar.setEnabled(false);
+		btnAlterar.setToolTipText("Alterar");
 		btnExcluir = new javax.swing.JButton();
+		btnExcluir.setEnabled(false);
+		btnExcluir.setToolTipText("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				try {
-					conecta.executaSQL("delete from produtos where produtos.idprodutos = '"+txtCodigoProduto.getText()+"'");
+					PreparedStatement pst = conecta.conn.prepareStatement("delete from produtos where "
+							+ "produtos.idprodutos = ?");
+					pst.setString(1, txtCodigoProduto.getText());
+					pst.execute();
 					JOptionPane.showMessageDialog(null, "Deletado com sucesso!!!");
-					
-				} catch (Exception e2) {
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Erro ao deletar produto");
-					
 				}
-			
+				
+				
+				
+				
+				
+//				try {
+//					conecta.executaSQL("delete from produtos where produtos.idprodutos = '"+txtCodigoProduto.getText()+"'");
+//					JOptionPane.showMessageDialog(null, "Deletado com sucesso!!!");
+//					
+//				} catch (Exception e2) {
+//					JOptionPane.showMessageDialog(null, "Erro ao deletar produto");
+//					
+//				}
+//			
 			}
 		});
 		jButton3 = new javax.swing.JButton();
@@ -92,6 +114,8 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 			}
 		});
 		btnSalvar = new javax.swing.JButton();
+		btnSalvar.setEnabled(false);
+		btnSalvar.setToolTipText("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtDescricao.setText(txtDescricao.getText().toUpperCase());
@@ -127,7 +151,24 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 
 			}
 		});
-		btnIncluir = new javax.swing.JButton();
+		btnNovo = new javax.swing.JButton();
+		btnNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtCodigoProduto.setEnabled(true);
+				txtCodigoBarras.setEnabled(true);
+				txtAplicacao.setEnabled(true);
+				txtDataCadastro.setEnabled(true);
+				txtDescricao.setEnabled(true);
+				txtFabricacao.setEnabled(true);
+				txtLote.setEnabled(true);
+				txtMedida.setEnabled(true);
+				txtQuantidade.setEnabled(true);
+				txtValidade.setEnabled(true);
+				fmtValorCusto.setEnabled(true);
+				fmtValorVenda.setEnabled(true);
+			}
+		});
+		btnNovo.setToolTipText("Novo");
 		lbtCodigoBarras = new javax.swing.JLabel();
 		lbtDescricao = new javax.swing.JLabel();
 		lbtAplicação = new javax.swing.JLabel();
@@ -139,6 +180,7 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 		lbtValorCusto = new javax.swing.JLabel();
 		LbtMedida = new javax.swing.JLabel();
 		txtCodigoBarras = new javax.swing.JTextField();
+		txtCodigoBarras.setEnabled(false);
 		txtCodigoBarras.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent ev) {
@@ -155,6 +197,7 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 		});
 		txtCodigoBarras.setDisabledTextColor(Color.BLACK);
 		txtMedida = new javax.swing.JTextField();
+		txtMedida.setEnabled(false);
 		txtMedida.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent ev) {
@@ -170,22 +213,31 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 		});
 		txtMedida.setDisabledTextColor(Color.BLACK);
 		txtDescricao = new javax.swing.JTextField();
+		txtDescricao.setEnabled(false);
 		txtDescricao.setDisabledTextColor(Color.BLACK);
 		txtAplicacao = new javax.swing.JTextField();
+		txtAplicacao.setEnabled(false);
 		txtAplicacao.setDisabledTextColor(Color.BLACK);
 		txtValidade = new javax.swing.JTextField();
+		txtValidade.setEnabled(false);
 		txtValidade.setDisabledTextColor(Color.BLACK);
 		txtFabricacao = new javax.swing.JTextField();
+		txtFabricacao.setEnabled(false);
 		txtFabricacao.setDisabledTextColor(Color.BLACK);
 		txtLote = new javax.swing.JTextField();
+		txtLote.setEnabled(false);
 		txtLote.setDisabledTextColor(Color.BLACK);
 		fmtValorVenda = new javax.swing.JFormattedTextField();
+		fmtValorVenda.setEnabled(false);
 		fmtValorVenda.setDisabledTextColor(Color.BLACK);
 		fmtValorCusto = new javax.swing.JFormattedTextField();
+		fmtValorCusto.setEnabled(false);
 		fmtValorCusto.setDisabledTextColor(Color.BLACK);
 		txtQuantidade = new javax.swing.JTextField();
+		txtQuantidade.setEnabled(false);
 		txtQuantidade.setDisabledTextColor(Color.BLACK);
 		btnPrimeiro = new javax.swing.JButton();
+		btnPrimeiro.setToolTipText("Primeiro");
 		btnPrimeiro.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
@@ -209,10 +261,14 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 			}
 		});
 		btnAnterior = new javax.swing.JButton();
+		btnAnterior.setToolTipText("Anterior");
 		btnProximo = new javax.swing.JButton();
+		btnProximo.setToolTipText("Pr\u00F3ximo");
 		btnUltimo = new javax.swing.JButton();
+		btnUltimo.setToolTipText("\u00DAltimo");
 		lbtDataCadastro = new javax.swing.JLabel();
 		txtDataCadastro = new javax.swing.JTextField();
+		txtDataCadastro.setEnabled(false);
 		txtDataCadastro.setDisabledTextColor(Color.BLACK);
 		pnlPesquisaProduto = new javax.swing.JPanel();
 		lbtCodigoBarrasPesquisa = new javax.swing.JLabel();
@@ -246,7 +302,7 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 		btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/images/Botoes_5103_usb_48.png"))); // NOI18N
 
-		btnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+		btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/images/add.png"))); // NOI18N
 
 		lbtCodigoBarras.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -305,6 +361,7 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 		lbCodigoProduto.setFont(new Font("Arial", Font.PLAIN, 14));
 		
 		txtCodigoProduto = new JTextField();
+		txtCodigoProduto.setEnabled(false);
 		txtCodigoProduto.setDisabledTextColor(Color.BLACK);
 
 		javax.swing.GroupLayout pnlCadastroProdutoLayout = new javax.swing.GroupLayout(
@@ -364,7 +421,7 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 							.addGap(18)
 							.addComponent(fmtValorVenda, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
 						.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-							.addComponent(btnIncluir, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnNovo, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
 							.addComponent(btnAlterar, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
@@ -429,7 +486,7 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 							.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.TRAILING, false)
 								.addComponent(btnExcluir, 0, 0, Short.MAX_VALUE)
 								.addComponent(btnAlterar, 0, 0, Short.MAX_VALUE)
-								.addComponent(btnIncluir, GroupLayout.PREFERRED_SIZE, 43, Short.MAX_VALUE))
+								.addComponent(btnNovo, GroupLayout.PREFERRED_SIZE, 43, Short.MAX_VALUE))
 							.addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnPrimeiro, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
 						.addComponent(btnAnterior, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
@@ -598,7 +655,7 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 	private javax.swing.JButton btnAlterar;
 	private javax.swing.JButton btnAnterior;
 	private javax.swing.JButton btnExcluir;
-	private javax.swing.JButton btnIncluir;
+	private javax.swing.JButton btnNovo;
 	private javax.swing.JButton btnPesquisar;
 	private javax.swing.JButton btnPrimeiro;
 	private javax.swing.JButton btnProximo;
