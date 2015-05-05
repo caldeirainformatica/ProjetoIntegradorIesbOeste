@@ -17,6 +17,7 @@ import persistencia.ConectaBanco;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 
 /**
  *
@@ -34,13 +35,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
 	 * Creates new form FrmPrincipal
 	 */
 	public FrmPrincipal() {
+		setResizable(false);
 		setType(Type.UTILITY);
 		setBackground(Color.WHITE);
 		getContentPane().setBackground(Color.WHITE);
 		initComponents();
 		
 		setLocation(500, 5);
-		setSize(400, 100);
+		setSize(200, 100);
 		setAlwaysOnTop(true);
 		conecta.conexao();
 
@@ -59,8 +61,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-		jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/images/Botoes_5103_usb_48.png"))); // NOI18N
+		jButton1.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/images/Windows_Tools_Icon_48.png"))); // NOI18N
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton1ActionPerformed(evt);

@@ -21,12 +21,15 @@ import javax.swing.JTextField;
 
 import model.ConnectionFactory;
 import model.Produtos;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.awt.Dimension;
 
@@ -37,6 +40,7 @@ import java.awt.Dimension;
 public class FrmCadastroProdutos extends javax.swing.JFrame {
 	ConectaBanco conecta = new ConectaBanco();
 	Produtos p = new Produtos();
+	private ResultSet rs;
 
 	/**
 	 * 
@@ -57,7 +61,15 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 		lbtDataCadastro.setVisible(false);
 		txtQuantidade.setVisible(false);
 		lbtQuantidade.setVisible(false);
-
+		PreparedStatement pst;
+		try {
+			pst = conecta.conn.prepareStatement("select * from produtos");
+			rs = pst.executeQuery();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
 	}
 
 	/**
@@ -75,7 +87,6 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 		btnAlterar.setEnabled(false);
 		btnAlterar.setToolTipText("Alterar");
 		btnExcluir = new javax.swing.JButton();
-		btnExcluir.setEnabled(false);
 		btnExcluir.setToolTipText("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -92,19 +103,23 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 					JOptionPane.showMessageDialog(null, "Erro ao deletar produto");
 				}
 				
-				
-				
-				
-				
-//				try {
-//					conecta.executaSQL("delete from produtos where produtos.idprodutos = '"+txtCodigoProduto.getText()+"'");
-//					JOptionPane.showMessageDialog(null, "Deletado com sucesso!!!");
-//					
-//				} catch (Exception e2) {
-//					JOptionPane.showMessageDialog(null, "Erro ao deletar produto");
-//					
-//				}
-//			
+				txtCodigoProduto.setText("");
+				txtCodigoBarras.setText("");
+				txtAplicacao.setText("");
+				txtDataCadastro.setText("");
+				txtDescricao.setText("");
+				txtFabricacao.setText("");
+				txtLote.setText("");
+				txtMedida.setText("");
+				txtQuantidade.setText("");
+				txtValidade.setText("");
+				fmtValorCusto.setText("");
+				fmtValorVenda.setText("");
+				btnAlterar.setEnabled(false);
+				btnExcluir.setEnabled(false);
+				btnSalvar.setEnabled(false);
+				btnNovo.setEnabled(true);
+								
 			}
 		});
 		jButton3 = new javax.swing.JButton();
@@ -136,13 +151,35 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 					JOptionPane.showMessageDialog(null,
 							"Produto salvo com sucesso");
 
+					txtCodigoProduto.setText("");
 					txtCodigoBarras.setText("");
-					txtDescricao.setText("");
 					txtAplicacao.setText("");
-					txtMedida.setText("");
-					txtValidade.setText("");
+					txtDataCadastro.setText("");
+					txtDescricao.setText("");
 					txtFabricacao.setText("");
 					txtLote.setText("");
+					txtMedida.setText("");
+					txtQuantidade.setText("");
+					txtValidade.setText("");
+					fmtValorCusto.setText("");
+					fmtValorVenda.setText("");
+					
+					txtCodigoProduto.setEnabled(false);
+					txtCodigoBarras.setEnabled(false);
+					txtAplicacao.setEnabled(false);
+					txtDataCadastro.setEnabled(false);
+					txtDescricao.setEnabled(false);
+					txtFabricacao.setEnabled(false);
+					txtLote.setEnabled(false);
+					txtMedida.setEnabled(false);
+					txtQuantidade.setEnabled(false);
+					txtValidade.setEnabled(false);
+					fmtValorCusto.setEnabled(false);
+					fmtValorVenda.setEnabled(false);
+					btnAlterar.setEnabled(false);
+					btnExcluir.setEnabled(false);
+					btnSalvar.setEnabled(false);
+					btnNovo.setEnabled(true);
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null,
 							"Erro ao cadastrar \n Erro " + e1.getMessage());
@@ -154,7 +191,21 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 		btnNovo = new javax.swing.JButton();
 		btnNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				txtCodigoProduto.setEnabled(true);
+				
+				txtCodigoProduto.setText("");
+				txtCodigoBarras.setText("");
+				txtAplicacao.setText("");
+				txtDataCadastro.setText("");
+				txtDescricao.setText("");
+				txtFabricacao.setText("");
+				txtLote.setText("");
+				txtMedida.setText("");
+				txtQuantidade.setText("");
+				txtValidade.setText("");
+				fmtValorCusto.setText("");
+				fmtValorVenda.setText("");
+				
+				//txtCodigoProduto.setEnabled(true);
 				txtCodigoBarras.setEnabled(true);
 				txtAplicacao.setEnabled(true);
 				txtDataCadastro.setEnabled(true);
@@ -166,6 +217,10 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 				txtValidade.setEnabled(true);
 				fmtValorCusto.setEnabled(true);
 				fmtValorVenda.setEnabled(true);
+				btnAlterar.setEnabled(true);
+				btnExcluir.setEnabled(false);
+				btnSalvar.setEnabled(true);
+				btnNovo.setEnabled(false);
 			}
 		});
 		btnNovo.setToolTipText("Novo");
@@ -241,30 +296,126 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 		btnPrimeiro.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
-				String sql = "select * from produtos";
-				Connection connection;
-
 				try {
-					connection = new ConnectionFactory().getConnection();
-					PreparedStatement stmt = connection.prepareStatement(sql);
-
-					ResultSet rs = stmt.executeQuery(sql);
+					PreparedStatement pst = conecta.conn.prepareStatement("select * from produtos");
+					rs = pst.executeQuery();
 					rs.first();
-					stmt.close();
+					txtCodigoProduto.setText(String.valueOf(rs.getInt("idProdutos")));
+					txtCodigoBarras.setText(String.valueOf(rs.getInt("codigoBarras")));
+					txtDescricao.setText(rs.getString("descricao"));
 					txtAplicacao.setText(rs.getString("aplicacao"));
-
-				} catch (SQLException e) {
+					txtDataCadastro.setText(rs.getString("dataCadastro"));
+					txtFabricacao.setText(rs.getString("dataFabricacao"));
+					txtValidade.setText(rs.getString("dataValidade"));
+					txtLote.setText(rs.getString("lote"));
+					txtMedida.setText(rs.getString("medida"));
+					txtQuantidade.setText(String.valueOf(rs.getInt("quantidade")));
+					
+					btnExcluir.setEnabled(true);
+					btnAlterar.setEnabled(true);
+					btnNovo.setEnabled(false);
+					btnSalvar.setEnabled(false);
+				
+				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
-					JOptionPane.showMessageDialog(null, "erro");
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Erro ao mostrar dados \n Contacte ao suporte SPIC"
+							+ " e informe o codigo codigo 687"+e1.getMessage());
 				}
 			}
 		});
+		
 		btnAnterior = new javax.swing.JButton();
 		btnAnterior.setToolTipText("Anterior");
+		btnAnterior.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					rs.previous();
+					txtCodigoProduto.setText(String.valueOf(rs.getInt("idProdutos")));
+					txtCodigoBarras.setText(String.valueOf(rs.getInt("codigoBarras")));
+					txtDescricao.setText(rs.getString("descricao"));
+					txtAplicacao.setText(rs.getString("aplicacao"));
+					txtDataCadastro.setText(rs.getString("dataCadastro"));
+					txtFabricacao.setText(rs.getString("dataFabricacao"));
+					txtValidade.setText(rs.getString("dataValidade"));
+					txtLote.setText(rs.getString("lote"));
+					txtMedida.setText(rs.getString("medida"));
+					txtQuantidade.setText(String.valueOf(rs.getInt("quantidade")));
+					
+					btnExcluir.setEnabled(true);
+					btnAlterar.setEnabled(true);
+					btnNovo.setEnabled(false);
+					btnSalvar.setEnabled(false);
+				
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Erro ao mostrar dados \n Contacte ao suporte SPIC"
+							+ " e informe o codigo codigo 687"+e1.getMessage());
+				}
+			}
+		});
 		btnProximo = new javax.swing.JButton();
+		btnProximo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					rs.next();
+					txtCodigoProduto.setText(String.valueOf(rs.getInt("idProdutos")));
+					txtCodigoBarras.setText(String.valueOf(rs.getInt("codigoBarras")));
+					txtDescricao.setText(rs.getString("descricao"));
+					txtAplicacao.setText(rs.getString("aplicacao"));
+					txtDataCadastro.setText(rs.getString("dataCadastro"));
+					txtFabricacao.setText(rs.getString("dataFabricacao"));
+					txtValidade.setText(rs.getString("dataValidade"));
+					txtLote.setText(rs.getString("lote"));
+					txtMedida.setText(rs.getString("medida"));
+					txtQuantidade.setText(String.valueOf(rs.getInt("quantidade")));
+					
+					btnExcluir.setEnabled(true);
+					btnAlterar.setEnabled(true);
+					btnNovo.setEnabled(false);
+					btnSalvar.setEnabled(false);
+				
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Erro ao mostrar dados \n Contacte ao suporte SPIC"
+							+ " e informe o codigo codigo 687"+e1.getMessage());
+				}
+			}
+		});
 		btnProximo.setToolTipText("Pr\u00F3ximo");
 		btnUltimo = new javax.swing.JButton();
+		btnUltimo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+//					PreparedStatement pst = conecta.conn.prepareStatement("select * from produtos");
+//					rs = pst.executeQuery();
+					rs.last();
+					txtCodigoProduto.setText(String.valueOf(rs.getInt("idProdutos")));
+					txtCodigoBarras.setText(String.valueOf(rs.getInt("codigoBarras")));
+					txtDescricao.setText(rs.getString("descricao"));
+					txtAplicacao.setText(rs.getString("aplicacao"));
+					txtDataCadastro.setText(rs.getString("dataCadastro"));
+					txtFabricacao.setText(rs.getString("dataFabricacao"));
+					txtValidade.setText(rs.getString("dataValidade"));
+					txtLote.setText(rs.getString("lote"));
+					txtMedida.setText(rs.getString("medida"));
+					txtQuantidade.setText(String.valueOf(rs.getInt("quantidade")));
+					
+					btnExcluir.setEnabled(true);
+					btnAlterar.setEnabled(true);
+					btnNovo.setEnabled(false);
+					btnSalvar.setEnabled(false);
+				
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Erro ao mostrar dados \n Contacte ao suporte SPIC"
+							+ " e informe o codigo codigo 687"+e1.getMessage());
+				}
+			}
+		});
 		btnUltimo.setToolTipText("\u00DAltimo");
 		lbtDataCadastro = new javax.swing.JLabel();
 		txtDataCadastro = new javax.swing.JTextField();
