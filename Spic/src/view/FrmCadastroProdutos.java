@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view;
 
 import java.sql.Connection;
@@ -21,12 +17,17 @@ import javax.swing.JTextField;
 
 import model.ConnectionFactory;
 import model.Produtos;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.awt.Dimension;
 
@@ -34,7 +35,7 @@ import java.awt.Dimension;
  *
  * @author RicardoNote
  */
-public class FrmCadastroProdutos extends javax.swing.JFrame {
+public class FrmCadastroProdutos extends JFrame {
 	ConectaBanco conecta = new ConectaBanco();
 	Produtos p = new Produtos();
 
@@ -341,19 +342,19 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 			}
 		});
 
-		btnPrimeiro.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+		btnPrimeiro.setIcon(new ImageIcon(getClass().getResource(
 				"/images/Undo_48x48.png"))); // NOI18N
 
-		btnAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/images/Previous_48x48.png"))); // NOI18N
-
-		btnProximo.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/images/Next_48x48.png"))); // NOI18N
-
-		btnUltimo.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+		btnAnterior.setIcon(new ImageIcon(getClass().getResource(
 				"/images/Redo_48x48.png"))); // NOI18N
 
-		lbtDataCadastro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+		btnProximo.setIcon(new ImageIcon(getClass().getResource(
+				"/images/Next_48x48.png"))); // NOI18N
+
+		btnUltimo.setIcon(new ImageIcon(getClass().getResource(
+				"/images/Previous_48x48.png"))); // NOI18N
+
+		lbtDataCadastro.setFont(new Font("Arial", 0, 14)); // NOI18N
 		lbtDataCadastro.setText("Data Cadastro");
 		
 		JLabel lbCodigoProduto = new JLabel();
@@ -364,7 +365,7 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 		txtCodigoProduto.setEnabled(false);
 		txtCodigoProduto.setDisabledTextColor(Color.BLACK);
 
-		javax.swing.GroupLayout pnlCadastroProdutoLayout = new javax.swing.GroupLayout(
+		javax.swing.GroupLayout pnlCadastroProdutoLayout = new GroupLayout(
 				pnlCadastroProduto);
 		pnlCadastroProdutoLayout.setHorizontalGroup(
 			pnlCadastroProdutoLayout.createParallelGroup(Alignment.LEADING)
