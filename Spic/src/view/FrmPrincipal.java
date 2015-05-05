@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import persistencia.ConectaBanco;
 
@@ -70,9 +71,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
 		JButton button = new JButton("");
 		button.addActionListener(new ActionListener() {
+			
+		
 			public void actionPerformed(ActionEvent arg0) {
-			conecta.desconecta();
-				System.exit(0);
+				//Pergunta para o usuário se tem mesmo certeza se deseja sair ou nao
+				if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?", "Confirmar",
+						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					
+					conecta.desconecta();
+					System.exit(0);
+					
+				} else {
+				    
+				}
+			
 			}
 		});
 		button.setIcon(new ImageIcon(FrmPrincipal.class
@@ -113,10 +125,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>
 
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void jButton1ActionPerformed(ActionEvent evt) {
 		FrmCadastroProdutos cadastroProdutos = new FrmCadastroProdutos();
 		cadastroProdutos.setVisible(true);
-		cadastroProdutos.setResizable(false);
+	
+		
 
 	}
 

@@ -213,5 +213,55 @@ public class ConProdutos {
 		}
 	}
 	
+	public boolean validarValorVenda(String valorVenda)throws Exception {
+		
+		try{
+			
+			if(valorVenda == ""||valorVenda== null||valorVenda.trim()==""){
+				
+				
+				return false;
+			
+			}else{
+				
+				
+				produto.setValorVenda(Float.parseFloat(valorVenda));
+				return true;
+				
+			}
+		}catch(NumberFormatException e){
+			
+			new Exception("Valor inválido!!");
+			return false;
+		}
+	
+		
+	}
+	
+	
+	public boolean validarValorCusto(String valorCusto)throws Exception {
+		
+		try{
+			
+			if(valorCusto == ""||valorCusto== null||valorCusto.trim()==""){
+				
+				
+				return false;
+			
+			}else{
+				
+				
+				produto.setValorCusto(Float.parseFloat(valorCusto));
+				return true;
+				
+			}
+		}catch(NumberFormatException e){
+			
+			new Exception("Valor inválido!!");
+			return false;
+		}
+	
+		
+	}
 	
 }	
