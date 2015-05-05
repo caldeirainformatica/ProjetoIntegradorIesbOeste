@@ -23,9 +23,11 @@ public class Produtos {
 	private String aplicacao;
 	private String medida;
 	private String ativo;
-	private String dataValidade;
-	private String dataFabricacao;
+	private Date dataValidade;
+	private Date dataFabricacao;
 	private String lote;
+	private float valorVenda;
+	private float valorCusto;
 	
 	//método construtor
 	public Produtos(){
@@ -73,14 +75,14 @@ public class Produtos {
 	}
 
 	
-	public String getDataValidade() {
+	public Date getDataValidade() {
 		
 		return dataValidade;
 		
 		
 	}
 
-	public String getDataFabricacao() {
+	public Date getDataFabricacao() {
 		return dataFabricacao;
 	}
 
@@ -114,17 +116,17 @@ public class Produtos {
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
 	}
-	public void setDataValidade(String dataValidade){ //throws ParseException{
+	public void setDataValidade(String dataValidade) throws ParseException{
 		
-//		DateFormat df = new SimpleDateFormat("dd/MM/yyy");
-//		java.util.Date data = df.parse(dataValidade);
-		this.dataValidade =	dataValidade;	//new java.sql.Date(data.getTime());
+		DateFormat df = new SimpleDateFormat("dd/MM/yyy");
+		java.util.Date data = df.parse(dataValidade);
+		this.dataValidade =	new java.sql.Date(data.getTime());
 		
 	}
-	public void setDataFabricacao(String dataFabricacao) {
-//		DateFormat df = new SimpleDateFormat("dd/MM/yyy");
-//		java.util.Date data = df.parse(dataFabricacao);
-		this.dataFabricacao = dataFabricacao;		//.getTime());
+	public void setDataFabricacao(String dataFabricacao)throws ParseException {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyy");
+		java.util.Date data = df.parse(dataFabricacao);
+		this.dataFabricacao = new java.sql.Date(data.getTime());
 		
 	}
 	public void setLote(String lote) {
