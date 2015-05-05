@@ -90,6 +90,16 @@ public class Produtos {
 		return lote;
 	}
 	
+	public float getValorVenda(){
+		
+		return valorVenda;
+	}
+	
+	public float getValorCusto(){
+		
+		return valorCusto;
+		
+	}
 	
 	
 
@@ -133,5 +143,17 @@ public class Produtos {
 		this.lote = lote;
 	}
 	
+	
+	public void setValorVenda(float valorVenda){
+		
+		this.valorVenda = valorVenda;
+		
+	}
+	
+	public void setValorCusto(float valorCusto){
+		
+		this.valorCusto = valorCusto;
+		
+	}
 
 }
