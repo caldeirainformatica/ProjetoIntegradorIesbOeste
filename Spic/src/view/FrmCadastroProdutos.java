@@ -59,6 +59,10 @@ public class FrmCadastroProdutos extends JFrame {
 		lbtDataCadastro.setVisible(false);
 		txtQuantidade.setVisible(false);
 		lbtQuantidade.setVisible(false);
+		if (txtCodigoProduto.getText() != ("")){
+			txtCodigoProduto.setEnabled(true);
+			
+		}
 		PreparedStatement pst;
 		try {
 			pst = conecta.conn.prepareStatement("select * from produtos");
@@ -82,6 +86,31 @@ public class FrmCadastroProdutos extends JFrame {
 		jTabbedPane1 = new javax.swing.JTabbedPane();
 		pnlCadastroProduto = new javax.swing.JPanel();
 		btnAlterar = new javax.swing.JButton();
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					PreparedStatement pst = conecta.conn.prepareStatement("update produtos set "
+							+ "descricao = ?, aplicacao = ?, codigoBarras = ?, valorVenda = ?, valorCusto = ?"
+							+ ", medida = ?, quantidade = ?"
+							+ "  where idprodutos = ?");
+					pst.setString(1, txtDescricao.getText());
+					pst.setString(2, txtAplicacao.getText());
+					pst.setString(3, txtCodigoBarras.getText());
+					pst.setString(4, fmtValorVenda.getText());
+					pst.setString(5, fmtValorCusto.getText());
+					pst.setString(6, txtMedida.getText());
+					pst.setString(7, txtQuantidade.getText());
+					pst.setString(8, txtCodigoProduto.getText());
+					
+					pst.execute();
+					JOptionPane.showMessageDialog(null, "Alterado com sucesso");
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog(null, "Erro ao alterar "+e.getMessage());
+					
+				}
+				
+			}
+		});
 		btnAlterar.setEnabled(false);
 		btnAlterar.setToolTipText("Alterar");
 		btnExcluir = new javax.swing.JButton();
@@ -215,7 +244,7 @@ public class FrmCadastroProdutos extends JFrame {
 				txtValidade.setEnabled(true);
 				fmtValorCusto.setEnabled(true);
 				fmtValorVenda.setEnabled(true);
-				btnAlterar.setEnabled(true);
+				btnAlterar.setEnabled(false);
 				btnExcluir.setEnabled(false);
 				btnSalvar.setEnabled(true);
 				btnNovo.setEnabled(false);
