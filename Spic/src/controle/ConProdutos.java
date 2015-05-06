@@ -249,11 +249,8 @@ public class ConProdutos {
 				return false;
 			
 			}else{
-				
-				
 				produto.setValorCusto(Float.parseFloat(valorCusto));
 				return true;
-				
 			}
 		}catch(NumberFormatException e){
 			
@@ -261,6 +258,27 @@ public class ConProdutos {
 			return false;
 		}
 	
+		
+	}
+	
+	public boolean validarQuantidade(String quantidade)throws Exception{
+		
+		try{
+			
+			if(quantidade == ""||quantidade== null||quantidade.trim()==""){
+				return false;
+			}else{
+				
+				produto.setQuantidade(Double.parseDouble(quantidade));
+				return true;
+			}
+			
+		}catch(NumberFormatException Exception){
+			
+			new Exception("Valor inválido!");
+			return false;
+			
+		}
 		
 	}
 	

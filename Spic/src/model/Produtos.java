@@ -28,7 +28,7 @@ public class Produtos {
 	private String lote;
 	private float valorVenda;
 	private float valorCusto;
-	private int quantidade;
+	private double quantidade;
 	
 	//método construtor
 	public Produtos(){
@@ -102,7 +102,7 @@ public class Produtos {
 		
 	}
 	
-	public int getQuantidade(){
+	public double getQuantidade(){
 		
 		return quantidade;
 	}
@@ -161,7 +161,7 @@ public class Produtos {
 		
 	}
 	
-	public void setQuantidade(int quantidade){
+	public void setQuantidade(double quantidade){
 		
 		this.quantidade = quantidade;
 		
