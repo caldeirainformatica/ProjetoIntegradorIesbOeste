@@ -4,6 +4,8 @@
 package persistencia;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -49,15 +51,17 @@ public class ConectaBanco {
 		}
 	}
 
-	public void executaSQL(String sql) {
+	public ResultSet executaSQL(String sql) {
 		try {
 			conexao();
 			stm = conn.createStatement(rs.TYPE_SCROLL_INSENSITIVE,
 					rs.CONCUR_READ_ONLY);
 			rs = stm.executeQuery(sql);
+			return rs;
 		} catch (SQLException e) {
 			// JOptionPane.showMessageDialog(null,
 			// "Erro no executasql \n Erro"+e.getMessage()); // mensagem de erro
+			return null;
 		}
 	}
 
