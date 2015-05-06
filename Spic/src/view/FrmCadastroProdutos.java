@@ -493,14 +493,12 @@ public class FrmCadastroProdutos extends JFrame {
 		btnPrimeiro.setIcon(new ImageIcon(getClass().getResource(
 				"/images/Undo_48x48.png"))); // NOI18N
 
-		btnAnterior.setIcon(new ImageIcon(getClass().getResource(
-				"/images/Redo_48x48.png"))); // NOI18N
+		btnAnterior.setIcon(new ImageIcon(FrmCadastroProdutos.class.getResource("/images/Previous_48x48.png"))); // NOI18N
 
 		btnProximo.setIcon(new ImageIcon(getClass().getResource(
 				"/images/Next_48x48.png"))); // NOI18N
 
-		btnUltimo.setIcon(new ImageIcon(getClass().getResource(
-				"/images/Previous_48x48.png"))); // NOI18N
+		btnUltimo.setIcon(new ImageIcon(FrmCadastroProdutos.class.getResource("/images/Redo_48x48.png"))); // NOI18N
 
 		lbtDataCadastro.setFont(new Font("Arial", 0, 14)); // NOI18N
 		lbtDataCadastro.setText("Data Cadastro");
