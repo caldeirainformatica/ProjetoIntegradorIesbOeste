@@ -68,7 +68,7 @@ public class ConectaBanco {
 	public void desconecta() { // metodo para fechar a conexão com o bd
 		try {
 			conn.close(); // fecha a conexão
-			JOptionPane.showMessageDialog(null, "desconectado com sucesso"); // imprime
+		//	JOptionPane.showMessageDialog(null, "desconectado com sucesso"); // imprime
 																				// uma
 																				// cx
 																				// de
