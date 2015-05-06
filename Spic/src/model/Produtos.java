@@ -28,6 +28,7 @@ public class Produtos {
 	private String lote;
 	private float valorVenda;
 	private float valorCusto;
+	private int quantidade;
 	
 	//método construtor
 	public Produtos(){
@@ -101,6 +102,10 @@ public class Produtos {
 		
 	}
 	
+	public int getQuantidade(){
+		
+		return quantidade;
+	}
 	
 
 	// inicio dos setters 
@@ -153,6 +158,12 @@ public class Produtos {
 	public void setValorCusto(float valorCusto){
 		
 		this.valorCusto = valorCusto;
+		
+	}
+	
+	public void setQuantidade(int quantidade){
+		
+		this.quantidade = quantidade;
 		
 	}
 
