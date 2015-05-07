@@ -181,8 +181,8 @@ public class FrmCadastroProdutos extends JFrame {
 						p.setDescricao(txtDescricao.getText());
 						p.setAplicacao(txtAplicacao.getText());
 						p.setMedida(txtMedida.getText());
-						p.setDataValidade(txtValidade.getText());
-						p.setDataFabricacao(txtValidade.getText());
+				//		p.setDataValidade(txtValidade.getText());
+					//	p.setDataFabricacao(txtValidade.getText());
 						p.setLote(txtLote.getText());
 						dao.insert(p);
 						JOptionPane.showMessageDialog(null,

@@ -21,9 +21,9 @@ public class Teste {
 		pro.validarDescricao("sdfsdksdfjsdfdsf");
 		pro.validarAplicacao("de passar no cabelo");
 		pro.validarMedida("mei metro");
-		pro.validarDataValidade("12/12/2012");
-		pro.validarDataFabricacao("13/12/2015");
-		pro.validarLote("120004404");
+//		pro.validarDataValidade("12/12/2012");
+//		pro.validarDataFabricacao("13/12/2015");
+//		pro.validarLote("120004404");
 		dao.insert(pro.produto);
 		
 		
