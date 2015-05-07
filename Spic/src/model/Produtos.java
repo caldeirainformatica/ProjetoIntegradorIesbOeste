@@ -26,8 +26,8 @@ public class Produtos {
 	private Date dataValidade;
 	private Date dataFabricacao;
 	private String lote;
-	private float valorVenda;
-	private float valorCusto;
+	private double valorVenda;
+	private double valorCusto;
 	private double quantidade;
 	
 	//método construtor
@@ -91,12 +91,12 @@ public class Produtos {
 		return lote;
 	}
 	
-	public float getValorVenda(){
+	public double getValorVenda(){
 		
 		return valorVenda;
 	}
 	
-	public float getValorCusto(){
+	public double getValorCusto(){
 		
 		return valorCusto;
 		
@@ -149,13 +149,13 @@ public class Produtos {
 	}
 	
 	
-	public void setValorVenda(float valorVenda){
+	public void setValorVenda(double valorVenda){
 		
 		this.valorVenda = valorVenda;
 		
 	}
 	
-	public void setValorCusto(float valorCusto){
+	public void setValorCusto(double valorCusto){
 		
 		this.valorCusto = valorCusto;
 		
