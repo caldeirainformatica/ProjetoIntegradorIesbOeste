@@ -22,9 +22,6 @@ public class Produtos {
 	private String descricao;
 	private String aplicacao;
 	private String medida;
-	private String ativo;
-	private Date dataValidade;
-	private Date dataFabricacao;
 	private String lote;
 	private double valorVenda;
 	private double valorCusto;
@@ -71,22 +68,6 @@ public class Produtos {
 		return medida;
 	}
 
-	public String getAtivo() {
-		return ativo;
-	}
-
-	
-	public Date getDataValidade() {
-		
-		return dataValidade;
-		
-		
-	}
-
-	public Date getDataFabricacao() {
-		return dataFabricacao;
-	}
-
 	public String getLote() {
 		return lote;
 	}
@@ -128,22 +109,7 @@ public class Produtos {
 	public void setMedida(String medida) {
 		this.medida = medida;
 	}
-	public void setAtivo(String ativo) {
-		this.ativo = ativo;
-	}
-	public void setDataValidade(String dataValidade) throws ParseException{
-		
-		DateFormat df = new SimpleDateFormat("dd/MM/yyy");
-		java.util.Date data = df.parse(dataValidade);
-		this.dataValidade =	new java.sql.Date(data.getTime());
-		
-	}
-	public void setDataFabricacao(String dataFabricacao)throws ParseException {
-		DateFormat df = new SimpleDateFormat("dd/MM/yyy");
-		java.util.Date data = df.parse(dataFabricacao);
-		this.dataFabricacao = new java.sql.Date(data.getTime());
-		
-	}
+	
 	public void setLote(String lote) {
 		this.lote = lote;
 	}
@@ -166,5 +132,7 @@ public class Produtos {
 		this.quantidade = quantidade;
 		
 	}
+	
+	
 
 }
