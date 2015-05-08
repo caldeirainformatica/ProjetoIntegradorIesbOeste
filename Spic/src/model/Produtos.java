@@ -122,6 +122,7 @@ public class Produtos {
 	}
 	
 	public void setValorCusto(double valorCusto){
+
 		
 		this.valorCusto = valorCusto;
 		

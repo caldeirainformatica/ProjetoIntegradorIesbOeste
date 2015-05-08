@@ -625,7 +625,7 @@ public class FrmCadastroProdutos extends JFrame {
 		btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ResultSet rs;
+		
 				DAO dao = new DAO();
 				p.setIdProdutos(Integer.valueOf(txtCodigoProduto.getText()));
 				p.setCodigoBarras(Long.valueOf(txtCodigoBarras.getText()));

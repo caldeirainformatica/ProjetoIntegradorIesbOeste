@@ -58,7 +58,7 @@ public class DAO {
 			
 			// JOptionPane.showMessageDialog(null, "Salvo com sucesso");
 		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, "Erro na inserção \n Erro "
+			JOptionPane.showMessageDialog(null, "Erro na pesquisa \n Erro "
 					+ e1.getMessage());
 		}
 	}
