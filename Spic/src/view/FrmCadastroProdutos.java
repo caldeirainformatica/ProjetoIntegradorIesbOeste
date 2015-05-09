@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -29,6 +30,7 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 import java.awt.Dimension;
+
 import javax.swing.JButton;
 
 /**
@@ -181,8 +183,8 @@ public class FrmCadastroProdutos extends JFrame {
 						p.setDescricao(txtDescricao.getText());
 						p.setAplicacao(txtAplicacao.getText());
 						p.setMedida(txtMedida.getText());
-				//		p.setDataValidade(txtValidade.getText());
-					//	p.setDataFabricacao(txtValidade.getText());
+						// p.setDataValidade(txtValidade.getText());
+						// p.setDataFabricacao(txtValidade.getText());
 						p.setLote(txtLote.getText());
 						dao.insert(p);
 						JOptionPane.showMessageDialog(null,
@@ -625,19 +627,43 @@ public class FrmCadastroProdutos extends JFrame {
 		btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		
+
 				DAO dao = new DAO();
-				p.setIdProdutos(Integer.valueOf(txtCodigoProduto.getText()));
-				p.setCodigoBarras(Long.valueOf(txtCodigoBarras.getText()));
-				p.setAplicacao(txtAplicacao.getText());
-				p.setDescricao(txtDescricao.getText());
-				p.setMedida(txtMedida.getText());
-				p.setValorVenda(Double.valueOf(fmtValorVenda.getText()));
-				p.setValorCusto(Double.valueOf(fmtValorCusto.getText()));
-				p.setQuantidade(Double.valueOf(txtQuantidade.getText()));
-				
+				if (txtCodigoProduto.getText().equals("")) {
+					p.setIdProdutos(Integer.valueOf(txtCodigoProduto.getText()));
+
+				}
+				if (txtCodigoBarras.getText().equals("")) {
+					p.setCodigoBarras(Long.valueOf(txtCodigoBarras.getText()));
+
+				}
+				if (!txtAplicacao.getText().equals("")) {
+					p.setAplicacao(txtAplicacao.getText());
+
+				}
+				if (!txtDescricao.getText().equals("")) {
+					p.setDescricao(txtDescricao.getText());
+
+				}
+				if (!txtMedida.getText().equals("")) {
+					p.setMedida(txtMedida.getText());
+
+				}
+				if (!fmtValorCusto.getText().equals("")) {
+					p.setValorCusto(Double.valueOf(fmtValorCusto.getText()));
+
+				}
+				if (!fmtValorVenda.getText().equals("")) {
+					p.setValorVenda(Double.valueOf(fmtValorVenda.getText()));
+
+				}
+				if (!txtQuantidade.getText().equals("")) {
+					p.setQuantidade(Double.valueOf(txtQuantidade.getText()));
+
+				}
+
 				dao.select(p);
-				
+
 				txtCodigoProduto.setText(String.valueOf(p.getIdProdutos()));
 				txtCodigoBarras.setText(String.valueOf(p.getCodigoBarras()));
 				txtAplicacao.setText(p.getAplicacao());
@@ -645,8 +671,7 @@ public class FrmCadastroProdutos extends JFrame {
 				txtMedida.setText(p.getMedida());
 				fmtValorVenda.setText(String.valueOf(p.getValorVenda()));
 				fmtValorCusto.setText(String.valueOf(p.getValorCusto()));
-				
-				
+
 			}
 		});
 
@@ -1263,6 +1288,29 @@ public class FrmCadastroProdutos extends JFrame {
 
 	private void fmtValorVendaActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
+	}
+
+	public void preencherTabela(String sql) {
+		ArrayList dados = new ArrayList<>();
+		String[] colunas = new String[] { "Codigo", "Codigo Barras",
+				"Descricao", "Aplicacao", "Valor", "Custo" };
+		conecta.executaSQL(sql);
+		try {
+			conecta.rs.first();
+			do {
+				dados.add(new Object[] { conecta.rs.getInt("idProdutos"),
+						conecta.rs.getLong("codigoBarras"),
+						conecta.rs.getString("descricao"),
+						conecta.rs.getString("aplicacao"),
+						conecta.rs.getDouble("valorVenda"),
+						conecta.rs.getDouble("valorCusto") });
+
+			} while (conecta.rs.next());
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,
+					"Erro ao preencher o array /n \n" + e.getMessage());
+		}
+	
 	}
 
 	/**

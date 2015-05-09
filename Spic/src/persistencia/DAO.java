@@ -44,10 +44,19 @@ public class DAO {
 			ResultSet rs;
 			conecta.conexao();
 			PreparedStatement pst = conecta.conn
-					.prepareStatement("select * from produtos where idProdutos = %?% or codigoBarras = %?% or descricao = %?% or "
-							+ "aplicacao = %?% or medida = %?% or valorVenda = %?% or valorCusto = %?% or quantidade = %?%");
+					.prepareStatement("select * from produtos where idProdutos = ? or codigoBarras = ? or descricao = ? or "
+							+ "aplicacao = ? or medida = ? or valorVenda = ? or valorCusto = ? or quantidade = ?");
+			pst.setInt(1, p.getIdProdutos());
+			pst.setLong(2, p.getCodigoBarras());
+			pst.setString(3, p.getDescricao());
+			pst.setString(4, p.getAplicacao());
+			pst.setString(5, p.getMedida());
+			pst.setDouble(6, p.getValorVenda());
+			pst.setDouble(7, p.getValorCusto());
+			pst.setDouble(8, p.getQuantidade());
+			
 			rs = pst.executeQuery();
-			p.setIdProdutos(rs.getInt("idProdutos"));
+			p.setIdProdutos(Integer.valueOf(rs.getString("idProdutos")));
 			p.setCodigoBarras(rs.getLong("codigoBarras"));
 			p.setDescricao(rs.getString("descricao"));
 			p.setAplicacao(rs.getString("aplicacao"));
@@ -58,7 +67,7 @@ public class DAO {
 			
 			// JOptionPane.showMessageDialog(null, "Salvo com sucesso");
 		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, "Erro na pesquisa \n Erro "
+			JOptionPane.showMessageDialog(null, "Erro na pesquisa classe dao \n Erro "
 					+ e1.getMessage());
 		}
 	}
