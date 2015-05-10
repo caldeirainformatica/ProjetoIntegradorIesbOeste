@@ -27,9 +27,6 @@ public class DAO {
 		pst.setString(2, p.getDescricao());
 		pst.setString(3, p.getAplicacao());
 		pst.setString(4, p.getMedida());
-		pst.setDate(5, p.getDataValidade());
-		pst.setDate(6, p.getDataFabricacao());
-		pst.setString(7, p.getLote());
 		pst.executeUpdate();
 		//JOptionPane.showMessageDialog(null, "Salvo com sucesso");
 	} catch (SQLException e1) {

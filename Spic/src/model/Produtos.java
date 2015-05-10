@@ -22,7 +22,7 @@ public class Produtos {
 	private String descricao;
 	private String aplicacao;
 	private String medida;
-	private String lote;
+	//private String fklote;
 	private float valorVenda;
 	private float valorCusto;
 	private double quantidade;
@@ -68,9 +68,9 @@ public class Produtos {
 		return medida;
 	}
 
-	public String getLote() {
-		return lote;
-	}
+	//public String getLote() {
+	//	return fklote;
+	//}
 	
 	public float getValorVenda(){
 		
@@ -110,9 +110,9 @@ public class Produtos {
 		this.medida = medida;
 	}
 	
-	public void setLote(String lote) {
-		this.lote = lote;
-	}
+	//public void setfkLote(String fklote) {
+		//this.fklote = fklote;
+	//}
 	
 	
 	public void setValorVenda(float valorVenda){

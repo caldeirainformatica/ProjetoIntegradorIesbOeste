@@ -170,10 +170,6 @@ public class FrmCadastroProdutos extends JFrame {
 							.getText()));
 					p.setDescricao(txtDescricao.getText());
 					p.setAplicacao(txtAplicacao.getText());
-					p.setMedida(txtMedida.getText());
-					p.setDataValidade(txtValidade.getText());
-					p.setDataFabricacao(txtValidade.getText());
-					p.setLote(txtLote.getText());
 					dao.insert(p);
 					JOptionPane.showMessageDialog(null,
 							"Produto salvo com sucesso");
