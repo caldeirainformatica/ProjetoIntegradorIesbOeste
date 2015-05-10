@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import model.ConnectionFactory;
+import model.ModeloTabela;
 import model.Produtos;
 
 import java.awt.event.KeyAdapter;
@@ -25,8 +26,10 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import javax.swing.ListSelectionModel;
 
 import java.awt.Font;
 import java.awt.Dimension;
@@ -60,9 +63,7 @@ public class FrmCadastroProdutos extends JFrame {
 		setLocation(370, 200);
 		txtDataCadastro.setVisible(false);
 		lbtDataCadastro.setVisible(false);
-		txtQuantidade.setVisible(false);
-		lbtQuantidade.setVisible(false);
-		if (txtCodigoProduto.getText() == ("")) {
+		if (!txtCodigoProduto.getText().equals("")) {
 			btnExcluir.setEnabled(true);
 		} else {
 			btnExcluir.setEnabled(false);
@@ -76,6 +77,9 @@ public class FrmCadastroProdutos extends JFrame {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
+		
+		
+		preencherTabela("select * from produtos order by idProdutos");
 
 	}
 
@@ -173,19 +177,22 @@ public class FrmCadastroProdutos extends JFrame {
 				txtDescricao.setText(txtDescricao.getText().toUpperCase());
 				txtAplicacao.setText(txtAplicacao.getText().toUpperCase());
 				txtMedida.setText(txtMedida.getText().toUpperCase());
-				if (txtCodigoProduto.getText() == ("")) {
+			//	if (txtCodigoProduto.getText() == ("")) {
 
 					try {
 
 						DAO dao = new DAO();
-						p.setCodigoBarras(Integer.parseInt(txtCodigoBarras
+						p.setCodigoBarras(Long.valueOf(txtCodigoBarras
 								.getText()));
 						p.setDescricao(txtDescricao.getText());
 						p.setAplicacao(txtAplicacao.getText());
 						p.setMedida(txtMedida.getText());
 						// p.setDataValidade(txtValidade.getText());
 						// p.setDataFabricacao(txtValidade.getText());
-						p.setLote(txtLote.getText());
+						//p.setLote(txtLote.getText());
+						p.setValorVenda(Double.valueOf(fmtValorVenda.getText()));
+						p.setValorCusto(Double.valueOf(fmtValorCusto.getText()));
+						p.setQuantidade(Double.valueOf(txtQuantidade.getText()));
 						dao.insert(p);
 						JOptionPane.showMessageDialog(null,
 								"Produto salvo com sucesso");
@@ -221,12 +228,12 @@ public class FrmCadastroProdutos extends JFrame {
 						btnNovo.setEnabled(true);
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null,
-								"Erro ao cadastrar \n Erro " + e1.getMessage());
+								"PRODUTOS Erro ao cadastrar \n Erro " + e1.getMessage());
 
 					}
-				} else {
+			//	} else {
 					// implementar aqui o update da alteração
-				}
+				//}
 
 			}
 		});
@@ -1310,7 +1317,23 @@ public class FrmCadastroProdutos extends JFrame {
 			JOptionPane.showMessageDialog(null,
 					"Erro ao preencher o array /n \n" + e.getMessage());
 		}
-	
+	ModeloTabela modelo = new ModeloTabela(dados, colunas);;
+	tabelaProdutos.setModel(modelo);
+	tabelaProdutos.getColumnModel().getColumn(0).setPreferredWidth(80);
+	tabelaProdutos.getColumnModel().getColumn(0).setResizable(true);
+	tabelaProdutos.getColumnModel().getColumn(1).setPreferredWidth(150);
+	tabelaProdutos.getColumnModel().getColumn(1).setResizable(true);
+	tabelaProdutos.getColumnModel().getColumn(2).setPreferredWidth(230);
+	tabelaProdutos.getColumnModel().getColumn(2).setResizable(true);
+	tabelaProdutos.getColumnModel().getColumn(3).setPreferredWidth(230);
+	tabelaProdutos.getColumnModel().getColumn(3).setResizable(true);
+	tabelaProdutos.getColumnModel().getColumn(4).setPreferredWidth(80);
+	tabelaProdutos.getColumnModel().getColumn(4).setResizable(true);
+	tabelaProdutos.getColumnModel().getColumn(5).setPreferredWidth(80);
+	tabelaProdutos.getColumnModel().getColumn(5).setResizable(true);
+	tabelaProdutos.getTableHeader().setReorderingAllowed(false);
+	tabelaProdutos.setAutoResizeMode(tabelaProdutos.AUTO_RESIZE_OFF);
+	tabelaProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
 
 	/**

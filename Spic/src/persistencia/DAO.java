@@ -32,9 +32,9 @@ public class DAO {
 			pst.setDouble(6, p.getValorCusto());
 			pst.setDouble(7, p.getQuantidade());
 			pst.executeUpdate();
-			// JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+			 JOptionPane.showMessageDialog(null, "DAO Salvo com sucesso");
 		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, "Erro na inserção \n Erro "
+			JOptionPane.showMessageDialog(null, "DAO Erro na inserção \n Erro "
 					+ e1.getMessage());
 		}
 	}
