@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-public class Lote {
+public class Lote_old {
 	
 	
 	
@@ -14,7 +14,7 @@ public class Lote {
 	private java.sql.Date dataFabricacao;
 
 
-	public Lote() {
+	public Lote_old() {
 		
 	}
 
