@@ -22,9 +22,9 @@ public class Produtos {
 	private String descricao;
 	private String aplicacao;
 	private String medida;
-	//private String fklote;
-	private float valorVenda;
-	private float valorCusto;
+	private String lote;
+	private double valorVenda;
+	private double valorCusto;
 	private double quantidade;
 	
 	//método construtor
@@ -72,12 +72,12 @@ public class Produtos {
 	//	return fklote;
 	//}
 	
-	public float getValorVenda(){
+	public double getValorVenda(){
 		
 		return valorVenda;
 	}
 	
-	public float getValorCusto(){
+	public double getValorCusto(){
 		
 		return valorCusto;
 		
@@ -115,13 +115,14 @@ public class Produtos {
 	//}
 	
 	
-	public void setValorVenda(float valorVenda){
+	public void setValorVenda(double valorVenda){
 		
 		this.valorVenda = valorVenda;
 		
 	}
 	
-	public void setValorCusto(float valorCusto){
+	public void setValorCusto(double valorCusto){
+
 		
 		this.valorCusto = valorCusto;
 		

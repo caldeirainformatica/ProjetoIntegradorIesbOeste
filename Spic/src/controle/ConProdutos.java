@@ -159,7 +159,7 @@ public class ConProdutos {
 		
 		try{
 			
-			if(quantidade == ""||quantidade== null||quantidade.trim()==""){
+			if(quantidade == ""||quantidade== null||quantidade.trim()==""||Double.parseDouble(quantidade) < 0){
 				return false;
 			}else{
 				
