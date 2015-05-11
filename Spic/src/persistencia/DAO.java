@@ -15,11 +15,10 @@ public class DAO {
 
 	ConectaBanco conecta = new ConectaBanco();
 	Produtos p = new Produtos();
-
 	// Comando sql para inclusão de produtos, deixando bem generico para incluir
 	// qualquer tipo de dados
 	public void insert(Produtos p) {
-		try {
+	try {
 			conecta.conexao();
 			PreparedStatement pst = conecta.conn
 					.prepareStatement("insert into produtos (codigoBarras, descricao, aplicacao,"
@@ -73,3 +72,4 @@ public class DAO {
 	}
 
 }
+

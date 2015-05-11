@@ -68,9 +68,9 @@ public class Produtos {
 		return medida;
 	}
 
-	public String getLote() {
-		return lote;
-	}
+	//public String getLote() {
+	//	return fklote;
+	//}
 	
 	public double getValorVenda(){
 		
@@ -110,9 +110,9 @@ public class Produtos {
 		this.medida = medida;
 	}
 	
-	public void setLote(String lote) {
-		this.lote = lote;
-	}
+	//public void setfkLote(String fklote) {
+		//this.fklote = fklote;
+	//}
 	
 	
 	public void setValorVenda(double valorVenda){

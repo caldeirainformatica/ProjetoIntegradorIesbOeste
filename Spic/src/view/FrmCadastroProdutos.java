@@ -1,37 +1,32 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-import persistencia.ConectaBanco;
-import persistencia.DAO;
-
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
 
 import model.ModeloTabela;
 import model.Produtos;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JLabel;
-import javax.swing.ListSelectionModel;
-
-import java.awt.Font;
-import java.awt.Dimension;
-
-import javax.swing.JButton;
+import persistencia.ConectaBanco;
+import persistencia.DAO;
 
 /**
  *
@@ -168,51 +163,19 @@ public class FrmCadastroProdutos extends JFrame {
 				txtDescricao.setText(txtDescricao.getText().toUpperCase());
 				txtAplicacao.setText(txtAplicacao.getText().toUpperCase());
 				txtMedida.setText(txtMedida.getText().toUpperCase());
-				// if (txtCodigoProduto.getText() == ("")) {
-
 				try {
-
+					
 					DAO dao = new DAO();
-					p.setCodigoBarras(Long.valueOf(txtCodigoBarras.getText()));
+					p.setCodigoBarras(Integer.parseInt(txtCodigoBarras
+							.getText()));
 					p.setDescricao(txtDescricao.getText());
 					p.setAplicacao(txtAplicacao.getText());
-					p.setMedida(txtMedida.getText());
-					// p.setDataValidade(txtValidade.getText());
-					// p.setDataFabricacao(txtValidade.getText());
-					// p.setLote(txtLote.getText());
-					p.setValorVenda(Double.valueOf(fmtValorVenda.getText()));
-					p.setValorCusto(Double.valueOf(fmtValorCusto.getText()));
-					p.setQuantidade(Double.valueOf(txtQuantidade.getText()));
 					dao.insert(p);
 					JOptionPane.showMessageDialog(null,
 							"Produto salvo com sucesso");
 
-					txtCodigoProduto.setText("");
-					txtCodigoBarras.setText("");
-					txtAplicacao.setText("");
-					txtDescricao.setText("");
-					txtMedida.setText("");
-					txtQuantidade.setText("");
-					fmtValorCusto.setText("");
-					fmtValorVenda.setText("");
-					txtCodigoProduto.setEnabled(false);
-					txtCodigoBarras.setEnabled(false);
-					txtAplicacao.setEnabled(false);
-					txtDescricao.setEnabled(false);
-					txtMedida.setEnabled(false);
-					txtQuantidade.setEnabled(false);
-					fmtValorCusto.setEnabled(false);
-					fmtValorVenda.setEnabled(false);
-					btnAlterar.setEnabled(false);
-					btnExcluir.setEnabled(false);
-					btnSalvar.setEnabled(false);
-					btnNovo.setEnabled(true);
-				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(
-							null,
-							"PRODUTOS Erro ao cadastrar \n Erro "
-									+ e1.getMessage());
-
+				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
 				// } else {
 				// implementar aqui o update da alteração
