@@ -1,37 +1,32 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-import persistencia.ConectaBanco;
-import persistencia.DAO;
-
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
 
 import model.ModeloTabela;
 import model.Produtos;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JLabel;
-import javax.swing.ListSelectionModel;
-
-import java.awt.Font;
-import java.awt.Dimension;
-
-import javax.swing.JButton;
+import persistencia.ConectaBanco;
+import persistencia.DAO;
 
 /**
  *
@@ -179,6 +174,8 @@ public class FrmCadastroProdutos extends JFrame {
 					JOptionPane.showMessageDialog(null,
 							"Produto salvo com sucesso");
 
+				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
 				// } else {
 				// implementar aqui o update da alteração
