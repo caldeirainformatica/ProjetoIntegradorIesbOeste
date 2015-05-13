@@ -74,6 +74,8 @@ public class Con_Lote_Ezeq {
 		try {
 			sdf1.parse(x);
 			this.dateValidade = dateValidade;
+			
+			System.out.println(dateValidade);
 		} catch (ParseException e) {
 
 		}

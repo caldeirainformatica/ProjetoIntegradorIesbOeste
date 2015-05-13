@@ -1,7 +1,5 @@
 package testes;
 
-import java.io.ObjectInputStream.GetField;
-
 import controle.Con_Lote_Ezeq;
 
 public class Teste_Con_Lote_Ezeq {
@@ -13,7 +11,6 @@ public class Teste_Con_Lote_Ezeq {
 
 		date.setDateValidade("20/11/2015");
 		
-		System.out.println(date);
 	}
 
 }
