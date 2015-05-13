@@ -1,13 +1,24 @@
 package controle;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+/*
+ * 
+ * 
+ *@author Ezequiel Henrique
+ * 
+ * 
+ * 
+ */
 
 public class Con_Lote_Ezeq {
 
 	private int idLote;
 	private String descricao;
-	private Date dateValidade;
+	private String dateValidade;
 	private Date dateFabricacao;
 
 	public int getIdLote() {
@@ -18,7 +29,7 @@ public class Con_Lote_Ezeq {
 		return descricao;
 	}
 
-	public Date getDateValidade() {
+	public String getDateValidade() {
 		return dateValidade;
 	}
 
@@ -54,14 +65,27 @@ public class Con_Lote_Ezeq {
 
 	}
 
-	public void setDateValidade(Date dateValidade) {
-		this.dateValidade = dateValidade;
-		
-		String x=request.setParameter("dataUsuario"); //pegando dados de um formulário WEB 
-		SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy"); 
-		Date dataUsuario=sdf1.parse(x);
+	public void setDateValidade(String dateValidade) {
+
+		String x = dateValidade;
+		DateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+		sdf1.setLenient(false);
+
+		try {
+			sdf1.parse(x);
+			this.dateValidade = dateValidade;
+		} catch (ParseException e) {
 
 		}
+
+		/*
+		 * String x = new String("dataUsuario"); SimpleDateFormat sdf1 = new
+		 * SimpleDateFormat("dd/MM/yyyy"); try { Date dataUsuario =
+		 * sdf1.parse(x); } catch (ParseException e) { // TODO Auto-generated
+		 * catch block e.printStackTrace(); }
+		 */
+
+	}
 
 	public void setDateFabricacao(Date dateFabricacao) {
 		this.dateFabricacao = dateFabricacao;
