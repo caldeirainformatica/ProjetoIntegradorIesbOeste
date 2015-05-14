@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-public class Lote_old {
+public class Lotes {
 	
 	
 	
@@ -14,7 +14,7 @@ public class Lote_old {
 	private java.sql.Date dataFabricacao;
 
 
-	public Lote_old() {
+	public Lotes() {
 		
 	}
 
@@ -30,14 +30,14 @@ public class Lote_old {
 
 
 	public void setDataValidade(String dataValidade) throws ParseException {
-		DateFormat df = new SimpleDateFormat("dd/MM/yyy");
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		java.util.Date data = df.parse(dataValidade);
 		this.dataValidade =	new java.sql.Date(data.getTime());
 	}
 
 
 	public void setDataFabricacao(String dataFabricacao) throws ParseException {
-		DateFormat df = new SimpleDateFormat("dd/MM/yyy");
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		java.util.Date data = df.parse(dataFabricacao);
 		this.dataFabricacao = new java.sql.Date(data.getTime());
 	}

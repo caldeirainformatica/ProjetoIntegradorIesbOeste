@@ -9,7 +9,7 @@ public class Teste_Con_Lote_Ezeq {
 		
 		Con_Lote_Ezeq date = new Con_Lote_Ezeq();
 
-		date.setDateValidade("20/11/2015");
+		date.setDateValidade("2011/20/15");
 		
 	}
 

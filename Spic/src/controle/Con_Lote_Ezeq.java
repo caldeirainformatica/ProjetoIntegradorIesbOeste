@@ -3,7 +3,6 @@ package controle;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /*
  * 
@@ -19,7 +18,7 @@ public class Con_Lote_Ezeq {
 	private int idLote;
 	private String descricao;
 	private String dateValidade;
-	private Date dateFabricacao;
+	private String dateFabricacao;
 
 	public int getIdLote() {
 		return idLote;
@@ -33,7 +32,7 @@ public class Con_Lote_Ezeq {
 		return dateValidade;
 	}
 
-	public Date getDateFabricacao() {
+	public String getDateFabricacao() {
 		return dateFabricacao;
 	}
 
@@ -67,17 +66,18 @@ public class Con_Lote_Ezeq {
 
 	public void setDateValidade(String dateValidade) {
 
-		String x = dateValidade;
+		
 		DateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
 		sdf1.setLenient(false);
 
 		try {
-			sdf1.parse(x);
+			sdf1.parse(dateValidade);
 			this.dateValidade = dateValidade;
 			
 			System.out.println(dateValidade);
 		} catch (ParseException e) {
 
+			e.printStackTrace();
 		}
 
 		/*
@@ -89,8 +89,21 @@ public class Con_Lote_Ezeq {
 
 	}
 
-	public void setDateFabricacao(Date dateFabricacao) {
+	public void setDateFabricacao(String dateFabricacao) {
+		
+	
+	String x = dateFabricacao;
+	DateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+	sdf1.setLenient(false);
+	
+	try {
+		sdf1.parse(x);
+		
 		this.dateFabricacao = dateFabricacao;
+	} catch (ParseException e) {
+		
+		e.printStackTrace();
+	}
 	}
 
 }

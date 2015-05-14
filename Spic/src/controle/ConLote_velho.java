@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import model.Lote_old;
+import model.Lotes;
 
 /*
  * 
@@ -20,7 +20,7 @@ import model.Lote_old;
 //validarDataFabricacao
 public class ConLote_velho {
 
-	Lote_old lot = new Lote_old();
+	Lotes lot = new Lotes();
 	
 	
 	public boolean validarIdLote(String idLote){
