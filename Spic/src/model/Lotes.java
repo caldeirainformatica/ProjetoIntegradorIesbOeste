@@ -9,9 +9,10 @@ public class Lotes {
 	
 	
 	private int idLote;
-	private int lote;
+	private String lote;
 	private java.sql.Date dataValidade;
 	private java.sql.Date dataFabricacao;
+	private int produto_idproduto;
 
 
 	public Lotes() {
@@ -24,8 +25,8 @@ public class Lotes {
 	}
 
 
-	public void setLote(int lote) {
-		this.lote = lote;
+	public void setLote(String i) {
+		this.lote = i;
 	}
 
 
@@ -41,6 +42,12 @@ public class Lotes {
 		java.util.Date data = df.parse(dataFabricacao);
 		this.dataFabricacao = new java.sql.Date(data.getTime());
 	}
+	
+	public void setProduto_idproduto(int produto_idproduto){
+		
+		this.produto_idproduto = produto_idproduto;
+		
+	}
 
 
 	public int getIdlote() {
@@ -48,7 +55,7 @@ public class Lotes {
 	}
 
 
-	public int getLote() {
+	public String getLote() {
 		return lote;
 	}
 
@@ -62,6 +69,9 @@ public class Lotes {
 		return dataFabricacao;
 	}
 	
-	
+	public int getProduto_idproduto(){
+		
+			return produto_idproduto;
+	}
 	
 }

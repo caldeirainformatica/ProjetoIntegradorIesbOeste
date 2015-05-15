@@ -16,7 +16,7 @@ public class FrmLotes extends javax.swing.JFrame {
      */
     public FrmLotes() {
     	
-    	setTitle("SPIC- Lotes");
+    	setTitle("SPIC- Lote");
         initComponents();
     }
 
