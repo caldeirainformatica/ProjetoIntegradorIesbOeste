@@ -5,12 +5,14 @@
  */
 package view;
 
+import controle.ConLote_velho;
+
 /**
  *
  * @author RicardoNote
  */
 public class FrmPesquisaProduto extends javax.swing.JFrame {
-
+	ConLote_velho lot= new ConLote_velho();
     /**
      * Creates new form FrmPesquisaProduto
      */

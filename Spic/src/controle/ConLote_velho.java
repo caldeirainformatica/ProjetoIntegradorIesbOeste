@@ -50,7 +50,7 @@ public class ConLote_velho {
 			if(lote == ""||lote== null||lote.trim()==""){
 				return false;
 			}else{
-				lot.setLote(Integer.parseInt(lote));
+				lot.setLote(lote);
 				return true;
 			}
 			
@@ -134,6 +134,25 @@ public class ConLote_velho {
         return(true);                          
     }  
 	
+	public boolean validarProduto_idproduto(String produto_idproduto){
+		
+		try{
+			
+			if(produto_idproduto == ""||produto_idproduto== null||produto_idproduto.trim()==""){
+				
+				return false;
+				
+			}else{
+				
+				lot.setProduto_idproduto(Integer.parseInt(produto_idproduto));
+				return true;
+			}
+		}catch(NumberFormatException e){
+			
+			new Exception("valores inválidos!!");
+			return false;
+		}
+	}
 	
 
 }
