@@ -1,5 +1,10 @@
 package persistencia;
-
+/*
+ * 
+ * @author: Daniel Fiuza
+ * 
+ * 
+ */
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -17,7 +22,7 @@ public class DaoLote {
 		public void inserirLote(Lotes l) throws Exception{
 			try{
 				conecta.conexao();
-				PreparedStatement pst = conecta.conn.prepareStatement("insert into lote (lote, dataValidade, dataFabricacao,produto_idproduto)values (?,?,?,?)");
+				PreparedStatement pst = conecta.conn.prepareStatement("insert into lote (lote, dataValidade, dataFabricacao,produtos_idprodutos)values (?,?,?,?)");
 				
 				pst.setString(1,l.getLote());
 				pst.setDate(2, l.getDataValidade());
