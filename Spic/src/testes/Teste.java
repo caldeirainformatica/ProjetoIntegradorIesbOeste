@@ -4,9 +4,11 @@ import java.text.ParseException;
 import java.util.InputMismatchException;
 
 import persistencia.DAO;
+import persistencia.DaoLote;
 import model.Empresas;
 import model.Produtos;
 import controle.ConEmpresas;
+import controle.ConLote_velho;
 import controle.ConProdutos;
 
 
@@ -18,10 +20,19 @@ public class Teste {
 		DAO dao = new DAO();
 		
 		pro.validarCodigoBarras("12323435");
-		pro.validarDescricao("sdfsdksdfjsdfdsf");
-		pro.validarAplicacao("de passar no cabelo");
+		pro.validarDescricao("teste");
+		pro.validarAplicacao("teste");
 		pro.validarMedida("mei metro");
 		dao.insert(pro.produto);
+		
+		ConLote_velho lote = new ConLote_velho();
+		DaoLote daolote = new DaoLote();
+		lote.validarLote("1sad234");
+		lote.validarDataValidade("12/11/2000");
+		lote.validarDataFabricacao("02/03/1970");
+		lote.validarProduto_idproduto("13");
+		daolote.inserirLote(lote.lot);
+		
 		
 		
 	}

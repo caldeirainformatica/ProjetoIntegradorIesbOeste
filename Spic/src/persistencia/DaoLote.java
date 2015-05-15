@@ -28,10 +28,10 @@ public class DaoLote {
 				pst.setDate(2, l.getDataValidade());
 				pst.setDate(3,l.getDataFabricacao());
 				pst.setInt(4, l.getProduto_idproduto());
-				
+				pst.executeUpdate();
 			}catch(SQLException e){
 				
-				throw new Exception("Erro ao inserir"+ e.getMessage());
+				throw new Exception("Erro ao inserir! :"+ e.getMessage());
 				
 			}
 		

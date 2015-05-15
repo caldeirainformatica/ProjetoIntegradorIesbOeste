@@ -20,7 +20,7 @@ import model.Lotes;
 //validarDataFabricacao
 public class ConLote_velho {
 
-	Lotes lot = new Lotes();
+	public Lotes lot = new Lotes();
 	
 	
 	public boolean validarIdLote(String idLote){
@@ -150,6 +150,7 @@ public class ConLote_velho {
 		}catch(NumberFormatException e){
 			
 			new Exception("valores inválidos!!");
+			System.out.println("Valores inválidos!!");
 			return false;
 		}
 	}
