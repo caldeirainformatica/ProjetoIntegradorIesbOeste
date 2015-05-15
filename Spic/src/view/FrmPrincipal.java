@@ -32,6 +32,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 	 * Creates new form FrmPrincipal
 	 */
 	public FrmPrincipal() {
+		setTitle("SPIC- Menu Principal");
 		setResizable(false);
 		setType(Type.UTILITY);
 		setBackground(Color.WHITE);

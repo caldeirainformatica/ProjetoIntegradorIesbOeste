@@ -46,6 +46,7 @@ public class FrmCadastroProdutos extends JFrame {
 	 * Creates new form FrmCadastroProdutos
 	 */
 	public FrmCadastroProdutos() {
+		setTitle("SPIC- Produtos");
 		setResizable(false);
 		setPreferredSize(new Dimension(720, 500));
 

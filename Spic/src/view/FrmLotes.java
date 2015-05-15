@@ -15,6 +15,8 @@ public class FrmLotes extends javax.swing.JFrame {
      * Creates new form FrmLotes
      */
     public FrmLotes() {
+    	
+    	setTitle("SPIC- Lotes");
         initComponents();
     }
 

@@ -20,6 +20,7 @@ public class FrmVendas extends javax.swing.JFrame {
      * Creates new form FrmVendas
      */
     public FrmVendas() {
+    	setTitle("SPIC- Vendas");
         initComponents();
     }
 

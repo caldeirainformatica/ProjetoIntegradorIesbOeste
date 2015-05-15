@@ -15,6 +15,7 @@ public class FrmPesquisaProduto extends javax.swing.JFrame {
      * Creates new form FrmPesquisaProduto
      */
     public FrmPesquisaProduto() {
+    	setTitle("SPIC- Pesquisar Produtos");
         initComponents();
     }
 
