@@ -144,7 +144,7 @@ public class ConLote {
 				
 			}else{
 				
-				lot.setProduto_idproduto(Integer.parseInt(produto_idproduto));
+	//			lot.setProduto_idproduto(Integer.parseInt(produto_idproduto));
 				return true;
 			}
 		}catch(NumberFormatException e){

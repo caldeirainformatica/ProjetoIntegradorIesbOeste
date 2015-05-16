@@ -33,9 +33,10 @@ public class DAO {
 			pst.setDouble(6, p.getValorCusto());
 			pst.setDouble(7, p.getQuantidade());
 			pst.executeUpdate();
-			JOptionPane.showMessageDialog(null, "DAO Salvo com sucesso");
+			JOptionPane.showMessageDialog(null,
+					"Produto salvo com sucesso");
 		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, "DAO Erro na inserção \n Erro "
+			JOptionPane.showMessageDialog(null, " Erro na inserção \n Erro "
 					+ e1.getMessage());
 		}
 	}
@@ -57,6 +58,7 @@ public class DAO {
 			pst.setDouble(8, p.getQuantidade());
 
 			rs = pst.executeQuery();
+			rs.first();
 			p.setIdProdutos(Integer.valueOf(rs.getString("idProdutos")));
 			p.setCodigoBarras(rs.getString("codigoBarras"));
 			p.setDescricao(rs.getString("descricao"));
@@ -73,7 +75,7 @@ public class DAO {
 		}
 	}
 
-	public void excluirProdutos(Produtos p) {
+	public void alterarProdutos(Produtos p) {
 		try {
 			conecta.conexao();
 			PreparedStatement pst = conecta.conn

@@ -58,12 +58,12 @@ public class FrmCadastroProdutos extends JFrame {
 		setPreferredSize(new Dimension(720, 500));
 
 		initComponents();
-		
-		btnOk.setVisible(false);
+
+		btnConfirmaPesquisa.setVisible(false);
 		conecta.conexao();
 		setLocation(370, 200);
-		btnConfirmar.setVisible(false);
-		btnOk.setVisible(false);
+		btnConfirmaAlteracao.setVisible(false);
+		btnConfirmaPesquisa.setVisible(false);
 		if (!txtCodigoProduto.getText().equals("")) {
 			btnExcluir.setEnabled(true);
 		} else {
@@ -72,12 +72,18 @@ public class FrmCadastroProdutos extends JFrame {
 		}
 		selectProduos();
 
+		btnExcluirAlterar();
+
+	}
+
+	private void btnExcluirAlterar() {
 		if (txtCodigoProduto.getText().equals("")) {
 			btnExcluir.setEnabled(false);
+			btnAlterar.setEnabled(false);
 		} else {
 			btnExcluir.setEnabled(true);
+			btnAlterar.setEnabled(true);
 		}
-
 	}
 
 	private void selectProduos() {
@@ -98,7 +104,7 @@ public class FrmCadastroProdutos extends JFrame {
 		btnAlterar = new javax.swing.JButton();
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				txtCodigoProduto.setEnabled(true);
+				txtCodigoProduto.setEnabled(false);
 				txtCodigoBarras.setEnabled(true);
 				txtMedida.setEnabled(true);
 				txtDescricao.setEnabled(true);
@@ -106,19 +112,20 @@ public class FrmCadastroProdutos extends JFrame {
 				fmtValorCusto.setEnabled(true);
 				fmtValorVenda.setEnabled(true);
 				txtQuantidade.setEnabled(true);
-				btnConfirmar.setVisible(true);
+				btnConfirmaAlteracao.setVisible(true);
 				btnAlterar.setEnabled(false);
 				btnExcluir.setEnabled(false);
-				
+
 			}
 		});
 		btnAlterar.setEnabled(false);
 		btnAlterar.setToolTipText("Alterar");
 		btnExcluir = new javax.swing.JButton();
+		btnExcluir.setEnabled(false);
 		btnExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				 btnConfirmar.setVisible(true);
+				btnConfirmaAlteracao.setVisible(true);
 			}
 		});
 		btnExcluir.setToolTipText("Excluir");
@@ -131,6 +138,7 @@ public class FrmCadastroProdutos extends JFrame {
 									+ "produtos.idprodutos = ?");
 					pst.setString(1, txtCodigoProduto.getText());
 					pst.execute();
+					selectProduos();
 					JOptionPane.showMessageDialog(null,
 							"Deletado com sucesso!!!");
 				} catch (SQLException e1) {
@@ -180,9 +188,8 @@ public class FrmCadastroProdutos extends JFrame {
 					p.setValorVenda(Double.valueOf(fmtValorVenda.getText()));
 					p.setValorCusto(Double.valueOf(fmtValorCusto.getText()));
 					p.setQuantidade(Double.valueOf(txtQuantidade.getText()));
+
 					dao.insert(p);
-					JOptionPane.showMessageDialog(null,
-							"Produto salvo com sucesso");
 
 					txtCodigoProduto.setText("");
 					txtCodigoBarras.setText("");
@@ -204,6 +211,8 @@ public class FrmCadastroProdutos extends JFrame {
 					btnExcluir.setEnabled(false);
 					btnSalvar.setEnabled(false);
 					btnNovo.setEnabled(true);
+
+					selectProduos();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(
 							null,
@@ -211,9 +220,6 @@ public class FrmCadastroProdutos extends JFrame {
 									+ e1.getMessage());
 
 				}
-				// } else {
-				// implementar aqui o update da alteração
-				// }
 
 			}
 		});
@@ -221,9 +227,9 @@ public class FrmCadastroProdutos extends JFrame {
 		btnNovo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				btnOk.setVisible(false);
-				btnConfirmar.setVisible(false);
-				
+				btnConfirmaPesquisa.setVisible(false);
+				btnConfirmaAlteracao.setVisible(false);
+
 			}
 		});
 		btnNovo.addActionListener(new ActionListener() {
@@ -326,13 +332,17 @@ public class FrmCadastroProdutos extends JFrame {
 					txtMedida.setText(rs.getString("medida"));
 					txtQuantidade.setText(String.valueOf(rs
 							.getInt("quantidade")));
-					fmtValorCusto.setText(String.valueOf(rs.getDouble("valorCusto")));
-					fmtValorVenda.setText(String.valueOf(rs.getDouble("valorVenda")));
+					fmtValorCusto.setText(String.valueOf(rs
+							.getDouble("valorCusto")));
+					fmtValorVenda.setText(String.valueOf(rs
+							.getDouble("valorVenda")));
 
 					btnExcluir.setEnabled(true);
 					btnAlterar.setEnabled(true);
 					btnNovo.setEnabled(false);
 					btnSalvar.setEnabled(false);
+
+					selectProduos();
 
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -430,6 +440,8 @@ public class FrmCadastroProdutos extends JFrame {
 					btnNovo.setEnabled(false);
 					btnSalvar.setEnabled(false);
 
+					selectProduos();
+
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -513,11 +525,16 @@ public class FrmCadastroProdutos extends JFrame {
 		txtCodigoProduto.setDisabledTextColor(Color.BLACK);
 
 		JButton btnPesquisa = new JButton("");
+		btnPesquisa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				btnConfirmaPesquisa.setVisible(true);
+			}
+		});
 		btnPesquisa.setToolTipText("Pesquisar");
 		btnPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				txtCodigoProduto.setText("");
 				txtCodigoBarras.setText("");
 				txtAplicacao.setText("");
 				txtDescricao.setText("");
@@ -531,53 +548,69 @@ public class FrmCadastroProdutos extends JFrame {
 				txtAplicacao.setEnabled(true);
 				txtDescricao.setEnabled(true);
 				txtMedida.setEnabled(true);
-				txtQuantidade.setEnabled(true);
-				fmtValorCusto.setEnabled(true);
-				fmtValorVenda.setEnabled(true);
+				txtQuantidade.setEnabled(false);
+				fmtValorCusto.setEnabled(false);
+				fmtValorVenda.setEnabled(false);
 				btnAlterar.setEnabled(false);
 				btnExcluir.setEnabled(false);
 				btnSalvar.setEnabled(false);
 				btnNovo.setEnabled(false);
 
-				btnOk.setVisible(true);
+				btnConfirmaPesquisa.setVisible(true);
+				btnPesquisa.setEnabled(false);
 
 			}
 		});
 		btnPesquisa.setIcon(new ImageIcon(FrmCadastroProdutos.class
 				.getResource("/images/Lupas_1330_21.jpg")));
 
-		btnOk = new JButton("OK");
-		btnOk.addActionListener(new ActionListener() {
+		btnConfirmaPesquisa = new JButton("Confirma Pesquisa");
+		btnConfirmaPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					ResultSet rs;
-					conecta.conexao();
-					PreparedStatement pst = conecta.conn
-							.prepareStatement("select * from produtos where produtos.descricao like ?");
-					pst.setInt(1, Integer.valueOf(txtCodigoProduto.getText()));
-					pst.setString(2, txtDescricao.getText());
-					pst.setString(3, txtAplicacao.getText());
-					rs = pst.executeQuery();
-					txtCodigoProduto.setText(String.valueOf(rs
-							.getInt("idProdutos")));
-					txtCodigoBarras.setText(rs.getString("codigoBarras"));
-					txtMedida.setText(rs.getString("medida"));
-					txtDescricao.setText(rs.getString("descricao"));
-					txtAplicacao.setText(rs.getString("aplicacao"));
-					fmtValorVenda.setText(String.valueOf(rs
-							.getDouble("valorVenda")));
-					fmtValorCusto.setText(String.valueOf(rs
-							.getDouble("valorCusto")));
-					txtQuantidade.setText(String.valueOf(rs
-							.getDouble("quantidade")));
 
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(
-							null,
-							"Deu erro aqui. linha 660 aproximado \n erro "
-									+ e1.getMessage());
+				if (!txtCodigoProduto.getText().equals("")) {
+					p.setIdProdutos(Integer.parseInt(txtCodigoProduto.getText()));
 				}
+				if (!txtCodigoBarras.getText().equals("")) {
+					p.setCodigoBarras(txtCodigoBarras.getText());
+				}
+				if (!txtMedida.getText().equals("")) {
+					p.setMedida(txtMedida.getText());
+
+				}
+				if (!txtDescricao.getText().equals("")) {
+					p.setDescricao(txtDescricao.getText());
+				}
+				if (!txtAplicacao.getText().equals("")) {
+					p.setAplicacao(txtAplicacao.getText());
+				}
+				dao.select(p);
+
+				txtCodigoBarras.setEnabled(false);
+				txtCodigoProduto.setEnabled(false);
+				txtMedida.setEnabled(false);
+				txtDescricao.setEnabled(false);
+				txtAplicacao.setEnabled(false);
+				txtQuantidade.setEnabled(false);
+				fmtValorCusto.setEnabled(false);
+				fmtValorVenda.setEnabled(false);
+
+				txtDescricao.setText(txtDescricao.getText().toUpperCase());
+				txtAplicacao.setText(txtAplicacao.getText().toUpperCase());
+				txtMedida.setText(txtMedida.getText().toUpperCase());
+				
+				btnConfirmaPesquisa.setVisible(false);
+
+				txtCodigoProduto.setText(Integer.toString(p.getIdProdutos()));
+				txtCodigoBarras.setText(p.getCodigoBarras());
+				txtMedida.setText(p.getMedida());
+				txtDescricao.setText(p.getDescricao());
+				txtAplicacao.setText(p.getAplicacao());
+				txtQuantidade.setText(Double.toString(p.getQuantidade()));
+				fmtValorCusto.setText(Double.toString(p.getValorCusto()));
+				fmtValorVenda.setText(Double.toString(p.getValorVenda()));
+
+				btnExcluirAlterar();
 
 			}
 		});
@@ -614,8 +647,8 @@ public class FrmCadastroProdutos extends JFrame {
 		btnCancelar.setIcon(new ImageIcon(FrmCadastroProdutos.class
 				.getResource("/images/cancel.png")));
 
-		btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.addActionListener(new ActionListener() {
+		btnConfirmaAlteracao = new JButton("Confirmar Altera\u00E7\u00E3o");
+		btnConfirmaAlteracao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				p.setIdProdutos(Integer.parseInt(txtCodigoProduto.getText()));
 				p.setCodigoBarras(txtCodigoBarras.getText());
@@ -624,11 +657,25 @@ public class FrmCadastroProdutos extends JFrame {
 				p.setDescricao(txtDescricao.getText());
 				p.setValorVenda(Double.parseDouble(fmtValorVenda.getText()));
 				p.setValorCusto(Double.parseDouble(fmtValorCusto.getText()));
-				p.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
-				dao.excluirProdutos(p);
+				
+				txtDescricao.setText(txtDescricao.getText().toUpperCase());
+				txtAplicacao.setText(txtAplicacao.getText().toUpperCase());
+				txtMedida.setText(txtMedida.getText().toUpperCase());
+				
+				dao.alterarProdutos(p);
+
 				selectProduos();
-				
-				
+
+				txtDescricao.setEnabled(false);
+				txtCodigoBarras.setEnabled(false);
+				txtAplicacao.setEnabled(false);
+				txtCodigoProduto.setEnabled(false);
+				txtMedida.setEnabled(false);
+				fmtValorCusto.setEnabled(false);
+				fmtValorVenda.setEnabled(false);
+				txtQuantidade.setEnabled(false);
+
+				btnConfirmaAlteracao.setVisible(false);
 			}
 		});
 
@@ -705,10 +752,10 @@ public class FrmCadastroProdutos extends JFrame {
 																																								pnlCadastroProdutoLayout
 																																										.createSequentialGroup()
 																																										.addComponent(
-																																												btnConfirmar)
+																																												btnConfirmaAlteracao)
 																																										.addGap(18)
 																																										.addComponent(
-																																												btnOk))
+																																												btnConfirmaPesquisa))
 																																						.addGroup(
 																																								pnlCadastroProdutoLayout
 																																										.createSequentialGroup()
@@ -951,9 +998,10 @@ public class FrmCadastroProdutos extends JFrame {
 												pnlCadastroProdutoLayout
 														.createParallelGroup(
 																Alignment.BASELINE)
-														.addComponent(btnOk)
 														.addComponent(
-																btnConfirmar))
+																btnConfirmaPesquisa)
+														.addComponent(
+																btnConfirmaAlteracao))
 										.addGap(34)
 										.addGroup(
 												pnlCadastroProdutoLayout
@@ -1130,6 +1178,6 @@ public class FrmCadastroProdutos extends JFrame {
 	private javax.swing.JTextField txtMedida;
 	private javax.swing.JTextField txtQuantidade;
 	private JTextField txtCodigoProduto;
-	private JButton btnOk;
-	private JButton btnConfirmar;
+	private JButton btnConfirmaPesquisa;
+	private JButton btnConfirmaAlteracao;
 }
