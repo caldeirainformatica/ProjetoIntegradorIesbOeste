@@ -75,7 +75,8 @@ public class FrmCadastroProdutos extends JFrame {
 		}
 
 	try {
-		fmtValorCusto.setFormatterFactory(new javax.swing.text.MaskFormatter(new javax.swing.text.MaskFormatter(###.###,##0.00)));
+		fmtValorCusto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("R$ ###,##")));
+		fmtValorVenda.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("R$ ###,##")));
 	} catch (Exception e) {
 		// TODO: handle exception
 	}
@@ -175,7 +176,7 @@ public class FrmCadastroProdutos extends JFrame {
 				try {
 
 					DAO dao = new DAO();
-					p.setCodigoBarras(Long.valueOf(txtCodigoBarras.getText()));
+					p.setCodigoBarras(txtCodigoBarras.getText());
 					p.setDescricao(txtDescricao.getText());
 					p.setAplicacao(txtAplicacao.getText());
 					p.setMedida(txtMedida.getText());
@@ -314,8 +315,8 @@ public class FrmCadastroProdutos extends JFrame {
 					rs.first();
 					txtCodigoProduto.setText(String.valueOf(rs
 							.getInt("idProdutos")));
-					txtCodigoBarras.setText(String.valueOf(rs
-							.getInt("codigoBarras")));
+					txtCodigoBarras.setText(rs
+							.getString("codigoBarras"));
 					txtDescricao.setText(rs.getString("descricao"));
 					txtAplicacao.setText(rs.getString("aplicacao"));
 					txtMedida.setText(rs.getString("medida"));
@@ -347,8 +348,8 @@ public class FrmCadastroProdutos extends JFrame {
 					rs.previous();
 					txtCodigoProduto.setText(String.valueOf(rs
 							.getInt("idProdutos")));
-					txtCodigoBarras.setText(String.valueOf(rs
-							.getInt("codigoBarras")));
+					txtCodigoBarras.setText(rs
+							.getString("codigoBarras"));
 					txtDescricao.setText(rs.getString("descricao"));
 					txtAplicacao.setText(rs.getString("aplicacao"));
 					txtMedida.setText(rs.getString("medida"));
@@ -378,8 +379,8 @@ public class FrmCadastroProdutos extends JFrame {
 					rs.next();
 					txtCodigoProduto.setText(String.valueOf(rs
 							.getInt("idProdutos")));
-					txtCodigoBarras.setText(String.valueOf(rs
-							.getInt("codigoBarras")));
+					txtCodigoBarras.setText(rs
+							.getString("codigoBarras"));
 					txtDescricao.setText(rs.getString("descricao"));
 					txtAplicacao.setText(rs.getString("aplicacao"));
 					txtMedida.setText(rs.getString("medida"));
@@ -413,8 +414,8 @@ public class FrmCadastroProdutos extends JFrame {
 					rs.last();
 					txtCodigoProduto.setText(String.valueOf(rs
 							.getInt("idProdutos")));
-					txtCodigoBarras.setText(String.valueOf(rs
-							.getInt("codigoBarras")));
+					txtCodigoBarras.setText(rs
+							.getString("codigoBarras"));
 					txtDescricao.setText(rs.getString("descricao"));
 					txtAplicacao.setText(rs.getString("aplicacao"));
 					txtMedida.setText(rs.getString("medida"));
@@ -558,8 +559,8 @@ public class FrmCadastroProdutos extends JFrame {
 					rs = pst.executeQuery();
 					txtCodigoProduto.setText(String.valueOf(rs
 							.getInt("idProdutos")));
-					txtCodigoBarras.setText(String.valueOf(rs
-							.getLong("codigoBarras")));
+					txtCodigoBarras.setText(rs
+							.getString("codigoBarras"));
 					txtMedida.setText(rs.getString("medida"));
 					txtDescricao.setText(rs.getString("descricao"));
 					txtAplicacao.setText(rs.getString("aplicacao"));
@@ -774,34 +775,7 @@ public class FrmCadastroProdutos extends JFrame {
 		// TODO add your handling code here:
 	}
 
-	public void preencherTabela(String sql) {
-		ArrayList dados = new ArrayList<>();
-		String[] colunas = new String[] { "Codigo", "Codigo Barras",
-				"Descricao", "Aplicacao", "Valor", "Custo" };
-		conecta.executaSQL(sql);
-		try {
-			conecta.rs.first();
-			do {
-				dados.add(new Object[] { conecta.rs.getInt("idProdutos"),
-						conecta.rs.getLong("codigoBarras"),
-						conecta.rs.getString("descricao"),
-						conecta.rs.getString("aplicacao"),
-						conecta.rs.getDouble("valorVenda"),
-						conecta.rs.getDouble("valorCusto") });
-
-			} while (conecta.rs.next());
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null,
-					"Erro ao preencher o array /n \n" + e.getMessage());
-		}
-		ModeloTabela modelo = new ModeloTabela(dados, colunas);
-		;
-	}
-
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
+	
 	public static void main(String args[]) {
 		
 		try {

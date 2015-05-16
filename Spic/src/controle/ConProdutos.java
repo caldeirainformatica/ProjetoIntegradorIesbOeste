@@ -39,7 +39,7 @@ public class ConProdutos {
 		}else{
 			
 			
-			produto.setCodigoBarras(Long.parseLong(codigoBarras));
+			produto.setCodigoBarras(codigoBarras);
 			return true;
 			
 		}

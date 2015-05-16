@@ -23,7 +23,7 @@ public class DAO {
 			PreparedStatement pst = conecta.conn
 					.prepareStatement("insert into produtos (codigoBarras, descricao, aplicacao,"
 							+ "medida, valorVenda, valorCusto, quantidade)values (?,?,?,?,?,?,?)");
-			pst.setLong(1, p.getCodigoBarras());
+			pst.setString(1, p.getCodigoBarras());
 			pst.setString(2, p.getDescricao());
 			pst.setString(3, p.getAplicacao());
 			pst.setString(4, p.getMedida());
@@ -46,7 +46,7 @@ public class DAO {
 					.prepareStatement("select * from produtos where idProdutos = ? or codigoBarras = ? or descricao = ? or "
 							+ "aplicacao = ? or medida = ? or valorVenda = ? or valorCusto = ? or quantidade = ?");
 			pst.setInt(1, p.getIdProdutos());
-			pst.setLong(2, p.getCodigoBarras());
+			pst.setString(2, p.getCodigoBarras());
 			pst.setString(3, p.getDescricao());
 			pst.setString(4, p.getAplicacao());
 			pst.setString(5, p.getMedida());
@@ -56,7 +56,7 @@ public class DAO {
 			
 			rs = pst.executeQuery();
 			p.setIdProdutos(Integer.valueOf(rs.getString("idProdutos")));
-			p.setCodigoBarras(rs.getLong("codigoBarras"));
+			p.setCodigoBarras(rs.getString("codigoBarras"));
 			p.setDescricao(rs.getString("descricao"));
 			p.setAplicacao(rs.getString("aplicacao"));
 			p.setMedida(rs.getString("medida"));
