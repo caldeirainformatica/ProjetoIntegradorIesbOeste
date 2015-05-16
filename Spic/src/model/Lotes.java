@@ -12,7 +12,6 @@ public class Lotes {
 	private String lote;
 	private java.sql.Date dataValidade;
 	private java.sql.Date dataFabricacao;
-	private int produto_idproduto;
 
 
 	public Lotes() {
@@ -43,11 +42,7 @@ public class Lotes {
 		this.dataFabricacao = new java.sql.Date(data.getTime());
 	}
 	
-	public void setProduto_idproduto(int produto_idproduto){
-		
-		this.produto_idproduto = produto_idproduto;
-		
-	}
+
 
 
 	public int getIdlote() {
@@ -69,9 +64,5 @@ public class Lotes {
 		return dataFabricacao;
 	}
 	
-	public int getProduto_idproduto(){
-		
-			return produto_idproduto;
-	}
 	
 }
