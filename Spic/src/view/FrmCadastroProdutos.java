@@ -32,6 +32,8 @@ import java.awt.Font;
 import java.awt.Dimension;
 
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -40,6 +42,7 @@ import javax.swing.JButton;
 public class FrmCadastroProdutos extends JFrame {
 	ConectaBanco conecta = new ConectaBanco();
 	Produtos p = new Produtos();
+	DAO dao = new DAO();
 	private ResultSet rs;
 
 	/**
@@ -55,16 +58,29 @@ public class FrmCadastroProdutos extends JFrame {
 		setPreferredSize(new Dimension(720, 500));
 
 		initComponents();
-
+		
 		btnOk.setVisible(false);
 		conecta.conexao();
 		setLocation(370, 200);
+		btnConfirmar.setVisible(false);
+		btnOk.setVisible(false);
 		if (!txtCodigoProduto.getText().equals("")) {
 			btnExcluir.setEnabled(true);
 		} else {
 			btnExcluir.setEnabled(false);
 
 		}
+		selectProduos();
+
+		if (txtCodigoProduto.getText().equals("")) {
+			btnExcluir.setEnabled(false);
+		} else {
+			btnExcluir.setEnabled(true);
+		}
+
+	}
+
+	private void selectProduos() {
 		PreparedStatement pst;
 		try {
 			pst = conecta.conn.prepareStatement("select * from produtos");
@@ -73,21 +89,8 @@ public class FrmCadastroProdutos extends JFrame {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-
-	try {
-		fmtValorCusto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("R$ ###,##")));
-		fmtValorVenda.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("R$ ###,##")));
-	} catch (Exception e) {
-		// TODO: handle exception
-	}
-		
-
-		
 	}
 
-	
-
-	
 	private void initComponents() {
 
 		TablePanel1 = new javax.swing.JTabbedPane();
@@ -95,34 +98,29 @@ public class FrmCadastroProdutos extends JFrame {
 		btnAlterar = new javax.swing.JButton();
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					PreparedStatement pst = conecta.conn
-							.prepareStatement("update produtos set "
-									+ "descricao = ?, aplicacao = ?, codigoBarras = ?, valorVenda = ?, valorCusto = ?"
-									+ ", medida = ?, quantidade = ?"
-									+ "  where idprodutos = ?");
-					pst.setString(1, txtDescricao.getText());
-					pst.setString(2, txtAplicacao.getText());
-					pst.setString(3, txtCodigoBarras.getText());
-					pst.setString(4, fmtValorVenda.getText());
-					pst.setString(5, fmtValorCusto.getText());
-					pst.setString(6, txtMedida.getText());
-					pst.setString(7, txtQuantidade.getText());
-					pst.setString(8, txtCodigoProduto.getText());
-
-					pst.execute();
-					JOptionPane.showMessageDialog(null, "Alterado com sucesso");
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog(null,
-							"Erro ao alterar " + e.getMessage());
-
-				}
-
+				txtCodigoProduto.setEnabled(true);
+				txtCodigoBarras.setEnabled(true);
+				txtMedida.setEnabled(true);
+				txtDescricao.setEnabled(true);
+				txtAplicacao.setEnabled(true);
+				fmtValorCusto.setEnabled(true);
+				fmtValorVenda.setEnabled(true);
+				txtQuantidade.setEnabled(true);
+				btnConfirmar.setVisible(true);
+				btnAlterar.setEnabled(false);
+				btnExcluir.setEnabled(false);
+				
 			}
 		});
 		btnAlterar.setEnabled(false);
 		btnAlterar.setToolTipText("Alterar");
 		btnExcluir = new javax.swing.JButton();
+		btnExcluir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				 btnConfirmar.setVisible(true);
+			}
+		});
 		btnExcluir.setToolTipText("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -171,7 +169,6 @@ public class FrmCadastroProdutos extends JFrame {
 				txtDescricao.setText(txtDescricao.getText().toUpperCase());
 				txtAplicacao.setText(txtAplicacao.getText().toUpperCase());
 				txtMedida.setText(txtMedida.getText().toUpperCase());
-				
 
 				try {
 
@@ -221,6 +218,14 @@ public class FrmCadastroProdutos extends JFrame {
 			}
 		});
 		btnNovo = new javax.swing.JButton();
+		btnNovo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				btnOk.setVisible(false);
+				btnConfirmar.setVisible(false);
+				
+			}
+		});
 		btnNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -315,13 +320,14 @@ public class FrmCadastroProdutos extends JFrame {
 					rs.first();
 					txtCodigoProduto.setText(String.valueOf(rs
 							.getInt("idProdutos")));
-					txtCodigoBarras.setText(rs
-							.getString("codigoBarras"));
+					txtCodigoBarras.setText(rs.getString("codigoBarras"));
 					txtDescricao.setText(rs.getString("descricao"));
 					txtAplicacao.setText(rs.getString("aplicacao"));
 					txtMedida.setText(rs.getString("medida"));
 					txtQuantidade.setText(String.valueOf(rs
 							.getInt("quantidade")));
+					fmtValorCusto.setText(String.valueOf(rs.getDouble("valorCusto")));
+					fmtValorVenda.setText(String.valueOf(rs.getDouble("valorVenda")));
 
 					btnExcluir.setEnabled(true);
 					btnAlterar.setEnabled(true);
@@ -348,8 +354,7 @@ public class FrmCadastroProdutos extends JFrame {
 					rs.previous();
 					txtCodigoProduto.setText(String.valueOf(rs
 							.getInt("idProdutos")));
-					txtCodigoBarras.setText(rs
-							.getString("codigoBarras"));
+					txtCodigoBarras.setText(rs.getString("codigoBarras"));
 					txtDescricao.setText(rs.getString("descricao"));
 					txtAplicacao.setText(rs.getString("aplicacao"));
 					txtMedida.setText(rs.getString("medida"));
@@ -379,8 +384,7 @@ public class FrmCadastroProdutos extends JFrame {
 					rs.next();
 					txtCodigoProduto.setText(String.valueOf(rs
 							.getInt("idProdutos")));
-					txtCodigoBarras.setText(rs
-							.getString("codigoBarras"));
+					txtCodigoBarras.setText(rs.getString("codigoBarras"));
 					txtDescricao.setText(rs.getString("descricao"));
 					txtAplicacao.setText(rs.getString("aplicacao"));
 					txtMedida.setText(rs.getString("medida"));
@@ -414,8 +418,7 @@ public class FrmCadastroProdutos extends JFrame {
 					rs.last();
 					txtCodigoProduto.setText(String.valueOf(rs
 							.getInt("idProdutos")));
-					txtCodigoBarras.setText(rs
-							.getString("codigoBarras"));
+					txtCodigoBarras.setText(rs.getString("codigoBarras"));
 					txtDescricao.setText(rs.getString("descricao"));
 					txtAplicacao.setText(rs.getString("aplicacao"));
 					txtMedida.setText(rs.getString("medida"));
@@ -546,8 +549,6 @@ public class FrmCadastroProdutos extends JFrame {
 		btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				DAO dao = new DAO();
 				try {
 					ResultSet rs;
 					conecta.conexao();
@@ -559,8 +560,7 @@ public class FrmCadastroProdutos extends JFrame {
 					rs = pst.executeQuery();
 					txtCodigoProduto.setText(String.valueOf(rs
 							.getInt("idProdutos")));
-					txtCodigoBarras.setText(rs
-							.getString("codigoBarras"));
+					txtCodigoBarras.setText(rs.getString("codigoBarras"));
 					txtMedida.setText(rs.getString("medida"));
 					txtDescricao.setText(rs.getString("descricao"));
 					txtAplicacao.setText(rs.getString("aplicacao"));
@@ -578,10 +578,10 @@ public class FrmCadastroProdutos extends JFrame {
 							"Deu erro aqui. linha 660 aproximado \n erro "
 									+ e1.getMessage());
 				}
-				
+
 			}
 		});
-		
+
 		JButton btnCancelar = new JButton("");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -611,144 +611,432 @@ public class FrmCadastroProdutos extends JFrame {
 		btnCancelar.setToolTipText("Cancelar");
 		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.setBackground(Color.WHITE);
-		btnCancelar.setIcon(new ImageIcon(FrmCadastroProdutos.class.getResource("/images/cancel.png")));
+		btnCancelar.setIcon(new ImageIcon(FrmCadastroProdutos.class
+				.getResource("/images/cancel.png")));
+
+		btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				p.setIdProdutos(Integer.parseInt(txtCodigoProduto.getText()));
+				p.setCodigoBarras(txtCodigoBarras.getText());
+				p.setAplicacao(txtAplicacao.getText());
+				p.setMedida(txtMedida.getText());
+				p.setDescricao(txtDescricao.getText());
+				p.setValorVenda(Double.parseDouble(fmtValorVenda.getText()));
+				p.setValorCusto(Double.parseDouble(fmtValorCusto.getText()));
+				p.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+				dao.excluirProdutos(p);
+				selectProduos();
+				
+				
+			}
+		});
 
 		javax.swing.GroupLayout pnlCadastroProdutoLayout = new GroupLayout(
 				pnlCadastroProduto);
-		pnlCadastroProdutoLayout.setHorizontalGroup(
-			pnlCadastroProdutoLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lbtCodigoBarras)
-					.addGap(18)
-					.addComponent(txtCodigoBarras, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(LbtMedida)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(txtMedida, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(365, Short.MAX_VALUE))
-				.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-					.addGap(267)
-					.addComponent(lbtAplicação)
-					.addContainerGap(381, Short.MAX_VALUE))
-				.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-					.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(txtAplicacao, GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE))
-						.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-							.addGap(0, 5, Short.MAX_VALUE)
-							.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-											.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.TRAILING)
-												.addComponent(btnOk)
-												.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-													.addComponent(btnNovo, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-													.addGap(18)
-													.addComponent(btnAlterar, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-													.addGap(18)
-													.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-													.addGap(18)
-													.addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-													.addGap(18)
-													.addComponent(btnPrimeiro, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-													.addGap(18)
-													.addComponent(btnAnterior, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-													.addGap(18)
-													.addComponent(btnProximo, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-													.addGap(18)
-													.addComponent(btnUltimo, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-													.addGap(18)
-													.addComponent(btnPesquisa, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)))
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(btnCancelar))
-										.addComponent(txtDescricao, 673, 673, 673)
-										.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-											.addComponent(lbtValorVenda)
-											.addGap(18)
-											.addComponent(fmtValorVenda, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(lbtValorCusto)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(fmtValorCusto, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(lbtQuantidade)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(txtQuantidade, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
-										.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-											.addComponent(lbCodigoProduto)
-											.addGap(10)
-											.addComponent(txtCodigoProduto, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
-											.addComponent(jButton3, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED))))
-								.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-									.addGap(249)
-									.addComponent(lbtDescricao)))))
-					.addGap(20))
-		);
-		pnlCadastroProdutoLayout.setVerticalGroup(
-			pnlCadastroProdutoLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-							.addComponent(jButton3, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-							.addGap(27)
-							.addComponent(lbtDescricao))
-						.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-							.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lbCodigoProduto, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtCodigoProduto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(20)
-							.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-									.addComponent(lbtCodigoBarras)
-									.addGap(6))
-								.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.BASELINE)
-									.addComponent(txtCodigoBarras, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addComponent(LbtMedida)
-									.addComponent(txtMedida, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(txtDescricao, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lbtAplicação)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtAplicacao, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbtValorVenda)
-						.addComponent(fmtValorVenda, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lbtValorCusto)
-						.addComponent(fmtValorCusto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lbtQuantidade)
-						.addComponent(txtQuantidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-					.addComponent(btnOk)
-					.addGap(34)
-					.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.LEADING)
-							.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(btnExcluir, 0, 0, Short.MAX_VALUE)
-								.addComponent(btnAlterar, 0, 0, Short.MAX_VALUE)
-								.addComponent(btnNovo, GroupLayout.PREFERRED_SIZE, 43, Short.MAX_VALUE))
-							.addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnPrimeiro, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnAnterior, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnProximo, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-						.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.LEADING)
-							.addComponent(btnUltimo, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-							.addGroup(pnlCadastroProdutoLayout.createSequentialGroup()
-								.addGap(1)
-								.addGroup(pnlCadastroProdutoLayout.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(btnCancelar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(btnPesquisa, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 42, Short.MAX_VALUE))
-								.addPreferredGap(ComponentPlacement.RELATED))))
-					.addGap(65))
-		);
+		pnlCadastroProdutoLayout
+				.setHorizontalGroup(pnlCadastroProdutoLayout
+						.createParallelGroup(Alignment.TRAILING)
+						.addGroup(
+								pnlCadastroProdutoLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(lbtCodigoBarras)
+										.addGap(18)
+										.addComponent(txtCodigoBarras,
+												GroupLayout.PREFERRED_SIZE, 96,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addComponent(LbtMedida)
+										.addPreferredGap(
+												ComponentPlacement.UNRELATED)
+										.addComponent(txtMedida,
+												GroupLayout.PREFERRED_SIZE, 35,
+												GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(365, Short.MAX_VALUE))
+						.addGroup(
+								pnlCadastroProdutoLayout
+										.createSequentialGroup().addGap(267)
+										.addComponent(lbtAplicação)
+										.addContainerGap(381, Short.MAX_VALUE))
+						.addGroup(
+								pnlCadastroProdutoLayout
+										.createSequentialGroup()
+										.addGroup(
+												pnlCadastroProdutoLayout
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addGroup(
+																pnlCadastroProdutoLayout
+																		.createSequentialGroup()
+																		.addContainerGap()
+																		.addComponent(
+																				txtAplicacao,
+																				GroupLayout.DEFAULT_SIZE,
+																				679,
+																				Short.MAX_VALUE))
+														.addGroup(
+																pnlCadastroProdutoLayout
+																		.createSequentialGroup()
+																		.addGap(0,
+																				11,
+																				Short.MAX_VALUE)
+																		.addGroup(
+																				pnlCadastroProdutoLayout
+																						.createParallelGroup(
+																								Alignment.LEADING)
+																						.addGroup(
+																								pnlCadastroProdutoLayout
+																										.createSequentialGroup()
+																										.addPreferredGap(
+																												ComponentPlacement.RELATED)
+																										.addGroup(
+																												pnlCadastroProdutoLayout
+																														.createParallelGroup(
+																																Alignment.LEADING)
+																														.addGroup(
+																																pnlCadastroProdutoLayout
+																																		.createSequentialGroup()
+																																		.addGroup(
+																																				pnlCadastroProdutoLayout
+																																						.createParallelGroup(
+																																								Alignment.TRAILING)
+																																						.addGroup(
+																																								pnlCadastroProdutoLayout
+																																										.createSequentialGroup()
+																																										.addComponent(
+																																												btnConfirmar)
+																																										.addGap(18)
+																																										.addComponent(
+																																												btnOk))
+																																						.addGroup(
+																																								pnlCadastroProdutoLayout
+																																										.createSequentialGroup()
+																																										.addComponent(
+																																												btnNovo,
+																																												GroupLayout.PREFERRED_SIZE,
+																																												48,
+																																												GroupLayout.PREFERRED_SIZE)
+																																										.addGap(18)
+																																										.addComponent(
+																																												btnAlterar,
+																																												GroupLayout.PREFERRED_SIZE,
+																																												48,
+																																												GroupLayout.PREFERRED_SIZE)
+																																										.addGap(18)
+																																										.addComponent(
+																																												btnExcluir,
+																																												GroupLayout.PREFERRED_SIZE,
+																																												50,
+																																												GroupLayout.PREFERRED_SIZE)
+																																										.addGap(18)
+																																										.addComponent(
+																																												btnSalvar,
+																																												GroupLayout.PREFERRED_SIZE,
+																																												48,
+																																												GroupLayout.PREFERRED_SIZE)
+																																										.addGap(18)
+																																										.addComponent(
+																																												btnPrimeiro,
+																																												GroupLayout.PREFERRED_SIZE,
+																																												48,
+																																												GroupLayout.PREFERRED_SIZE)
+																																										.addGap(18)
+																																										.addComponent(
+																																												btnAnterior,
+																																												GroupLayout.PREFERRED_SIZE,
+																																												48,
+																																												GroupLayout.PREFERRED_SIZE)
+																																										.addGap(18)
+																																										.addComponent(
+																																												btnProximo,
+																																												GroupLayout.PREFERRED_SIZE,
+																																												48,
+																																												GroupLayout.PREFERRED_SIZE)
+																																										.addGap(18)
+																																										.addComponent(
+																																												btnUltimo,
+																																												GroupLayout.PREFERRED_SIZE,
+																																												48,
+																																												GroupLayout.PREFERRED_SIZE)
+																																										.addGap(18)
+																																										.addComponent(
+																																												btnPesquisa,
+																																												GroupLayout.PREFERRED_SIZE,
+																																												55,
+																																												GroupLayout.PREFERRED_SIZE)))
+																																		.addPreferredGap(
+																																				ComponentPlacement.UNRELATED)
+																																		.addComponent(
+																																				btnCancelar))
+																														.addComponent(
+																																txtDescricao,
+																																673,
+																																673,
+																																673)
+																														.addGroup(
+																																pnlCadastroProdutoLayout
+																																		.createSequentialGroup()
+																																		.addComponent(
+																																				lbtValorVenda)
+																																		.addGap(18)
+																																		.addComponent(
+																																				fmtValorVenda,
+																																				GroupLayout.PREFERRED_SIZE,
+																																				96,
+																																				GroupLayout.PREFERRED_SIZE)
+																																		.addPreferredGap(
+																																				ComponentPlacement.UNRELATED)
+																																		.addComponent(
+																																				lbtValorCusto)
+																																		.addPreferredGap(
+																																				ComponentPlacement.RELATED)
+																																		.addComponent(
+																																				fmtValorCusto,
+																																				GroupLayout.PREFERRED_SIZE,
+																																				108,
+																																				GroupLayout.PREFERRED_SIZE)
+																																		.addPreferredGap(
+																																				ComponentPlacement.RELATED)
+																																		.addComponent(
+																																				lbtQuantidade)
+																																		.addPreferredGap(
+																																				ComponentPlacement.UNRELATED)
+																																		.addComponent(
+																																				txtQuantidade,
+																																				GroupLayout.PREFERRED_SIZE,
+																																				64,
+																																				GroupLayout.PREFERRED_SIZE))
+																														.addGroup(
+																																pnlCadastroProdutoLayout
+																																		.createSequentialGroup()
+																																		.addComponent(
+																																				lbCodigoProduto)
+																																		.addGap(10)
+																																		.addComponent(
+																																				txtCodigoProduto,
+																																				GroupLayout.PREFERRED_SIZE,
+																																				81,
+																																				GroupLayout.PREFERRED_SIZE)
+																																		.addPreferredGap(
+																																				ComponentPlacement.RELATED,
+																																				420,
+																																				Short.MAX_VALUE)
+																																		.addComponent(
+																																				jButton3,
+																																				GroupLayout.PREFERRED_SIZE,
+																																				48,
+																																				GroupLayout.PREFERRED_SIZE)
+																																		.addPreferredGap(
+																																				ComponentPlacement.RELATED))))
+																						.addGroup(
+																								pnlCadastroProdutoLayout
+																										.createSequentialGroup()
+																										.addGap(249)
+																										.addComponent(
+																												lbtDescricao)))))
+										.addGap(20)));
+		pnlCadastroProdutoLayout
+				.setVerticalGroup(pnlCadastroProdutoLayout
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								pnlCadastroProdutoLayout
+										.createSequentialGroup()
+										.addContainerGap(
+												GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addGroup(
+												pnlCadastroProdutoLayout
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addGroup(
+																pnlCadastroProdutoLayout
+																		.createSequentialGroup()
+																		.addComponent(
+																				jButton3,
+																				GroupLayout.PREFERRED_SIZE,
+																				43,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addGap(27)
+																		.addComponent(
+																				lbtDescricao))
+														.addGroup(
+																pnlCadastroProdutoLayout
+																		.createSequentialGroup()
+																		.addGroup(
+																				pnlCadastroProdutoLayout
+																						.createParallelGroup(
+																								Alignment.BASELINE)
+																						.addComponent(
+																								lbCodigoProduto,
+																								GroupLayout.PREFERRED_SIZE,
+																								17,
+																								GroupLayout.PREFERRED_SIZE)
+																						.addComponent(
+																								txtCodigoProduto,
+																								GroupLayout.PREFERRED_SIZE,
+																								GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.PREFERRED_SIZE))
+																		.addGap(20)
+																		.addGroup(
+																				pnlCadastroProdutoLayout
+																						.createParallelGroup(
+																								Alignment.TRAILING,
+																								false)
+																						.addGroup(
+																								pnlCadastroProdutoLayout
+																										.createSequentialGroup()
+																										.addComponent(
+																												lbtCodigoBarras)
+																										.addGap(6))
+																						.addGroup(
+																								pnlCadastroProdutoLayout
+																										.createParallelGroup(
+																												Alignment.BASELINE)
+																										.addComponent(
+																												txtCodigoBarras,
+																												GroupLayout.PREFERRED_SIZE,
+																												GroupLayout.DEFAULT_SIZE,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addComponent(
+																												LbtMedida)
+																										.addComponent(
+																												txtMedida,
+																												GroupLayout.PREFERRED_SIZE,
+																												GroupLayout.DEFAULT_SIZE,
+																												GroupLayout.PREFERRED_SIZE)))))
+										.addPreferredGap(
+												ComponentPlacement.UNRELATED)
+										.addComponent(txtDescricao,
+												GroupLayout.PREFERRED_SIZE, 40,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addComponent(lbtAplicação)
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addComponent(txtAplicacao,
+												GroupLayout.PREFERRED_SIZE, 33,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addGroup(
+												pnlCadastroProdutoLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																lbtValorVenda)
+														.addComponent(
+																fmtValorVenda,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																lbtValorCusto)
+														.addComponent(
+																fmtValorCusto,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																lbtQuantidade)
+														.addComponent(
+																txtQuantidade,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												ComponentPlacement.RELATED, 33,
+												Short.MAX_VALUE)
+										.addGroup(
+												pnlCadastroProdutoLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(btnOk)
+														.addComponent(
+																btnConfirmar))
+										.addGap(34)
+										.addGroup(
+												pnlCadastroProdutoLayout
+														.createParallelGroup(
+																Alignment.TRAILING)
+														.addGroup(
+																pnlCadastroProdutoLayout
+																		.createParallelGroup(
+																				Alignment.LEADING)
+																		.addGroup(
+																				pnlCadastroProdutoLayout
+																						.createParallelGroup(
+																								Alignment.TRAILING,
+																								false)
+																						.addComponent(
+																								btnExcluir,
+																								0,
+																								0,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								btnAlterar,
+																								0,
+																								0,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								btnNovo,
+																								GroupLayout.PREFERRED_SIZE,
+																								43,
+																								Short.MAX_VALUE))
+																		.addComponent(
+																				btnSalvar,
+																				GroupLayout.PREFERRED_SIZE,
+																				43,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addComponent(
+																				btnPrimeiro,
+																				GroupLayout.PREFERRED_SIZE,
+																				42,
+																				GroupLayout.PREFERRED_SIZE))
+														.addComponent(
+																btnAnterior,
+																GroupLayout.PREFERRED_SIZE,
+																42,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																btnProximo,
+																GroupLayout.PREFERRED_SIZE,
+																42,
+																GroupLayout.PREFERRED_SIZE)
+														.addGroup(
+																pnlCadastroProdutoLayout
+																		.createParallelGroup(
+																				Alignment.LEADING)
+																		.addComponent(
+																				btnUltimo,
+																				Alignment.TRAILING,
+																				GroupLayout.PREFERRED_SIZE,
+																				42,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addGroup(
+																				pnlCadastroProdutoLayout
+																						.createSequentialGroup()
+																						.addGap(1)
+																						.addGroup(
+																								pnlCadastroProdutoLayout
+																										.createParallelGroup(
+																												Alignment.LEADING,
+																												false)
+																										.addComponent(
+																												btnCancelar,
+																												Alignment.TRAILING,
+																												GroupLayout.DEFAULT_SIZE,
+																												GroupLayout.DEFAULT_SIZE,
+																												Short.MAX_VALUE)
+																										.addComponent(
+																												btnPesquisa,
+																												Alignment.TRAILING,
+																												GroupLayout.PREFERRED_SIZE,
+																												42,
+																												Short.MAX_VALUE))
+																						.addPreferredGap(
+																								ComponentPlacement.RELATED))))
+										.addGap(65)));
 		pnlCadastroProduto.setLayout(pnlCadastroProdutoLayout);
 
 		TablePanel1.addTab("Cadastro de Produtos", pnlCadastroProduto);
@@ -775,9 +1063,8 @@ public class FrmCadastroProdutos extends JFrame {
 		// TODO add your handling code here:
 	}
 
-	
 	public static void main(String args[]) {
-		
+
 		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
 					.getInstalledLookAndFeels()) {
@@ -810,7 +1097,7 @@ public class FrmCadastroProdutos extends JFrame {
 			public void run() {
 				FrmCadastroProdutos cadProd = new FrmCadastroProdutos();
 				cadProd.setVisible(true);
-	
+
 			}
 
 		});
@@ -844,4 +1131,5 @@ public class FrmCadastroProdutos extends JFrame {
 	private javax.swing.JTextField txtQuantidade;
 	private JTextField txtCodigoProduto;
 	private JButton btnOk;
+	private JButton btnConfirmar;
 }

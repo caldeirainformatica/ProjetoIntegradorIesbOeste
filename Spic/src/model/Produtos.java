@@ -4,11 +4,6 @@
 package model;
 
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.sql.Date;
-
 
 
 /**
@@ -27,27 +22,12 @@ public class Produtos {
 	private double valorCusto;
 	private double quantidade;
 	
-	//método construtor
+	
 	public Produtos(){
 		
 	}
 	
-	/*//Método construtor aprimorado
-	public Produtos(int idProdutos,int codigoBarras,String descricao,String aplicacao,String medida,Boolean ativo, String dataValidade,  String dataFabricacao,String lote) throws ParseException {
-		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyy");
-		
-		this.idProdutos = idProdutos;
-		this.codigoBarras = codigoBarras;
-		this.descricao = descricao;
-		this.aplicacao = aplicacao;
-		this.medida =medida;
-		this.ativo = ativo;
-		this.dataValidade = df.parse(dataValidade);
-		this.dataFabricacao = df.parse(dataFabricacao);
-		this.lote = lote;	
-	}*/
-
-
+	
 // inicio dos getters
 	public int getIdProdutos() {
 		return idProdutos;
