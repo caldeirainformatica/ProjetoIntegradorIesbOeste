@@ -8,7 +8,7 @@ import persistencia.DaoLote;
 import model.Empresas;
 import model.Produtos;
 import controle.ConEmpresas;
-import controle.ConLote_velho;
+import controle.ConLote;
 import controle.ConProdutos;
 
 
@@ -25,7 +25,7 @@ public class Teste {
 		pro.validarMedida("mei metro");
 		dao.insert(pro.produto);
 		
-		ConLote_velho lote = new ConLote_velho();
+		ConLote lote = new ConLote();
 		DaoLote daolote = new DaoLote();
 		lote.validarLote("1sad234");
 		lote.validarDataValidade("12/11/2000");
