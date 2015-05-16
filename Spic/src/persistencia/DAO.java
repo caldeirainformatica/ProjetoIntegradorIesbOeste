@@ -102,5 +102,12 @@ public class DAO {
 		}
 
 	}
+/**
+ * @author Ricardo Caldeira
+ * 
+ * Nessa parte eu começo a implementar a DAO de vendas. Seguindo recomenação do professor
+ *  Roger irei implementar tudo em uma só classe	
+ */
 
+	
 }
