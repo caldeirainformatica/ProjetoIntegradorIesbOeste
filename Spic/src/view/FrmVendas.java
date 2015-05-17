@@ -25,12 +25,7 @@ public class FrmVendas extends javax.swing.JFrame {
      * Creates new form FrmVendas
      */
     public FrmVendas() {
-    	addKeyListener(new KeyAdapter() {
-    		@Override
-    		public void keyTyped(KeyEvent arg0) {
-    			
-    		}
-    	});
+    	
     	setIconImage(Toolkit.getDefaultToolkit().getImage(FrmVendas.class.getResource("/images/th.jpg")));
     	setResizable(false);
     	setTitle("VENDAS");
@@ -226,20 +221,19 @@ public class FrmVendas extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
-        		.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        		.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-        			.addComponent(tabelaPesquisaProdutos, Alignment.LEADING)
-        			.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-        				.addComponent(tabelaProdutos, GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
-        				.addPreferredGap(ComponentPlacement.RELATED)
-        				.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)))
+        		.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
+        		.addGroup(layout.createSequentialGroup()
+        			.addComponent(tabelaProdutos, GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        		.addComponent(tabelaPesquisaProdutos, GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
-        			.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        			.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(tabelaPesquisaProdutos, GroupLayout.PREFERRED_SIZE, 321, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(tabelaPesquisaProdutos, GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
         				.addComponent(tabelaProdutos, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
