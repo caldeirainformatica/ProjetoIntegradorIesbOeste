@@ -19,6 +19,7 @@ import java.awt.event.KeyEvent;
  *
  * @author RicardoNote
  */
+// Homologado por : Vinicius Menezes
 public class FrmVendas extends javax.swing.JFrame {
 
     /**
