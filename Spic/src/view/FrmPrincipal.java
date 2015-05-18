@@ -55,10 +55,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
 		JButton btnProdutos = new JButton("");
 		btnProdutos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FrmCadastroProdutos cadastroProdutos = new FrmCadastroProdutos();
-				cadastroProdutos.setResizable(false);
-				cadastroProdutos.setVisible(true);
+				chamaCadastroProdutos();
 			}
+
 		});
 		btnProdutos.setIcon(new ImageIcon(FrmPrincipal.class
 				.getResource("/images/Windows_Tools_Icon_48.png")));
@@ -68,11 +67,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
 		JButton btnVendas = new JButton("");
 		btnVendas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FrmVendas vendas = new FrmVendas();
-				vendas.setVisible(true);
-				vendas.setResizable(false);
-				vendas.setExtendedState(MAXIMIZED_BOTH);
+				chamaVendas();
 			}
+
 		});
 		btnVendas.setIcon(new ImageIcon(FrmPrincipal.class
 				.getResource("/images/Dollar.png")));
@@ -83,19 +80,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				// Pergunta para o usuário se tem mesmo certeza se deseja sair
-				// ou nao
-				if (JOptionPane.showConfirmDialog(null,
-						"Tem certeza que deseja sair?", "Confirmar",
-						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-
-					conecta.desconecta();
-					System.exit(0);
-
-				} else {
-
-				}
+				fechaTela();
 			}
+
 		});
 		btnSair.setIcon(new ImageIcon(FrmPrincipal.class
 				.getResource("/images/domesticos_2141_porta.gif")));
@@ -108,14 +95,35 @@ public class FrmPrincipal extends javax.swing.JFrame {
 		JMenu mnCadastro = new JMenu("Cadastro");
 		menuBar.add(mnCadastro);
 
-		JMenuItem mntmProdutos = new JMenuItem("Produtos");
-		mnCadastro.add(mntmProdutos);
+		JMenuItem mnProdutos = new JMenuItem("Produtos");
+		mnProdutos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chamaCadastroProdutos();
+			}
+		});
+		mnCadastro.add(mnProdutos);
 
 		JMenu mnMovimentos = new JMenu("Movimentos");
 		menuBar.add(mnMovimentos);
 
-		JMenuItem mntmVendas = new JMenuItem("Vendas");
-		mnMovimentos.add(mntmVendas);
+		JMenuItem mnVendas = new JMenuItem("Vendas");
+		mnVendas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chamaVendas();
+			}
+		});
+		mnMovimentos.add(mnVendas);
+		
+		JMenu mnMenu = new JMenu("Menu");
+		mnMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		menuBar.add(mnMenu);
+		
+		JMenuItem mnSair = new JMenuItem("Sair");
+		mnMenu.add(mnSair);
 		initComponents();
 
 		Container container = getContentPane();
@@ -125,15 +133,43 @@ public class FrmPrincipal extends javax.swing.JFrame {
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 73, 1350, 636);
 		getContentPane().add(panel);
-		
+
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/images/Logo Spic.jpg")));
+		label.setIcon(new ImageIcon(FrmPrincipal.class
+				.getResource("/images/Logo Spic.jpg")));
 		panel.add(label);
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
-		setSize(tela.width, tela.height);  
+		setSize(tela.width, tela.height);
 
 		conecta.conexao();
 
+	}
+
+	private void chamaCadastroProdutos() {
+		FrmCadastroProdutos cadastroProdutos = new FrmCadastroProdutos();
+		cadastroProdutos.setResizable(false);
+		cadastroProdutos.setVisible(true);
+	}
+
+	private void chamaVendas() {
+		FrmVendas vendas = new FrmVendas();
+		vendas.setVisible(true);
+		vendas.setResizable(false);
+		vendas.setExtendedState(MAXIMIZED_BOTH);
+	}
+
+	private void fechaTela() {
+		// Pergunta para o usuário se tem mesmo certeza se deseja sair
+		// ou nao
+		if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?",
+				"Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+			conecta.desconecta();
+			System.exit(0);
+
+		} else {
+
+		}
 	}
 
 	private void initComponents() {
