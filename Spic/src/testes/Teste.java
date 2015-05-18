@@ -30,7 +30,6 @@ public class Teste {
 		lote.validarLote("1sad234");
 		lote.validarDataValidade("12/11/2000");
 		lote.validarDataFabricacao("02/03/1970");
-		lote.validarProduto_idproduto("13");
 		daolote.inserirLote(lote.lot);
 		
 		

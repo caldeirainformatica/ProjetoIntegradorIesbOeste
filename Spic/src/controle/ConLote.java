@@ -134,26 +134,6 @@ public class ConLote {
         return(true);                          
     }  
 	
-	public boolean validarProduto_idproduto(String produto_idproduto){
-		
-		try{
-			
-			if(produto_idproduto == ""||produto_idproduto== null||produto_idproduto.trim()==""){
-				
-				return false;
-				
-			}else{
-				
-				lot.setProduto_idproduto(Integer.parseInt(produto_idproduto));
-				return true;
-			}
-		}catch(NumberFormatException e){
-			
-			new Exception("valores inválidos!!");
-			System.out.println("Valores inválidos!!");
-			return false;
-		}
-	}
 	
 
 }
