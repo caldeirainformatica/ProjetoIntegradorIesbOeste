@@ -42,7 +42,7 @@ public class ConectaBanco {
 																			// o
 																			// bd
 			// JOptionPane.showMessageDialog(null, "conectado com sucesso"); //
-			// imprime uma cx de mensagem
+			// imprime uma cx d//e mensagem
 		} catch (SQLException e) { // se de erro, faça isso
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null,
