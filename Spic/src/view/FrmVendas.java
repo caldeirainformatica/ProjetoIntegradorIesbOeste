@@ -45,6 +45,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * @author Ricardo Caldeira
@@ -122,7 +124,30 @@ public class FrmVendas extends javax.swing.JFrame {
 				if (!txtAplicacao.getText().equals("")) {
 					p.setAplicacao(txtAplicacao.getText());
 				}
-				dao.select(p);
+				if ((txtCodigoProduto.getText().equals(""))
+						&& (txtCodigoBarras.getText().equals(""))
+						&& (txtDescricao.getText().equals(""))
+						&& (txtAplicacao.getText().equals(""))) {
+					JOptionPane.showMessageDialog(null, "E necessário digitar alguma coisa para a pesquisa");
+				}else{
+					try {
+						preencherTabela("select * from produtos where idProdutos like '%"
+								+ p.getIdProdutos()
+								+ "%' or codigoBarras like '%"
+								+ p.getCodigoBarras()
+								+ "%'"
+								+ " or descricao like '%"
+								+ p.getDescricao()
+								+ "%' or aplicacao like '%"
+								+ p.getAplicacao()
+								+ "%'");
+
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
 			}
 		});
 		btnPesquisar.setIcon(new ImageIcon(FrmVendas.class
@@ -368,6 +393,7 @@ public class FrmVendas extends javax.swing.JFrame {
 		tabelaProdutos.setViewportView(jTable2);
 
 		JScrollPane scrollPane = new JScrollPane();
+	
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
@@ -414,6 +440,16 @@ public class FrmVendas extends javax.swing.JFrame {
 								.addGap(3)));
 
 		tabelaPesquisaProdutos = new JTable();
+		tabelaPesquisaProdutos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount()==2){
+					if (tabelaPesquisaProdutos.getSelectedRow() > -1){
+						JOptionPane.showMessageDialog(null, "clicou");
+					}
+				}
+			}
+		});
 		tabelaPesquisaProdutos.setModel(new DefaultTableModel(
 				new Object[][] {}, new String[] {}));
 		scrollPane.setViewportView(tabelaPesquisaProdutos);
