@@ -1,5 +1,6 @@
 package view;
 
+import model.VendasItem;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import model.ModeloTabela;
 import model.Produtos;
+import model.VendasItem;
 import persistencia.ConectaBanco;
 import persistencia.DAO;
 import persistencia.DaoLote;
@@ -44,6 +46,7 @@ import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -128,8 +131,10 @@ public class FrmVendas extends javax.swing.JFrame {
 						&& (txtCodigoBarras.getText().equals(""))
 						&& (txtDescricao.getText().equals(""))
 						&& (txtAplicacao.getText().equals(""))) {
-					JOptionPane.showMessageDialog(null, "E necessário digitar alguma coisa para a pesquisa");
-				}else{
+					JOptionPane
+							.showMessageDialog(null,
+									"E necessário digitar alguma coisa para a pesquisa");
+				} else {
 					try {
 						preencherTabela("select * from produtos where idProdutos like '%"
 								+ p.getIdProdutos()
@@ -393,7 +398,6 @@ public class FrmVendas extends javax.swing.JFrame {
 		tabelaProdutos.setViewportView(jTable2);
 
 		JScrollPane scrollPane = new JScrollPane();
-	
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
@@ -443,10 +447,27 @@ public class FrmVendas extends javax.swing.JFrame {
 		tabelaPesquisaProdutos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount()==2){
-					if (tabelaPesquisaProdutos.getSelectedRow() > -1){
-						JOptionPane.showMessageDialog(null, "clicou");
+				if (e.getButton() == MouseEvent.BUTTON1
+						&& e.getClickCount() == 2) {
+					if (tabelaPesquisaProdutos.getSelectedRow() > -1) {
+
+						
+						int linhaSelecionada = tabelaPesquisaProdutos
+								.getSelectedRow();
+						if (linhaSelecionada == -1) {
+							JOptionPane.showMessageDialog(null,
+									"Não tem nada selecionado");
+						} else {
+				VendasItem vendas = new VendasItem();
+				vendas.setValorItem(Double.parseDouble(tabelaPesquisaProdutos.getValueAt(linhaSelecionada, 4).toString()));
+						}
+
 					}
+
+					FrmVendasItem vendasItem = new FrmVendasItem();
+					vendasItem.setVisible(true);
+					vendasItem.setResizable(false);
+
 				}
 			}
 		});

@@ -4,11 +4,18 @@
  * and open the template in the editor.
  */
 package view;
+import javax.swing.JFrame;
+
+import model.VendasItem;
+
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /**
  *
  * @author RicardoNote
  */
+@SuppressWarnings("serial")
 public class FrmVendasItem extends javax.swing.JFrame {
 
     /**
@@ -16,6 +23,9 @@ public class FrmVendasItem extends javax.swing.JFrame {
      */
     public FrmVendasItem() {
         initComponents();
+       
+
+        
     }
 
     /**
@@ -31,18 +41,25 @@ public class FrmVendasItem extends javax.swing.JFrame {
         lbQuantidadeItem = new javax.swing.JLabel();
         lbValorVenda = new javax.swing.JLabel();
         txtQuantidadeItem = new javax.swing.JTextField();
+        txtQuantidadeItem.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusLost(FocusEvent arg0) {
+        		 VendasItem vendasItem = new VendasItem();
+        	        fmtValorItem.setText(Double.toString(vendasItem.getValorItem()));
+        	}
+        });
         fmtValorItem = new javax.swing.JFormattedTextField();
         btnFecharVenda = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         lbQuantidadeItem.setText("Quantidade");
 
         lbValorVenda.setText("Valor Unitario");
-
+       
         btnFecharVenda.setText("Fechar Item");
         btnFecharVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +129,7 @@ public class FrmVendasItem extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+       dispose();
     }                                        
 
     private void btnFecharVendaActionPerformed(java.awt.event.ActionEvent evt) {                                               
@@ -128,6 +145,7 @@ public class FrmVendasItem extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+    	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -150,6 +168,7 @@ public class FrmVendasItem extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FrmVendasItem().setVisible(true);
+              
             }
         });
     }
