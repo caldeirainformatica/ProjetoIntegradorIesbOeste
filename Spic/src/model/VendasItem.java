@@ -2,6 +2,8 @@ package model;
 
 import javax.swing.JOptionPane;
 
+import view.FrmVendasItem;
+
 public class VendasItem {
 
 	private int quantidade;
@@ -13,7 +15,13 @@ public class VendasItem {
 	}
 
 	public double getValorItem() {
+		FrmVendasItem vendas = new FrmVendasItem();
+		vendas.setVisible(true);
+		vendas.valorItem(valorItem);
+		vendas.setResizable(false);
+
 		return valorItem;
+		
 	}
 
 	public double getValorTotal() {
@@ -25,9 +33,12 @@ public class VendasItem {
 	}
 
 	public void setValorItem(double valorItem) {
+		if (valorItem >=0){
 		this.valorItem = valorItem;
-	JOptionPane.showMessageDialog(null, this.valorItem);
-	JOptionPane.showMessageDialog(null, valorItem);
+		getValorItem();
+		}
+//	JOptionPane.showMessageDialog(null, this.valorItem);
+	JOptionPane.showMessageDialog(null, "setvalor "+valorItem);
 	}
 
 	public void setValorTotal(double valorTotal) {

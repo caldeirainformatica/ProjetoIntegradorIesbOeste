@@ -24,10 +24,15 @@ public class FrmVendasItem extends javax.swing.JFrame {
     public FrmVendasItem() {
         initComponents();
        
+      
+       
 
         
     }
-
+   
+public void valorItem(Double valorItem){
+	  fmtValorItem.setText(Double.toString(valorItem));
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,8 +49,7 @@ public class FrmVendasItem extends javax.swing.JFrame {
         txtQuantidadeItem.addFocusListener(new FocusAdapter() {
         	@Override
         	public void focusLost(FocusEvent arg0) {
-        		 VendasItem vendasItem = new VendasItem();
-        	        fmtValorItem.setText(Double.toString(vendasItem.getValorItem()));
+        		
         	}
         });
         fmtValorItem = new javax.swing.JFormattedTextField();
@@ -132,8 +136,14 @@ public class FrmVendasItem extends javax.swing.JFrame {
        dispose();
     }                                        
 
-    private void btnFecharVendaActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
+    private void btnFecharVendaActionPerformed(java.awt.event.ActionEvent evt) {
+    	double valorItem = (Double.parseDouble(txtQuantidadeItem.getText()));
+    	double quantidade = (Double.parseDouble(txtQuantidadeItem.getText()));
+    	double valorTotal = (valorItem + quantidade);
+    	
+      VendasItem vendasItem = new VendasItem();
+      vendasItem.setValorTotal(valorTotal);
+      dispose();
     }                                              
 
     /**

@@ -1,6 +1,5 @@
 package view;
 
-import model.VendasItem;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,36 +14,15 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import model.ModeloTabela;
 import model.Produtos;
-import model.VendasItem;
 import persistencia.ConectaBanco;
 import persistencia.DAO;
-import persistencia.DaoLote;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.awt.Color;
 
-import javax.swing.JTextField;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JTable;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JLabel;
 import javax.swing.ListSelectionModel;
-
-import java.awt.Font;
-import java.awt.Dimension;
-import java.awt.List;
-
-import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import java.awt.Point;
@@ -56,6 +34,7 @@ import java.awt.event.MouseEvent;
  */
 
 public class FrmVendas extends javax.swing.JFrame {
+	
 
 	/**
 	 * 
@@ -176,7 +155,7 @@ public class FrmVendas extends javax.swing.JFrame {
 				.getResource("/images/door_out.png")));
 		lbSubTotal = new javax.swing.JLabel();
 		tabelaProdutos = new javax.swing.JScrollPane();
-		jTable2 = new javax.swing.JTable();
+		tabelaVendaProduto = new javax.swing.JTable();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -390,83 +369,95 @@ public class FrmVendas extends javax.swing.JFrame {
 								.addContainerGap()));
 		jPanel2.setLayout(jPanel2Layout);
 
-		jTable2.setModel(new javax.swing.table.DefaultTableModel(
-				new Object[][] { { null, null, null, null },
-						{ null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null } }, new String[] { "Title 1",
-						"Title 2", "Title 3", "Title 4" }));
-		tabelaProdutos.setViewportView(jTable2);
+		tabelaVendaProduto.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Codigo", "Descri\u00E7\u00E3o", "Quantidade", "Valor Unit\u00E1rio", "Valor Total"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class, Double.class, Double.class, Double.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, true, true, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+			
+		});
+		tabelaVendaProduto.getColumnModel().getColumn(1).setPreferredWidth(305);
+		tabelaProdutos.setViewportView(tabelaVendaProduto);
 
 		JScrollPane scrollPane = new JScrollPane();
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
-		layout.setHorizontalGroup(layout
-				.createParallelGroup(Alignment.LEADING)
-				.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 842,
-						Short.MAX_VALUE)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addComponent(tabelaProdutos,
-										GroupLayout.DEFAULT_SIZE, 501,
-										Short.MAX_VALUE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(jPanel2,
-										GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE))
-				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 842,
-						Short.MAX_VALUE));
-		layout.setVerticalGroup(layout
-				.createParallelGroup(Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addComponent(jPanel1,
-										GroupLayout.DEFAULT_SIZE, 129,
-										Short.MAX_VALUE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(scrollPane,
-										GroupLayout.PREFERRED_SIZE, 345,
-										GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(
-										layout.createParallelGroup(
-												Alignment.LEADING, false)
-												.addComponent(
-														tabelaProdutos,
-														GroupLayout.PREFERRED_SIZE,
-														0, Short.MAX_VALUE)
-												.addComponent(
-														jPanel2,
-														GroupLayout.DEFAULT_SIZE,
-														GroupLayout.DEFAULT_SIZE,
-														Short.MAX_VALUE))
-								.addGap(3)));
+		layout.setHorizontalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
+				.addGroup(layout.createSequentialGroup()
+					.addComponent(tabelaProdutos, GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(layout.createSequentialGroup()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		layout.setVerticalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+					.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 345, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(tabelaProdutos, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+						.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(3))
+		);
 
 		tabelaPesquisaProdutos = new JTable();
 		tabelaPesquisaProdutos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				if (e.getButton() == MouseEvent.BUTTON1
 						&& e.getClickCount() == 2) {
 					if (tabelaPesquisaProdutos.getSelectedRow() > -1) {
 
-						
 						int linhaSelecionada = tabelaPesquisaProdutos
 								.getSelectedRow();
 						if (linhaSelecionada == -1) {
 							JOptionPane.showMessageDialog(null,
 									"Não tem nada selecionado");
 						} else {
-				VendasItem vendas = new VendasItem();
-				vendas.setValorItem(Double.parseDouble(tabelaPesquisaProdutos.getValueAt(linhaSelecionada, 4).toString()));
+							
+//							DefaultTableModel pesquisaProduto = (DefaultTableModel) tabelaPesquisaProdutos.getModel();
+						//	String codigo = (String) (pesquisaProduto.getValueAt(linhaSelecionada, 0));
+//							String descricao = (String) (pesquisaProduto.getValueAt(linhaSelecionada, 2));
+//							String valorItem = (String) (pesquisaProduto.getValueAt(linhaSelecionada, 4));
+//							String quantidade = ("1");
+//							JOptionPane.showMessageDialog(null, codigo);
+//							String valorTotal = (String) (pesquisaProduto.getValueAt(linhaSelecionada, 4));
+							
+//							DefaultTableModel dtm = (DefaultTableModel) tabelaVendaProduto.getModel();
+//							dtm.addRow(new String[] {codigo/*, descricao, valorItem, quantidade, valorTotal*/});
+							
+//							 tabelaVendaProduto.setColumnSelectionAllowed(true);  
+//							 tabelaVendaProduto.setRowSelectionAllowed(true);  
+//							 tabelaVendaProduto.setColumnSelectionInterval(3, 3); 
+							
 						}
+							
 
 					}
 
-					FrmVendasItem vendasItem = new FrmVendasItem();
-					vendasItem.setVisible(true);
-					vendasItem.setResizable(false);
+				
 
 				}
 			}
@@ -592,7 +583,7 @@ public class FrmVendas extends javax.swing.JFrame {
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JPanel jPanel2;
 	private javax.swing.JScrollPane tabelaProdutos;
-	private javax.swing.JTable jTable2;
+	private javax.swing.JTable tabelaVendaProduto;
 	private javax.swing.JTextField txtCodigoBarras;
 	private javax.swing.JTextField txtCodigoProduto;
 	private javax.swing.JTextField txtDescricao;
