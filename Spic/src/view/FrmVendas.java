@@ -28,6 +28,9 @@ import javax.swing.JScrollPane;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /**
  * @author Ricardo Caldeira
@@ -154,8 +157,17 @@ public class FrmVendas extends javax.swing.JFrame {
 		btnFechar.setIcon(new ImageIcon(FrmVendas.class
 				.getResource("/images/door_out.png")));
 		lbSubTotal = new javax.swing.JLabel();
-		tabelaProdutos = new javax.swing.JScrollPane();
+		scrProdutoVenda = new javax.swing.JScrollPane();
 		tabelaVendaProduto = new javax.swing.JTable();
+		tabelaVendaProduto.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+		//		tabelaVendaProduto.set
+			}
+		});
+		tabelaVendaProduto.setGridColor(Color.WHITE);
+		tabelaVendaProduto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabelaVendaProduto.setSurrendersFocusOnKeystroke(true);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -382,41 +394,34 @@ public class FrmVendas extends javax.swing.JFrame {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			boolean[] columnEditables = new boolean[] {
-				false, false, true, true, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-			
 		});
-		tabelaVendaProduto.getColumnModel().getColumn(1).setPreferredWidth(305);
-		tabelaProdutos.setViewportView(tabelaVendaProduto);
+		tabelaVendaProduto.getColumnModel().getColumn(1).setPreferredWidth(300);
+		scrProdutoVenda.setViewportView(tabelaVendaProduto);
 
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scrPesquisaProduto = new JScrollPane();
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
 		layout.setHorizontalGroup(
 			layout.createParallelGroup(Alignment.LEADING)
-				.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
+				.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
 				.addGroup(layout.createSequentialGroup()
-					.addComponent(tabelaProdutos, GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+					.addComponent(scrProdutoVenda, GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
 				.addGroup(layout.createSequentialGroup()
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
+					.addComponent(scrPesquisaProduto, GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		layout.setVerticalGroup(
 			layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
 					.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 345, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(1)
+					.addComponent(scrPesquisaProduto, GroupLayout.PREFERRED_SIZE, 345, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(tabelaProdutos, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+						.addComponent(scrProdutoVenda, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
 						.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addGap(3))
 		);
@@ -437,20 +442,18 @@ public class FrmVendas extends javax.swing.JFrame {
 									"Não tem nada selecionado");
 						} else {
 							
-//							DefaultTableModel pesquisaProduto = (DefaultTableModel) tabelaPesquisaProdutos.getModel();
-						//	String codigo = (String) (pesquisaProduto.getValueAt(linhaSelecionada, 0));
-//							String descricao = (String) (pesquisaProduto.getValueAt(linhaSelecionada, 2));
-//							String valorItem = (String) (pesquisaProduto.getValueAt(linhaSelecionada, 4));
-//							String quantidade = ("1");
-//							JOptionPane.showMessageDialog(null, codigo);
-//							String valorTotal = (String) (pesquisaProduto.getValueAt(linhaSelecionada, 4));
 							
-//							DefaultTableModel dtm = (DefaultTableModel) tabelaVendaProduto.getModel();
-//							dtm.addRow(new String[] {codigo/*, descricao, valorItem, quantidade, valorTotal*/});
+							Object codigo = (tabelaPesquisaProdutos.getValueAt(linhaSelecionada, 0));
+							Object descricao = (tabelaPesquisaProdutos.getValueAt(linhaSelecionada, 2));
+							Object valorItem = (tabelaPesquisaProdutos.getValueAt(linhaSelecionada, 4));
+							Object quantidade = (1);
+							//JOptionPane.showMessageDialog(null, codigo);
+							Object valorTotal = (tabelaPesquisaProdutos.getValueAt(linhaSelecionada, 4));
 							
-//							 tabelaVendaProduto.setColumnSelectionAllowed(true);  
-//							 tabelaVendaProduto.setRowSelectionAllowed(true);  
-//							 tabelaVendaProduto.setColumnSelectionInterval(3, 3); 
+							DefaultTableModel dtm = (DefaultTableModel) tabelaVendaProduto.getModel();
+							dtm.addRow(new Object[] {codigo, descricao, quantidade, valorItem,valorTotal});
+							
+							 
 							
 						}
 							
@@ -464,7 +467,7 @@ public class FrmVendas extends javax.swing.JFrame {
 		});
 		tabelaPesquisaProdutos.setModel(new DefaultTableModel(
 				new Object[][] {}, new String[] {}));
-		scrollPane.setViewportView(tabelaPesquisaProdutos);
+		scrPesquisaProduto.setViewportView(tabelaPesquisaProdutos);
 		getContentPane().setLayout(layout);
 
 		pack();
@@ -498,7 +501,7 @@ public class FrmVendas extends javax.swing.JFrame {
 		ModeloTabela modelo = new ModeloTabela(dados, colunas);
 		tabelaPesquisaProdutos.setModel(modelo);
 		tabelaPesquisaProdutos.getColumnModel().getColumn(0)
-				.setPreferredWidth(100);
+				.setPreferredWidth(95);
 		tabelaPesquisaProdutos.getColumnModel().getColumn(0)
 				.setResizable(false);
 		tabelaPesquisaProdutos.getColumnModel().getColumn(1)
@@ -582,7 +585,7 @@ public class FrmVendas extends javax.swing.JFrame {
 	private javax.swing.JLabel lbSubTotal;
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JPanel jPanel2;
-	private javax.swing.JScrollPane tabelaProdutos;
+	private javax.swing.JScrollPane scrProdutoVenda;
 	private javax.swing.JTable tabelaVendaProduto;
 	private javax.swing.JTextField txtCodigoBarras;
 	private javax.swing.JTextField txtCodigoProduto;
