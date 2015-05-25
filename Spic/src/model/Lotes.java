@@ -4,14 +4,18 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+
+
+
 public class Lotes {
 	
 	
 	
 	private int idLote;
 	private String lote;
-	private java.sql.Date dataValidade;
-	private java.sql.Date dataFabricacao;
+	private Date dataValidade;
+	private Date dataFabricacao;
 
 
 	public Lotes() {
@@ -29,17 +33,33 @@ public class Lotes {
 	}
 
 
-	public void setDataValidade(String dataValidade) throws ParseException {
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		java.util.Date data = df.parse(dataValidade);
-		this.dataValidade =	new java.sql.Date(data.getTime());
+	public void setDataValidade(String dataValidade) throws ParseException  {
+		if(dataValidade.matches("\\d{4}-\\d{2}-\\d{2}")){
+			String[] data = dataValidade.split("-");
+			dataValidade = 	data[2]	+ "/" + data[1] + "/"+ data[0];
+			
+			
+		}
+		
+		DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");  
+		java.sql.Date data = new java.sql.Date(fmt.parse(dataValidade).getTime());  
+		this.dataValidade =	data;
 	}
 
 
 	public void setDataFabricacao(String dataFabricacao) throws ParseException {
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		java.util.Date data = df.parse(dataFabricacao);
-		this.dataFabricacao = new java.sql.Date(data.getTime());
+		
+		if(dataFabricacao.matches("\\d{4}-\\d{2}-\\d{2}")){
+			
+			String[] data = dataFabricacao.split("-");
+			dataFabricacao = 	data[2]	+ "/" + data[1] + "/"+ data[0];
+			
+			
+		}
+		
+		DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");  
+		java.sql.Date data = new java.sql.Date(fmt.parse(dataFabricacao).getTime());  
+		this.dataFabricacao = data;
 	}
 	
 
