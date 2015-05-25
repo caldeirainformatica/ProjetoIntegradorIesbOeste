@@ -126,8 +126,7 @@ public class FrmVendas extends javax.swing.JFrame {
 								+ " or descricao like '%"
 								+ p.getDescricao()
 								+ "%' or aplicacao like '%"
-								+ p.getAplicacao()
-								+ "%'");
+								+ p.getAplicacao()+ "%'");
 
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
