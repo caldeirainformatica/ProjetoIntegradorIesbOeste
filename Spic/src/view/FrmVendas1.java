@@ -19,10 +19,13 @@ import persistencia.DAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JScrollPane;
 
 import java.awt.Point;
@@ -31,19 +34,24 @@ import java.awt.event.MouseEvent;
 import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JFormattedTextField;
+
 import java.awt.Dimension;
+
 import javax.swing.JButton;
 
 /**
  * @author Ricardo Caldeira
  */
 
-public class FrmVendas extends javax.swing.JFrame {
+public class FrmVendas1 extends javax.swing.JFrame {
 	Double valorUnitario;
 	Double valorTotal;
 	Double quantidade;
@@ -58,23 +66,28 @@ public class FrmVendas extends javax.swing.JFrame {
 	Produtos p = new Produtos();
 	private ResultSet rs;
 
-	public FrmVendas() {
+	public FrmVendas1() throws ParseException {
 		setLocation(new Point(0, 200));
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
-				FrmVendas.class.getResource("/images/th.jpg")));
+				FrmVendas1.class.getResource("/images/th.jpg")));
 		setResizable(false);
 		setTitle("VENDAS");
 		setType(Type.UTILITY);
 		initComponents();
+		
 		conecta.conexao();
 		selectProdutos();
+		
 		try {
 			preencherTabela("select *from produtos order by idProdutos");
+			
+					
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+			
 
 	}
 
@@ -137,15 +150,15 @@ public class FrmVendas extends javax.swing.JFrame {
 
 			}
 		});
-		btnPesquisar.setIcon(new ImageIcon(FrmVendas.class
+		btnPesquisar.setIcon(new ImageIcon(FrmVendas1.class
 				.getResource("/images/zoom.png")));
 		jPanel2 = new javax.swing.JPanel();
 		lbItens = new javax.swing.JLabel();
 		btnLimpa = new javax.swing.JButton();
-		btnLimpa.setIcon(new ImageIcon(FrmVendas.class
+		btnLimpa.setIcon(new ImageIcon(FrmVendas1.class
 				.getResource("/images/cancel.png")));
 		btnFinaliza = new javax.swing.JButton();
-		btnFinaliza.setIcon(new ImageIcon(FrmVendas.class
+		btnFinaliza.setIcon(new ImageIcon(FrmVendas1.class
 				.getResource("/images/money_dollar.png")));
 		btnFechar = new javax.swing.JButton();
 		btnFechar.addActionListener(new ActionListener() {
@@ -154,7 +167,7 @@ public class FrmVendas extends javax.swing.JFrame {
 
 			}
 		});
-		btnFechar.setIcon(new ImageIcon(FrmVendas.class
+		btnFechar.setIcon(new ImageIcon(FrmVendas1.class
 				.getResource("/images/door_out.png")));
 		lbSubTotal = new javax.swing.JLabel();
 		scrProdutoVenda = new javax.swing.JScrollPane();
@@ -185,7 +198,7 @@ public class FrmVendas extends javax.swing.JFrame {
 		btnPesquisar.setText("Pesquisar");
 		
 		label = new JLabel("");
-		label.setIcon(new ImageIcon(FrmVendas.class.getResource("/images/th.jpg")));
+		label.setIcon(new ImageIcon(FrmVendas1.class.getResource("/images/th.jpg")));
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(
 				jPanel1);
@@ -341,10 +354,10 @@ public class FrmVendas extends javax.swing.JFrame {
 		);
 		panel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(66, 9, 223, 32);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtProduto = new JTextField();
+		txtProduto.setBounds(66, 9, 223, 32);
+		panel.add(txtProduto);
+		txtProduto.setColumns(10);
 		
 		JLabel lblCliente = new JLabel("Produto");
 		lblCliente.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -356,33 +369,39 @@ public class FrmVendas extends javax.swing.JFrame {
 		lblQuantidade.setBounds(321, 12, 80, 14);
 		panel.add(lblQuantidade);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(414, 9, 86, 32);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		txtQuantidade = new JTextField();
+		txtQuantidade.setBounds(414, 9, 86, 32);
+		panel.add(txtQuantidade);
+		txtQuantidade.setColumns(10);
 		
 		JLabel lblValorUnitrio = new JLabel("Valor Unit\u00E1rio");
 		lblValorUnitrio.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblValorUnitrio.setBounds(510, 12, 86, 14);
 		panel.add(lblValorUnitrio);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(606, 9, 95, 32);
-		panel.add(formattedTextField);
+		JFormattedTextField fmtValorUnitario = new JFormattedTextField();
+		fmtValorUnitario.setBounds(606, 9, 95, 32);
+		panel.add(fmtValorUnitario);
 		
 		JLabel lblData = new JLabel("Data");
 		lblData.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblData.setBounds(10, 52, 46, 14);
 		panel.add(lblData);
 		
-		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
-		formattedTextField_1.setBounds(66, 47, 111, 32);
-		panel.add(formattedTextField_1);
+		JButton btnCarrinho = new JButton("Adiciona Item ao Carrinho");
+		btnCarrinho.setIcon(new ImageIcon(FrmVendas1.class.getResource("/images/cart_add.png")));
+		btnCarrinho.setBounds(715, 8, 194, 33);
+		panel.add(btnCarrinho);
 		
-		JButton btnAdicionaItemAo = new JButton("Adiciona Item ao Carrinho");
-		btnAdicionaItemAo.setIcon(new ImageIcon(FrmVendas.class.getResource("/images/cart_add.png")));
-		btnAdicionaItemAo.setBounds(715, 8, 194, 33);
-		panel.add(btnAdicionaItemAo);
+		JFormattedTextField fmtData = new JFormattedTextField();
+		fmtData.setBounds(66, 52, 80, 36);
+		panel.add(fmtData);
+		try {
+			MaskFormatter form = new MaskFormatter("##/##/####");
+			fmtData.setFormatterFactory(new DefaultFormatterFactory(form));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
 		tabelaPesquisaProdutos = new JTable();
 		tabelaPesquisaProdutos.addMouseListener(new MouseAdapter() {
@@ -506,16 +525,16 @@ public class FrmVendas extends javax.swing.JFrame {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(FrmVendas.class.getName()).log(
+			java.util.logging.Logger.getLogger(FrmVendas1.class.getName()).log(
 					java.util.logging.Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(FrmVendas.class.getName()).log(
+			java.util.logging.Logger.getLogger(FrmVendas1.class.getName()).log(
 					java.util.logging.Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(FrmVendas.class.getName()).log(
+			java.util.logging.Logger.getLogger(FrmVendas1.class.getName()).log(
 					java.util.logging.Level.SEVERE, null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(FrmVendas.class.getName()).log(
+			java.util.logging.Logger.getLogger(FrmVendas1.class.getName()).log(
 					java.util.logging.Level.SEVERE, null, ex);
 		}
 		// </editor-fold>
@@ -523,9 +542,13 @@ public class FrmVendas extends javax.swing.JFrame {
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				FrmVendas vendas = new FrmVendas();
-				vendas.setVisible(true);
-				vendas.setExtendedState(MAXIMIZED_BOTH);
+				try {
+					FrmVendas1 vendas = new FrmVendas1();
+					vendas.setVisible(true);
+					vendas.setExtendedState(MAXIMIZED_BOTH);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 
 			}
 		});
@@ -549,8 +572,8 @@ public class FrmVendas extends javax.swing.JFrame {
 	private javax.swing.JTextField txtDescricao;
 	private javax.swing.JTextField txtAplicacao;
 	private JTable tabelaPesquisaProdutos;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtProduto;
+	private JTextField txtQuantidade;
 	private JLabel label;
 	private JTextField textField_2;
 	private JLabel lblCliente_1;

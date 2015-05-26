@@ -23,6 +23,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.SystemColor;
 import java.awt.Component;
 
@@ -67,7 +68,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
 		JButton btnVendas = new JButton("");
 		btnVendas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				chamaVendas();
+				try {
+					chamaVendas();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 
 		});
@@ -109,7 +115,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
 		JMenuItem mnVendas = new JMenuItem("Vendas");
 		mnVendas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				chamaVendas();
+				try {
+					chamaVendas();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		mnMovimentos.add(mnVendas);
@@ -151,11 +162,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
 		cadastroProdutos.setVisible(true);
 	}
 
-	private void chamaVendas() {
-		FrmVendas vendas = new FrmVendas();
+	private void chamaVendas() throws Exception {
+	try {
+		FrmVendas1 vendas = new FrmVendas1();
 		vendas.setVisible(true);
 		vendas.setResizable(false);
 		vendas.setExtendedState(MAXIMIZED_BOTH);
+	} catch (Exception e) {
+		// TODO: handle exception
+	}
 	}
 
 	private void fechaTela() {
