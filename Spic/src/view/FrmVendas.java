@@ -52,9 +52,7 @@ import javax.swing.JButton;
  */
 
 public class FrmVendas extends javax.swing.JFrame {
-	Double valorUnitario;
-	Double valorTotal;
-	Double quantidade;
+	
 
 	/**
 	 * 
@@ -65,6 +63,7 @@ public class FrmVendas extends javax.swing.JFrame {
 	DAO dao = new DAO();
 	Produtos p = new Produtos();
 	private ResultSet rs;
+	String codigo;
 
 	public FrmVendas() throws ParseException {
 		setLocation(new Point(0, 200));
@@ -76,6 +75,7 @@ public class FrmVendas extends javax.swing.JFrame {
 		setType(Type.UTILITY);
 		initComponents();
 		
+	
 		conecta.conexao();
 		selectProdutos();
 		
@@ -93,6 +93,7 @@ public class FrmVendas extends javax.swing.JFrame {
 
 	private void selectProdutos() {
 		PreparedStatement pst;
+
 		try {
 
 			pst = conecta.conn.prepareStatement("select * from produtos");
@@ -317,8 +318,32 @@ public class FrmVendas extends javax.swing.JFrame {
 			new Object[][] {
 			},
 			new String[] {
+				"C\u00F3digo", "Descri\u00E7\u00E3o", "Quantidade", "Valor Unit\u00E1rio", "Valor Total"
 			}
-		));
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		tabelaVendaProduto.getColumnModel().getColumn(0).setResizable(false);
+		tabelaVendaProduto.getColumnModel().getColumn(0).setPreferredWidth(101);
+		tabelaVendaProduto.getColumnModel().getColumn(1).setResizable(false);
+		tabelaVendaProduto.getColumnModel().getColumn(1).setPreferredWidth(253);
+		tabelaVendaProduto.getColumnModel().getColumn(2).setResizable(false);
+		tabelaVendaProduto.getColumnModel().getColumn(2).setPreferredWidth(88);
+		tabelaVendaProduto.getColumnModel().getColumn(3).setResizable(false);
+		tabelaVendaProduto.getColumnModel().getColumn(3).setPreferredWidth(93);
+		tabelaVendaProduto.getColumnModel().getColumn(4).setResizable(false);
+		tabelaVendaProduto.getColumnModel().getColumn(4).setPreferredWidth(105);
 		scrProdutoVenda.setViewportView(tabelaVendaProduto);
 
 		JScrollPane scrPesquisaProduto = new JScrollPane();
@@ -354,15 +379,15 @@ public class FrmVendas extends javax.swing.JFrame {
 		);
 		panel.setLayout(null);
 		
-		txtProduto = new JTextField();
-		txtProduto.setBounds(66, 9, 223, 32);
-		panel.add(txtProduto);
-		txtProduto.setColumns(10);
+		txtDescricaoFim = new JTextField();
+		txtDescricaoFim.setBounds(87, 9, 223, 32);
+		panel.add(txtDescricaoFim);
+		txtDescricaoFim.setColumns(10);
 		
-		JLabel lblCliente = new JLabel("Produto");
-		lblCliente.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblCliente.setBounds(10, 11, 80, 14);
-		panel.add(lblCliente);
+		JLabel lbDescricaoFim = new JLabel("Descri\u00E7\u00E3o");
+		lbDescricaoFim.setFont(new Font("Arial", Font.PLAIN, 14));
+		lbDescricaoFim.setBounds(10, 11, 80, 14);
+		panel.add(lbDescricaoFim);
 		
 		JLabel lblQuantidade = new JLabel("Quantidade");
 		lblQuantidade.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -389,6 +414,25 @@ public class FrmVendas extends javax.swing.JFrame {
 		panel.add(lblData);
 		
 		JButton btnCarrinho = new JButton("Adiciona Item ao Carrinho");
+		btnCarrinho.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DefaultTableModel dtm = (DefaultTableModel) tabelaVendaProduto.getModel();
+				
+				String valorUnitario = fmtValorUnitario.getText().trim();
+				String quantidade = txtQuantidade.getText().trim();
+				String descricaoFim = txtDescricaoFim.getText().trim();
+				String valorTotal = String.valueOf((Double.parseDouble(txtQuantidade.getText())*Double.parseDouble(fmtValorUnitario.getText())));
+				
+				
+				dtm.addRow(new String[]{codigo, descricaoFim, quantidade, valorUnitario, valorTotal});
+				
+				
+				txtDescricaoFim.setText("");
+				txtQuantidade.setText("");
+				fmtValorUnitario.setText("");
+				
+			}
+		});
 		btnCarrinho.setIcon(new ImageIcon(FrmVendas.class.getResource("/images/cart_add.png")));
 		btnCarrinho.setBounds(715, 8, 194, 33);
 		panel.add(btnCarrinho);
@@ -396,9 +440,12 @@ public class FrmVendas extends javax.swing.JFrame {
 		JFormattedTextField fmtData = new JFormattedTextField();
 		fmtData.setBounds(66, 52, 80, 36);
 		panel.add(fmtData);
+		
 		try {
 			MaskFormatter form = new MaskFormatter("##/##/####");
 			fmtData.setFormatterFactory(new DefaultFormatterFactory(form));
+			fmtData.setText("27052015");
+			fmtData.setEnabled(false);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -418,21 +465,11 @@ public class FrmVendas extends javax.swing.JFrame {
 							JOptionPane.showMessageDialog(null,
 									"Não tem nada selecionado");
 						} else {
-							valorUnitario = (Double) (tabelaPesquisaProdutos.getValueAt(linhaSelecionada, 4));
+							txtDescricaoFim.setText(String.valueOf(tabelaPesquisaProdutos.getValueAt(linhaSelecionada, 2)));
+							txtQuantidade.setText("1");
+							fmtValorUnitario.setText(String.valueOf(tabelaPesquisaProdutos.getValueAt(linhaSelecionada, 4)));
+							codigo = String.valueOf(tabelaPesquisaProdutos.getValueAt(linhaSelecionada, 0));
 							
-//							FrmVendasItem vendasItem = new FrmVendasItem();
-//							vendasItem.setValorUnitario(valorUnitario);
-//							
-							
-							
-							
-							
-							
-							
-//							DefaultTableModel dtm = (DefaultTableModel) tabelaVendaProduto.getModel();
-//							dtm.addRow(new Object[] {codigo, descricao, quantidade, valorItem,valorTotal});
-//							
-							 
 							
 						}
 							
@@ -572,7 +609,7 @@ public class FrmVendas extends javax.swing.JFrame {
 	private javax.swing.JTextField txtDescricao;
 	private javax.swing.JTextField txtAplicacao;
 	private JTable tabelaPesquisaProdutos;
-	private JTextField txtProduto;
+	private JTextField txtDescricaoFim;
 	private JTextField txtQuantidade;
 	private JLabel label;
 	private JTextField textField_2;
