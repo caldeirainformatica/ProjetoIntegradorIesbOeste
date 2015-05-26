@@ -51,7 +51,7 @@ import javax.swing.JButton;
  * @author Ricardo Caldeira
  */
 
-public class FrmVendas1 extends javax.swing.JFrame {
+public class FrmVendas extends javax.swing.JFrame {
 	Double valorUnitario;
 	Double valorTotal;
 	Double quantidade;
@@ -66,11 +66,11 @@ public class FrmVendas1 extends javax.swing.JFrame {
 	Produtos p = new Produtos();
 	private ResultSet rs;
 
-	public FrmVendas1() throws ParseException {
+	public FrmVendas() throws ParseException {
 		setLocation(new Point(0, 200));
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
-				FrmVendas1.class.getResource("/images/th.jpg")));
+				FrmVendas.class.getResource("/images/th.jpg")));
 		setResizable(false);
 		setTitle("VENDAS");
 		setType(Type.UTILITY);
@@ -150,15 +150,15 @@ public class FrmVendas1 extends javax.swing.JFrame {
 
 			}
 		});
-		btnPesquisar.setIcon(new ImageIcon(FrmVendas1.class
+		btnPesquisar.setIcon(new ImageIcon(FrmVendas.class
 				.getResource("/images/zoom.png")));
 		jPanel2 = new javax.swing.JPanel();
 		lbItens = new javax.swing.JLabel();
 		btnLimpa = new javax.swing.JButton();
-		btnLimpa.setIcon(new ImageIcon(FrmVendas1.class
+		btnLimpa.setIcon(new ImageIcon(FrmVendas.class
 				.getResource("/images/cancel.png")));
 		btnFinaliza = new javax.swing.JButton();
-		btnFinaliza.setIcon(new ImageIcon(FrmVendas1.class
+		btnFinaliza.setIcon(new ImageIcon(FrmVendas.class
 				.getResource("/images/money_dollar.png")));
 		btnFechar = new javax.swing.JButton();
 		btnFechar.addActionListener(new ActionListener() {
@@ -167,7 +167,7 @@ public class FrmVendas1 extends javax.swing.JFrame {
 
 			}
 		});
-		btnFechar.setIcon(new ImageIcon(FrmVendas1.class
+		btnFechar.setIcon(new ImageIcon(FrmVendas.class
 				.getResource("/images/door_out.png")));
 		lbSubTotal = new javax.swing.JLabel();
 		scrProdutoVenda = new javax.swing.JScrollPane();
@@ -198,7 +198,7 @@ public class FrmVendas1 extends javax.swing.JFrame {
 		btnPesquisar.setText("Pesquisar");
 		
 		label = new JLabel("");
-		label.setIcon(new ImageIcon(FrmVendas1.class.getResource("/images/th.jpg")));
+		label.setIcon(new ImageIcon(FrmVendas.class.getResource("/images/th.jpg")));
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(
 				jPanel1);
@@ -389,7 +389,7 @@ public class FrmVendas1 extends javax.swing.JFrame {
 		panel.add(lblData);
 		
 		JButton btnCarrinho = new JButton("Adiciona Item ao Carrinho");
-		btnCarrinho.setIcon(new ImageIcon(FrmVendas1.class.getResource("/images/cart_add.png")));
+		btnCarrinho.setIcon(new ImageIcon(FrmVendas.class.getResource("/images/cart_add.png")));
 		btnCarrinho.setBounds(715, 8, 194, 33);
 		panel.add(btnCarrinho);
 		
@@ -525,16 +525,16 @@ public class FrmVendas1 extends javax.swing.JFrame {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(FrmVendas1.class.getName()).log(
+			java.util.logging.Logger.getLogger(FrmVendas.class.getName()).log(
 					java.util.logging.Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(FrmVendas1.class.getName()).log(
+			java.util.logging.Logger.getLogger(FrmVendas.class.getName()).log(
 					java.util.logging.Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(FrmVendas1.class.getName()).log(
+			java.util.logging.Logger.getLogger(FrmVendas.class.getName()).log(
 					java.util.logging.Level.SEVERE, null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(FrmVendas1.class.getName()).log(
+			java.util.logging.Logger.getLogger(FrmVendas.class.getName()).log(
 					java.util.logging.Level.SEVERE, null, ex);
 		}
 		// </editor-fold>
@@ -543,7 +543,7 @@ public class FrmVendas1 extends javax.swing.JFrame {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrmVendas1 vendas = new FrmVendas1();
+					FrmVendas vendas = new FrmVendas();
 					vendas.setVisible(true);
 					vendas.setExtendedState(MAXIMIZED_BOTH);
 				} catch (Exception e) {

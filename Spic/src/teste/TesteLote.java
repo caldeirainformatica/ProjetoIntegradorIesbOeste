@@ -14,14 +14,15 @@ public class TesteLote {
 		Lotes lote = new Lotes();
 		
 		DaoLote dao = new DaoLote();
-		
-		lo.validarLote("whattafuck");
+		/*
+		lo.validarLote("lgvt003");
 		lo.validarDataValidade("12/12/2015");
-		lo.validarDataValidade("12/1/2015");
+		lo.validarDataFabricacao("12/01/2015");
 		
-		dao.inserirLote(lo.lot);
+		*/
 		
-		lote.setLote("whattafuck");
+		
+		lote.setLote("lgvt003");
 		
 		
 		dao.selecionarLote(lote);

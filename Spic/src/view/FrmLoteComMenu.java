@@ -21,6 +21,7 @@ public class FrmLoteComMenu extends javax.swing.JFrame {
                  
     public FrmLoteComMenu() {
         initComponents();
+        setTitle("Lotes");
     }
 
     
@@ -35,8 +36,8 @@ public class FrmLoteComMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new CardLayout());
 
-        jTabbedPane2.addTab("tab1", pnlLotes2);
-        jTabbedPane2.addTab("tab2", pnlLotesPesquisa1);
+        jTabbedPane2.addTab("Cadastrar Lotes", pnlLotes2);
+        jTabbedPane2.addTab("Pesquisar Lotes", pnlLotesPesquisa1);
 
         getContentPane().add(jTabbedPane2, "card2");
 
@@ -68,6 +69,7 @@ public class FrmLoteComMenu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FrmLoteComMenu().setVisible(true);
+                
                 
             }
         });

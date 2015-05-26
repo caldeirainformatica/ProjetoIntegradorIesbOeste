@@ -3,20 +3,26 @@ package view;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+
+import model.Lotes;
 import model.ModeloTabela;
 import persistencia.ConectaBanco;
+import persistencia.DaoLote;
 /**
  *
  * @author Fiuza
  */
 
 public class PnlLotesPesquisa extends JPanel {
-
+	Lotes lote = new Lotes();
+	DaoLote dao = new DaoLote();
     ConectaBanco conecta = new ConectaBanco();
+   
     public PnlLotesPesquisa() {
         
         
@@ -50,7 +56,12 @@ public class PnlLotesPesquisa extends JPanel {
         btnPesquisarLotes.setToolTipText("Clique para pesquisar lotes");
         btnPesquisarLotes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarLotesActionPerformed(evt);
+                try {
+					btnPesquisarLotesActionPerformed(evt);
+				} catch (Exception e) {
+				
+					e.printStackTrace();
+				}
             }
         });
 
@@ -89,8 +100,11 @@ public class PnlLotesPesquisa extends JPanel {
         // TODO add your handling code here:
     }                                                 
 
-    private void btnPesquisarLotesActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        // TODO add your handling code here:
+    private void btnPesquisarLotesActionPerformed(java.awt.event.ActionEvent evt) throws Exception {                                                  
+    
+		
+		 lote.setLote(txtPesquisarLotes.getText()); 
+		preencherTabelaLote("select * from lotes where lote like '%" + lote.getLote() + "%' " );
     }                                                 
     
     // Variables declaration - do not modify                     
@@ -106,7 +120,7 @@ public class PnlLotesPesquisa extends JPanel {
         
         ArrayList dados =  new ArrayList();
     
-        String [] colunas = new String[]{"idlotes","lote","dataValidade","dataFabricacao"};
+        String [] colunas = new String[]{"id","Lote","Validade","Fabricacao"};
 
        conecta.executaSQL(sql);
         try {
@@ -129,7 +143,7 @@ public class PnlLotesPesquisa extends JPanel {
        JTableLote.getColumnModel().getColumn(3).setPreferredWidth(80);
        JTableLote.getColumnModel().getColumn(3).setResizable(false);
        JTableLote.getTableHeader().setReorderingAllowed(false);
-       JTableLote.setAutoResizeMode(JTableLote.AUTO_RESIZE_OFF);
+       JTableLote.setAutoResizeMode(JTableLote.AUTO_RESIZE_ALL_COLUMNS);
        JTableLote.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
        
     }

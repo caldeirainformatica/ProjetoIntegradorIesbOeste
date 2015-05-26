@@ -164,7 +164,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
 	private void chamaVendas() throws Exception {
 	try {
-		FrmVendas1 vendas = new FrmVendas1();
+		FrmVendas vendas = new FrmVendas();
 		vendas.setVisible(true);
 		vendas.setResizable(false);
 		vendas.setExtendedState(MAXIMIZED_BOTH);

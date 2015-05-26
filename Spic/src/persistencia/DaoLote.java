@@ -47,30 +47,24 @@ public class DaoLote {
 		public void selecionarLote(Lotes l) throws Exception{
 			try{
 				conecta.conexao();
-				PreparedStatement pst = conecta.conn.prepareStatement("select * from lotes where idlotes = ? or lote = ? or dataValidade = ? or dataFabricacao = ? ");
-				pst.setInt(1,l.getIdlote());
-				pst.setString(2, l.getLote());
-				pst.setDate(3, l.getDataValidade());
-				pst.setDate(4, l.getDataFabricacao());
+				PreparedStatement pst = conecta.conn.prepareStatement("select * from lotes where lote = ?");
+				//pst.setInt(1,l.getIdlote());
+				pst.setString(1, l.getLote());
+				//pst.setDate(3, l.getDataValidade());
+				//pst.setDate(4, l.getDataFabricacao());
 				
 				rs = pst.executeQuery();
-				rs.next();
+				rs.first();
 				l.setIdlote(Integer.valueOf(rs.getString("idlotes")));
-				l.setLote(rs.getString("idlotes"));
 				l.setLote(rs.getString("lote"));
-				l.setLote(rs.getString("dataValidade"));
-				l.setLote(rs.getString("dataFabricacao"));
+				l.setDataValidade(rs.getString("dataValidade"));
+				l.setDataFabricacao(rs.getString("dataFabricacao"));
 				
-				if(l .getLote() == null || l.getDataValidade() == null || l.getDataFabricacao() == null){
 					
-					JOptionPane.showMessageDialog(null, "Null");
-					
-				}else{
-					
-					JOptionPane.showMessageDialog(null,l.getIdlote() + " "+l.getLote() + " "+ l.getDataValidade() + " " + l.getDataFabricacao());
+			
+					JOptionPane.showMessageDialog(null, l.getIdlote() + " "+ l.getLote() + " "+ formataDataHueHueBRBR(l.getDataValidade().toString()) + " " + formataDataHueHueBRBR(l.getDataFabricacao().toString()));
 					
 					
-				}
 
 			}catch(SQLException e){
 				
@@ -83,6 +77,19 @@ public class DaoLote {
 			
 		}
 		
+		public String formataDataHueHueBRBR(String data){
+			
+			if(data.matches("\\d{4}-\\d{2}-\\d{2}")){
+				
+				String[] dataArray = data.split("-");
+				data = 	dataArray[2]	+ "/" + dataArray[1] + "/"+ dataArray[0];
+				
+			
+			}
+			return data;
+			
+			
+		}
 	
 
 }
