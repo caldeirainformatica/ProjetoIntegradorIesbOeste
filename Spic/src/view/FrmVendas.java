@@ -60,6 +60,7 @@ public class FrmVendas extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
 
 	ConectaBanco conecta = new ConectaBanco();
+	
 	DAO dao = new DAO();
 	Produtos p = new Produtos();
 	private ResultSet rs;
@@ -383,7 +384,7 @@ public class FrmVendas extends javax.swing.JFrame {
 		txtDescricaoFim.setBounds(87, 9, 223, 32);
 		panel.add(txtDescricaoFim);
 		txtDescricaoFim.setColumns(10);
-		
+			
 		JLabel lbDescricaoFim = new JLabel("Descri\u00E7\u00E3o");
 		lbDescricaoFim.setFont(new Font("Arial", Font.PLAIN, 14));
 		lbDescricaoFim.setBounds(10, 11, 80, 14);
