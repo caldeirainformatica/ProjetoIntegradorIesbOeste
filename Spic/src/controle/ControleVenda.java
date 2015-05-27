@@ -13,24 +13,26 @@ public class ControleVenda {
 	private int codigoProduto;
 	
 	public void adicionaItem(ModeloVendas mod){
-		conecta.conexao();
+		
 	
 		try {
+			
 			achaCodigoProduto(mod.getNomeProduto());
+			conecta.conexao();
 			PreparedStatement pst = conecta.conn.prepareStatement("insert into vendaItens (vendas_idvendas, produtos_idprodutos, quantidade)"
-					+ "values ?,?,? ");
-			pst.setInt(1, mod.getIdVenda());
+					+ "values (?,?,?)");
+			pst.setInt(1, mod.getIdVendas());
 			pst.setInt(2, codigoProduto);
 			pst.setDouble(3, mod.getQuantidadeItem());
 			pst.execute();
 			JOptionPane.showMessageDialog(null, "Produto de codigo "+codigoProduto+" adicionado com sucesso");
-			conecta.desconecta();
+			
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "erro ao realizar a venda");
-			conecta.desconecta();
+			JOptionPane.showMessageDialog(null, "erro ao realizar a venda\n CONTROLE VENDA "+e.getMessage());
+			
 		}
 		
-		
+		conecta.desconecta();
 	
 	}
 	public void achaCodigoProduto(String nome) throws SQLException{

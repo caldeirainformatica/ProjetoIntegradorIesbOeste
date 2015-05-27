@@ -1,17 +1,20 @@
 package model;
 
+import javax.swing.JOptionPane;
+
 public class ModeloVendas {
-	private int idVenda;
+	private int idVendas;
 	private String data;
 	private float valorVenda;
 	private String nomeCliente;
 	private String nomeProduto;
 	private int quantidadeItem;
-	public int getIdVenda() {
-		return idVenda;
+	public int getIdVendas() {
+		return idVendas;
 	}
-	public void setIdVenda(int idVenda) {
-		this.idVenda = idVenda;
+	public void setIdVenda(int idVendas) {
+		JOptionPane.showMessageDialog(null, idVendas);
+		this.idVendas = idVendas;
 	}
 	public String getData() {
 		return data;

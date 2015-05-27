@@ -60,7 +60,7 @@ public class FrmVendas extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
 
 	ConectaBanco conecta = new ConectaBanco();
-	ControleVenda controle = new ControleVenda();
+	
 	
 	DAO dao = new DAO();
 	ModeloVendas mod = new ModeloVendas();
@@ -80,16 +80,7 @@ public class FrmVendas extends javax.swing.JFrame {
 		initComponents();
 		
 		conecta.conexao();
-		try {
-			PreparedStatement pst = conecta.conn.prepareStatement("insert into vendas (valorVenda)values (?)");
-			pst.setFloat(1, 0);
-			pst.execute();
-			conecta.executaSQL("select * from venda");
-			conecta.rs.last();
-			codigoVenda = conecta.rs.getInt("idVenda");
-		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, "Erro na abertura da venda");
-		}
+		
 		selectProdutos();
 		
 		try {
@@ -454,27 +445,42 @@ public class FrmVendas extends javax.swing.JFrame {
 		JButton btnCarrinho = new JButton("Adiciona Item ao Carrinho");
 		btnCarrinho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ControleVenda controle = new ControleVenda();
+			
+				try {
+					conecta.conexao();
+					PreparedStatement pst = conecta.conn.prepareStatement("insert into vendas (valorVenda)values (?)");
+					pst.setFloat(1, 0);
+					pst.execute();
+					conecta.executaSQL("select * from vendas");
+					conecta.rs.last();
+					codigoVenda = conecta.rs.getInt("idVendas");
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null, "Erro na abertura da venda"+e1.getMessage());
+				}
+				
 				
 				mod.setNomeProduto(txtDescricaoFim.getText());
 				mod.setQuantidadeItem(Integer.parseInt(txtQuantidade.getText()));
 				mod.setIdVenda(codigoVenda);
+				
 				controle.adicionaItem(mod);
 				
-//				
-//				DefaultTableModel dtm = (DefaultTableModel) tabelaVendaProduto.getModel();
-//				
-//				String valorUnitario = fmtValorUnitario.getText().trim();
-//				String quantidade = txtQuantidade.getText().trim();
-//				String descricaoFim = txtDescricaoFim.getText().trim();
-//				String valorTotal = String.valueOf((Double.parseDouble(txtQuantidade.getText())*Double.parseDouble(fmtValorUnitario.getText())));
-//				
-//				
-//				dtm.addRow(new String[]{codigo, descricaoFim, quantidade, valorUnitario, valorTotal});
-//				
-//				
-//				txtDescricaoFim.setText("");
-//				txtQuantidade.setText("");
-//				fmtValorUnitario.setText("");
+				
+				DefaultTableModel dtm = (DefaultTableModel) tabelaVendaProduto.getModel();
+				
+				String valorUnitario = fmtValorUnitario.getText().trim();
+				String quantidade = txtQuantidade.getText().trim();
+				String descricaoFim = txtDescricaoFim.getText().trim();
+				String valorTotal = String.valueOf((Double.parseDouble(txtQuantidade.getText())*Double.parseDouble(fmtValorUnitario.getText())));
+				
+				
+				dtm.addRow(new String[]{codigo, descricaoFim, quantidade, valorUnitario, valorTotal});
+				
+				
+				txtDescricaoFim.setText("");
+				txtQuantidade.setText("");
+				fmtValorUnitario.setText("");
 				
 			}
 		});
