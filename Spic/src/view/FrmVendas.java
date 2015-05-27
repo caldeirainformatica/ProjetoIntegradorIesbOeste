@@ -374,7 +374,7 @@ public class FrmVendas extends javax.swing.JFrame {
 		tabelaVendaProduto.getColumnModel().getColumn(4).setResizable(false);
 		tabelaVendaProduto.getColumnModel().getColumn(4).setPreferredWidth(105);
 		scrProdutoVenda.setViewportView(tabelaVendaProduto);
-
+ 
 		JScrollPane scrPesquisaProduto = new JScrollPane();
 		
 		JPanel panel = new JPanel();
