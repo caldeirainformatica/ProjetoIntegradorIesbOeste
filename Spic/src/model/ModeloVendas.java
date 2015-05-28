@@ -1,7 +1,5 @@
 package model;
 
-import javax.swing.JOptionPane;
-
 public class ModeloVendas {
 	private int idVendas;
 	private String data;
@@ -13,7 +11,7 @@ public class ModeloVendas {
 		return idVendas;
 	}
 	public void setIdVenda(int idVendas) {
-		JOptionPane.showMessageDialog(null, idVendas);
+	//	JOptionPane.showMessageDialog(null, idVendas);
 		this.idVendas = idVendas;
 	}
 	public String getData() {
