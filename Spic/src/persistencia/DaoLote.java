@@ -33,7 +33,7 @@ public class DaoLote {
 				pst.setDate(3,l.getDataFabricacao());
 				pst.executeUpdate();
 				
-				JOptionPane.showConfirmDialog(null, "Inserido Shoow!! :D");
+				JOptionPane.showMessageDialog(null, "Inserido com sucesso!");
 			}catch(SQLException e){
 				
 				throw new Exception("Erro ao inserir! :"+ e.getMessage());
@@ -62,14 +62,14 @@ public class DaoLote {
 				
 					
 			
-					JOptionPane.showMessageDialog(null, l.getIdlote() + " "+ l.getLote() + " "+ formataDataHueHueBRBR(l.getDataValidade().toString()) + " " + formataDataHueHueBRBR(l.getDataFabricacao().toString()));
+					JOptionPane.showMessageDialog(null, l.getIdlote() + " "+ l.getLote() + " "+ l.getDataValidade() + " " + l.getDataFabricacao());
 					
 					
 
 			}catch(SQLException e){
 				
 				
-				throw new Exception("erro ao pesquisar lote!!"+e.getMessage());
+				throw new Exception("erro ao pesquisar lote! Avise o suporte!"+"/n"+e.getMessage());
 				
 				
 			}
@@ -77,19 +77,43 @@ public class DaoLote {
 			
 		}
 		
-		public String formataDataHueHueBRBR(String data){
+		public void deletarLote(Lotes l){
 			
-			if(data.matches("\\d{4}-\\d{2}-\\d{2}")){
+			try{
+				conecta.conexao();
+				PreparedStatement pst = conecta.conn.prepareStatement("DELETE FROM lotes WHERE idLote = ? ");
+				pst.setString(1,l.getLote());
 				
-				String[] dataArray = data.split("-");
-				data = 	dataArray[2]	+ "/" + dataArray[1] + "/"+ dataArray[0];
+				JOptionPane.showMessageDialog(null, "Registro deletado com sucesso!");
 				
-			
+			}catch(SQLException e){
+				
+				JOptionPane.showMessageDialog(null, "Erro ao tentar deletar registro! Avise o suporte! "+ "/n"+e.getMessage());
+				
 			}
-			return data;
-			
-			
 		}
+		
+		
+		
+		public void alterarLotes(Lotes l){
+			
+			try{
+				conecta.conexao();
+				PreparedStatement pst = conecta.conn.prepareStatement("update lotes l set "+ "l.lote = ?, l.dataValidade = ?, l.dataFabricacao = ?" + "  where l.idlotes = ?");
+				pst.setString(1, l.getLote());
+				pst.setDate(2, l.getDataValidade());
+				pst.setDate(3, l.getDataFabricacao());
+				pst.setInt(4, l.getIdlote());
+				
+				pst.execute();
+				JOptionPane.showMessageDialog(null, "Alterado com sucesso");
+			}catch(SQLException e){
+				JOptionPane.showMessageDialog(null, "Erro ao tentar alterar registro! Avise o suporte! "+ "/n"+e.getMessage());
+				
+			}
+		}
+		
+		
 	
 
 }

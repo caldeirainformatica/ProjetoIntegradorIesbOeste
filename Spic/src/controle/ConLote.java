@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import persistencia.DaoLote;
 import model.Lotes;
 
 /*
@@ -20,7 +21,8 @@ import model.Lotes;
 //validarDataFabricacao
 public class ConLote {
 
-	public Lotes lot = new Lotes();
+	 public Lotes lot = new Lotes();
+	
 	
 	
 	public boolean validarIdLote(String idLote){
@@ -63,6 +65,8 @@ public class ConLote {
 	}
 	
 	public boolean validarDataValidade(String dataValidade)throws java.text.ParseException{  
+		
+		formataDataBr(dataValidade);
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");  
         Calendar cal = new GregorianCalendar();  
 
@@ -100,7 +104,8 @@ public class ConLote {
 
 
 
-	public boolean validarDataFabricacao(String dataFabricacao)throws java.text.ParseException {  
+	public boolean validarDataFabricacao(String dataFabricacao)throws java.text.ParseException { 
+		formataDataBr(dataFabricacao);
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");  
         Calendar cal = new GregorianCalendar();  
 
@@ -134,8 +139,21 @@ public class ConLote {
         return(true);                          
     }  
 	
-
-
+	public String formataDataBr(String data){
+		
+		if(data.matches("\\d{4}-\\d{2}-\\d{2}")){
+			
+			String[] dataArray = data.split("-");
+			data = 	dataArray[2]	+ "/" + dataArray[1] + "/"+ dataArray[0];
+			return data;
+		
+		}else{
+			
+			return data;
+		}
+		
+		
+		
+	}
 	
-
 }
