@@ -9,7 +9,7 @@ public class ModeloVendas {
 	private int quantidadeItem;
 	public int getIdVendas() {
 		return idVendas;
-	}
+	} 
 	public void setIdVenda(int idVendas) {
 	//	JOptionPane.showMessageDialog(null, idVendas);
 		this.idVendas = idVendas;
