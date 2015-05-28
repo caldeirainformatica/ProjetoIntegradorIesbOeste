@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import model.ModeloTabela;
+import model.ModeloVendas;
 import model.Produtos;
 import persistencia.ConectaBanco;
 import persistencia.DAO;
@@ -42,10 +43,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 
 import javax.swing.JFormattedTextField;
-
-import java.awt.Dimension;
-
 import javax.swing.JButton;
+
+import controle.ControleVenda;
 
 /**
  * @author Ricardo Caldeira
@@ -60,10 +60,14 @@ public class FrmVendas extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
 
 	ConectaBanco conecta = new ConectaBanco();
+	
+	
 	DAO dao = new DAO();
+	ModeloVendas mod = new ModeloVendas();
 	Produtos p = new Produtos();
 	private ResultSet rs;
-	String codigo;
+	String codigo; //trabalhando com as transferencias de uma tabela para outra
+	int codigoVenda;
 
 	public FrmVendas() throws ParseException {
 		setLocation(new Point(0, 200));
@@ -75,8 +79,8 @@ public class FrmVendas extends javax.swing.JFrame {
 		setType(Type.UTILITY);
 		initComponents();
 		
-	
 		conecta.conexao();
+		
 		selectProdutos();
 		
 		try {
@@ -155,21 +159,29 @@ public class FrmVendas extends javax.swing.JFrame {
 				.getResource("/images/zoom.png")));
 		jPanel2 = new javax.swing.JPanel();
 		lbItens = new javax.swing.JLabel();
-		btnLimpa = new javax.swing.JButton();
-		btnLimpa.setIcon(new ImageIcon(FrmVendas.class
+		btnItemVenda = new javax.swing.JButton();
+		btnItemVenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			((DefaultTableModel) tabelaVendaProduto.getModel()).removeRow(tabelaVendaProduto.getSelectedRow());
+			}
+		});
+		btnItemVenda.setIcon(new ImageIcon(FrmVendas.class
 				.getResource("/images/cancel.png")));
-		btnFinaliza = new javax.swing.JButton();
-		btnFinaliza.setIcon(new ImageIcon(FrmVendas.class
-				.getResource("/images/money_dollar.png")));
-		btnFechar = new javax.swing.JButton();
-		btnFechar.addActionListener(new ActionListener() {
+		btnCancelarVenda = new javax.swing.JButton();
+		btnCancelarVenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+			}
+		});
+		btnCancelarVenda.setIcon(new ImageIcon(FrmVendas.class.getResource("/images/cancel.png")));
+		btnFaturar = new javax.swing.JButton();
+		btnFaturar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();
+				
 
 			}
 		});
-		btnFechar.setIcon(new ImageIcon(FrmVendas.class
-				.getResource("/images/door_out.png")));
+		btnFaturar.setIcon(new ImageIcon(FrmVendas.class.getResource("/images/money_dollar.png")));
 		lbSubTotal = new javax.swing.JLabel();
 		scrProdutoVenda = new javax.swing.JScrollPane();
 		tabelaVendaProduto = new javax.swing.JTable();
@@ -249,11 +261,11 @@ public class FrmVendas extends javax.swing.JFrame {
 		lbItens.setForeground(new java.awt.Color(51, 51, 255));
 		lbItens.setText("Itens");
 
-		btnLimpa.setText("Limpa F6");
+		btnItemVenda.setText("- Item Venda");
 
-		btnFinaliza.setText("Finaliza F5");
+		btnCancelarVenda.setText("Cancelar Venda");
 
-		btnFechar.setText("Fechar F4");
+		btnFaturar.setText("Faturar");
 
 		lbSubTotal.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
 		lbSubTotal.setForeground(new java.awt.Color(51, 51, 255));
@@ -266,6 +278,16 @@ public class FrmVendas extends javax.swing.JFrame {
 		lblCliente_1.setText("Cliente");
 		lblCliente_1.setForeground(new Color(51, 51, 255));
 		lblCliente_1.setFont(new Font("Arial", Font.BOLD, 24));
+		
+		JButton btnFechar = new JButton("Fechar");
+		btnFechar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		btnFechar.setIcon(new ImageIcon(FrmVendas.class.getResource("/images/door_out.png")));
+		
+		JLabel lbSubTotalValor = new JLabel("");
 
 		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(
 				jPanel2);
@@ -275,21 +297,25 @@ public class FrmVendas extends javax.swing.JFrame {
 					.addGroup(jPanel2Layout.createParallelGroup(Alignment.LEADING)
 						.addGroup(jPanel2Layout.createSequentialGroup()
 							.addGap(107)
-							.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE))
+							.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
 						.addGroup(jPanel2Layout.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(lbItens))
 						.addGroup(jPanel2Layout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(lbSubTotal))
+							.addComponent(lbSubTotal)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lbSubTotalValor, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE))
 						.addGroup(jPanel2Layout.createSequentialGroup()
 							.addContainerGap()
 							.addGroup(jPanel2Layout.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblCliente_1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
 								.addGroup(jPanel2Layout.createSequentialGroup()
-									.addComponent(btnLimpa)
+									.addComponent(btnItemVenda)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(btnFinaliza)
+									.addComponent(btnCancelarVenda)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnFaturar)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(btnFechar)))))
 					.addContainerGap())
@@ -304,12 +330,15 @@ public class FrmVendas extends javax.swing.JFrame {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lbItens)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lbSubTotal)
+					.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lbSubTotal)
+						.addComponent(lbSubTotalValor, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
 					.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnFechar)
-						.addComponent(btnFinaliza)
-						.addComponent(btnLimpa))
+						.addComponent(btnFaturar)
+						.addComponent(btnCancelarVenda)
+						.addComponent(btnItemVenda)
+						.addComponent(btnFechar))
 					.addContainerGap())
 		);
 		jPanel2.setLayout(jPanel2Layout);
@@ -345,7 +374,7 @@ public class FrmVendas extends javax.swing.JFrame {
 		tabelaVendaProduto.getColumnModel().getColumn(4).setResizable(false);
 		tabelaVendaProduto.getColumnModel().getColumn(4).setPreferredWidth(105);
 		scrProdutoVenda.setViewportView(tabelaVendaProduto);
-
+ 
 		JScrollPane scrPesquisaProduto = new JScrollPane();
 		
 		JPanel panel = new JPanel();
@@ -383,7 +412,7 @@ public class FrmVendas extends javax.swing.JFrame {
 		txtDescricaoFim.setBounds(87, 9, 223, 32);
 		panel.add(txtDescricaoFim);
 		txtDescricaoFim.setColumns(10);
-		
+			
 		JLabel lbDescricaoFim = new JLabel("Descri\u00E7\u00E3o");
 		lbDescricaoFim.setFont(new Font("Arial", Font.PLAIN, 14));
 		lbDescricaoFim.setBounds(10, 11, 80, 14);
@@ -416,6 +445,28 @@ public class FrmVendas extends javax.swing.JFrame {
 		JButton btnCarrinho = new JButton("Adiciona Item ao Carrinho");
 		btnCarrinho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ControleVenda controle = new ControleVenda();
+			
+				try {
+					conecta.conexao();
+					PreparedStatement pst = conecta.conn.prepareStatement("insert into vendas (valorVenda)values (?)");
+					pst.setFloat(1, 0);
+					pst.execute();
+					conecta.executaSQL("select * from vendas");
+					conecta.rs.last();
+					codigoVenda = conecta.rs.getInt("idVendas");
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null, "Erro na abertura da venda"+e1.getMessage());
+				}
+				
+				
+				mod.setNomeProduto(txtDescricaoFim.getText());
+				mod.setQuantidadeItem(Integer.parseInt(txtQuantidade.getText()));
+				mod.setIdVenda(codigoVenda);
+				
+				controle.adicionaItem(mod);
+				
+				
 				DefaultTableModel dtm = (DefaultTableModel) tabelaVendaProduto.getModel();
 				
 				String valorUnitario = fmtValorUnitario.getText().trim();
@@ -592,9 +643,9 @@ public class FrmVendas extends javax.swing.JFrame {
 	}
 
 	// Variables declaration - do not modify
-	private javax.swing.JButton btnLimpa;
-	private javax.swing.JButton btnFinaliza;
-	private javax.swing.JButton btnFechar;
+	private javax.swing.JButton btnItemVenda;
+	private javax.swing.JButton btnCancelarVenda;
+	private javax.swing.JButton btnFaturar;
 	private javax.swing.JButton btnPesquisar;
 	private javax.swing.JLabel lbCodigoBarras;
 	private javax.swing.JLabel lbDescricao;
