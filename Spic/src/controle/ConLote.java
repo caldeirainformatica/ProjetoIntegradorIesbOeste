@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javax.swing.JOptionPane;
+
 import persistencia.DaoLote;
 import model.Lotes;
 
@@ -141,19 +143,26 @@ public class ConLote {
 	
 	public String formataDataBr(String data){
 		
-		if(data.matches("\\d{4}-\\d{2}-\\d{2}")){
+			if(data.matches("\\d{4}-\\d{2}-\\d{2}")){
 			
-			String[] dataArray = data.split("-");
-			data = 	dataArray[2]	+ "/" + dataArray[1] + "/"+ dataArray[0];
+				String[] dataArray = data.split("-");
+				data = 	dataArray[2]	+ "/" + dataArray[1] + "/"+ dataArray[0];
+				return data;
+		
+		}else if(data.matches("\\d{2}/\\d{2}/\\d{4}")){
+			
 			return data;
 		
-		}else{
+		}else
+		{
+			JOptionPane.showMessageDialog(null, "Formato de dadas é inválido!!");
+			return null;
+		}
 			
-			return data;
 		}
 		
 		
 		
-	}
+	
 	
 }

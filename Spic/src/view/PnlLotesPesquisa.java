@@ -161,6 +161,15 @@ public class PnlLotesPesquisa extends JPanel {
 
         btnDeletar.setText("Deletar");
         btnDeletar.setEnabled(false);
+        btnDeletar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				btnDeletarActionPerformed(evt);
+				
+			}
+		});
+        
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -283,7 +292,9 @@ public class PnlLotesPesquisa extends JPanel {
         );
     }// </editor-fold>                        
 
-    private void txtPesquisarLotesActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+    
+
+	private void txtPesquisarLotesActionPerformed(java.awt.event.ActionEvent evt) {                                                  
    	 lote.setLote(txtPesquisarLotes.getText()); 
    		preencherTabelaLote("select * from lotes where lote like '%" + lote.getLote() + "%' " );
     }                                                 
@@ -338,6 +349,7 @@ public class PnlLotesPesquisa extends JPanel {
     
     private void btnEditarActionPerformed(ActionEvent evt) throws ParseException{
     	
+    	conlot.validarIdLote(txtId.getText());
     	conlot.validarLote(txtLote.getText());
     	conlot.validarDataValidade(conlot.formataDataBr(txtValidade.getText()));
     	conlot.validarDataFabricacao(conlot.formataDataBr(txtFabricacao.getText()));
@@ -347,6 +359,13 @@ public class PnlLotesPesquisa extends JPanel {
     	
     	
     }
+    protected void btnDeletarActionPerformed(ActionEvent evt) {
+		lote.setIdlote(Integer.parseInt(txtId.getText()));
+		dao.deletarLote(lote);
+		preencherTabelaLote("select * from lotes order by idlotes");
+		
+		
+	}
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) throws Exception {                                          
        

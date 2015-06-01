@@ -81,11 +81,12 @@ public class DaoLote {
 			
 			try{
 				conecta.conexao();
-				PreparedStatement pst = conecta.conn.prepareStatement("DELETE FROM lotes WHERE idLote = ? ");
-				pst.setString(1,l.getLote());
+				
+				PreparedStatement pst = conecta.conn.prepareStatement("DELETE FROM lotes WHERE idlotes = ? ");
+				pst.setString(1,String.valueOf( l.getIdlote()));
 				
 				JOptionPane.showMessageDialog(null, "Registro deletado com sucesso!");
-				
+				pst.executeUpdate();
 			}catch(SQLException e){
 				
 				JOptionPane.showMessageDialog(null, "Erro ao tentar deletar registro! Avise o suporte! "+ "/n"+e.getMessage());
@@ -99,13 +100,13 @@ public class DaoLote {
 			
 			try{
 				conecta.conexao();
-				PreparedStatement pst = conecta.conn.prepareStatement("update lotes l set "+ "l.lote = ?, l.dataValidade = ?, l.dataFabricacao = ?" + "  where l.idlotes = ?");
+				PreparedStatement pst = conecta.conn.prepareStatement("update lotes  set lote = ? , dataValidade = ? , dataFabricacao = ? where idlotes = ?");
 				pst.setString(1, l.getLote());
-				pst.setDate(2, l.getDataValidade());
-				pst.setDate(3, l.getDataFabricacao());
-				pst.setInt(4, l.getIdlote());
+				pst.setString(2, l.getDataValidade().toString());
+				pst.setString(3, l.getDataFabricacao().toString());
+				pst.setString(4, String.valueOf(l.getIdlote()));
 				
-				pst.execute();
+				pst.executeUpdate();
 				JOptionPane.showMessageDialog(null, "Alterado com sucesso");
 			}catch(SQLException e){
 				JOptionPane.showMessageDialog(null, "Erro ao tentar alterar registro! Avise o suporte! "+ "/n"+e.getMessage());
