@@ -7,6 +7,7 @@ package view;
 
 import javax.swing.GroupLayout;
 import javax.swing.JOptionPane;
+import java.awt.Point;
 
 /**
  *
@@ -18,6 +19,7 @@ public class FrmLoteComMenu extends javax.swing.JFrame {
      * Creates new form FrmLoteComMenu
      */
     public FrmLoteComMenu() {
+    	setLocation(new Point(370, 50));
         initComponents();
     }
 

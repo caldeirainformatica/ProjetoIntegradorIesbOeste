@@ -24,6 +24,8 @@ import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+import model.Lotes;
+
 import java.awt.SystemColor;
 import java.awt.Component;
 
@@ -94,6 +96,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
 				.getResource("/images/domesticos_2141_porta.gif")));
 		btnSair.setBounds(157, 11, 62, 53);
 		pnlBotoes.add(btnSair);
+		
+		JButton btnLotes = new JButton("New button");
+		btnLotes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				FrmLoteComMenu l = new FrmLoteComMenu();
+				l.setVisible(true);
+				l.setResizable(false);
+			
+			}
+		});
+		btnLotes.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/images/th.jpg")));
+		btnLotes.setBounds(229, 11, 89, 53);
+		pnlBotoes.add(btnLotes);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
