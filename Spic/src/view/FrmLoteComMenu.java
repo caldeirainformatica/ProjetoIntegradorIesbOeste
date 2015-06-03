@@ -39,7 +39,7 @@ public class FrmLoteComMenu extends javax.swing.JFrame {
         getContentPane().add(pnlLotesPesquisa1, "card2");
         setTitle("Lote");
         setResizable(true);
-        pack();
+       pack();
     }// </editor-fold>                        
 
     /**

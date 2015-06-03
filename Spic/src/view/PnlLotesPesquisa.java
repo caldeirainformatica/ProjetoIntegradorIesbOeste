@@ -8,58 +8,55 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import controle.ConLote;
+import model.Lotes;
 import model.ModeloTabela;
 import persistencia.ConectaBanco;
 import persistencia.DaoLote;
-import controle.ConLote;
-import model.Lotes;
 /**
  *
  * @author Fiuza
  */
 
 public class PnlLotesPesquisa extends JPanel {
-	
-    // Variables declaration - do not modify                     
+	   // Variables declaration - do not modify                     
     private javax.swing.JTable JTableLote;
-    private JButton btnDeletar;
-    private JButton btnNovo;
-    private JButton btnPesquisarLotes;
-    private JButton btnSalvar;
-    private JButton btnEditar;
-    private JButton jButton2;
-    private JLabel jLabel6;
-    private JLabel jLabel7;
-    private JScrollPane jScrollPane1;
-    private JSeparator jSeparator1;
-    private JTextField txtId;
-    private JLabel lblFabricacao;
-    private JLabel lblId;
-    private JLabel lblLote;
-    private JLabel lblPesquisaLotes;
-    private JLabel lblValidade;
-    private JTextField txtFabricacao;
-    private JTextField txtLote;
-    private JTextField txtPesquisarLotes;
-    private JTextField txtValidade;
-    // End of variables declaration       
-    
-    
-    
-	Lotes lote = new Lotes();
+    private javax.swing.JButton btnDeletar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnPesquisarLotes;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblPesquisaLotes;
+    private javax.swing.JFormattedTextField txtFabricacao;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtLote;
+    private javax.swing.JTextField txtPesquisarLotes;
+    private javax.swing.JFormattedTextField txtValidade;
+    // End of variables declaration                   
+
+	
 	ConLote conlot = new ConLote();
+	DaoLote dao = new DaoLote();
+	Lotes lote = new Lotes();
+	
+	
+	
+
     ConectaBanco conecta = new ConectaBanco();
-    DaoLote dao = new DaoLote();
     public PnlLotesPesquisa() {
         
         
@@ -69,32 +66,30 @@ public class PnlLotesPesquisa extends JPanel {
         
     }
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+                         
     private void initComponents() {
 
-        jLabel6 = new JLabel();
-        jButton2 = new JButton();
-        lblPesquisaLotes = new JLabel();
-        txtPesquisarLotes = new JTextField();
-        jScrollPane1 = new JScrollPane();
-        JTableLote = new JTable();
-        btnPesquisarLotes = new JButton();
-        lblFabricacao = new JLabel();
-        txtId = new JTextField();
-        txtValidade = new JTextField();
-        txtLote = new JTextField();
-        txtFabricacao = new JTextField();
-        lblLote = new JLabel();
-        lblId = new JLabel();
-        lblValidade = new JLabel();
-        jSeparator1 = new JSeparator();
-        jLabel7 = new JLabel();
-        btnDeletar = new JButton();
-        btnSalvar = new JButton();
-        btnNovo = new JButton();
-        btnEditar = new JButton();
-        
+        jLabel6 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        lblPesquisaLotes = new javax.swing.JLabel();
+        txtPesquisarLotes = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTableLote = new javax.swing.JTable();
+        btnPesquisarLotes = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
+        txtLote = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        btnDeletar = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        btnNovo = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        txtValidade = new javax.swing.JFormattedTextField();
+        txtFabricacao = new javax.swing.JFormattedTextField();
         
         
         txtId.setEnabled(false);
@@ -134,15 +129,9 @@ public class PnlLotesPesquisa extends JPanel {
             }
         });
 
-        lblFabricacao.setText("Fabricação:");
+        jLabel4.setText("Fabricação:");
 
         txtId.setEditable(false);
-
-        txtValidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtValidadeActionPerformed(evt);
-            }
-        });
 
         txtLote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,25 +139,23 @@ public class PnlLotesPesquisa extends JPanel {
             }
         });
 
-        lblLote.setText("Lote:");
+        jLabel2.setText("Lote:");
 
         lblId.setText("id:");
 
-        lblValidade.setText("Validade:");
+        jLabel5.setText("Validade:");
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel7.setText("Cadastro de Lotes");
 
         btnDeletar.setText("Deletar");
         btnDeletar.setEnabled(false);
-        btnDeletar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				btnDeletarActionPerformed(evt);
-				
-			}
-		});
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	btnDeletarActionPerformed(evt);
+            }
+
+        });
         
 
         btnSalvar.setText("Salvar");
@@ -177,31 +164,50 @@ public class PnlLotesPesquisa extends JPanel {
                 try {
 					btnSalvarActionPerformed(evt);
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Erro ao inserir registro!!");
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }
         });
 
         btnNovo.setText("Novo");
-        btnNovo.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				btnNovoActionPerformed(evt);
-				
-			}
-		});
-        
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
+
         btnEditar.setText("Alterar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
-                	btnEditarActionPerformed(evt);
-				} catch (Exception e) {
+					btnEditarActionPerformed(evt);
+				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+            }
+        });
+
+        try {
+            txtValidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtValidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValidadeActionPerformed(evt);
+            }
+        });
+
+        try {
+            txtFabricacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtFabricacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+             
             }
         });
 
@@ -213,37 +219,43 @@ public class PnlLotesPesquisa extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFabricacao)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(lblLote, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblValidade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFabricacao)
-                                    .addComponent(txtValidade)
-                                    .addComponent(txtLote)))
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(331, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnNovo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnSalvar)
-                                .addComponent(btnEditar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnDeletar)))        
-                        .addGap(164, 164, 164))
+                                .addComponent(txtLote)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtValidade, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtFabricacao, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(jLabel7)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(btnNovo)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSalvar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEditar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDeletar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(111, 111, 111)
+                                .addComponent(jLabel7))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(lblPesquisaLotes)
@@ -257,29 +269,33 @@ public class PnlLotesPesquisa extends JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel7)
-                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(lblId)
+                        .addGap(9, 9, 9))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblId))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel2)
+                    .addComponent(txtLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLote))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel5)
+                    .addComponent(txtValidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtValidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblValidade))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFabricacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFabricacao))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel4)
+                    .addComponent(txtFabricacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDeletar)
                     .addComponent(btnSalvar)
-                    .addComponent(btnNovo))
-                    .addComponent(btnEditar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                    .addComponent(btnNovo)
+                    .addComponent(btnEditar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -292,147 +308,145 @@ public class PnlLotesPesquisa extends JPanel {
         );
     }// </editor-fold>                        
 
-    
+    private void txtPesquisarLotesActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+      	 lote.setLote(txtPesquisarLotes.getText()); 
+      		preencherTabelaLote("select * from lotes where lote like '%" + lote.getLote() + "%' " );
+       }                                                 
 
-	private void txtPesquisarLotesActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-   	 lote.setLote(txtPesquisarLotes.getText()); 
+                                                      
+
+       private void JTableLoteMouseClicked(java.awt.event.MouseEvent evt) {                                        
+           int linhaSelecionada = JTableLote.getSelectedRow();
+           if (evt.getButton() == MouseEvent.BUTTON1&& evt.getClickCount() == 2) {
+   			if (JTableLote.getSelectedRow() > -1) {
+   				if (linhaSelecionada == -1) {
+   					JOptionPane.showMessageDialog(null,"Não tem nada selecionado");
+   				} else {
+   					txtId.setText(JTableLote.getValueAt(linhaSelecionada, 0).toString());
+   					try{
+   						txtLote.setText(JTableLote.getValueAt(linhaSelecionada, 1).toString());
+   					}catch(Exception e){
+   						txtLote.setText("");
+   					}
+   					try{
+   						txtValidade.setText(JTableLote.getValueAt(linhaSelecionada, 2).toString());
+   					}catch(Exception e){
+   						txtValidade.setText("");
+   						
+   					}
+   					try{
+   						txtFabricacao.setText(JTableLote.getValueAt(linhaSelecionada, 3).toString());
+   					}catch(Exception e){
+   						txtFabricacao.setText("");	
+   					}
+   					
+   					txtId.setEnabled(true);
+   			        txtValidade.setEnabled(true);
+   			        txtLote.setEnabled(true);
+   			        txtFabricacao.setEnabled(true);
+   			        btnDeletar.setEnabled(true);
+   						
+   				}
+   			}
+   		}
+       }                                       
+
+       private void txtLoteActionPerformed(java.awt.event.ActionEvent evt) {                                        
+           // TODO add your handling code here:
+       }                                       
+
+       private void txtValidadeActionPerformed(java.awt.event.ActionEvent evt) {                                            
+           // TODO add your handling code here:
+       }                                           
+       
+       
+       
+       private void btnEditarActionPerformed(ActionEvent evt) throws ParseException{
+       	
+       	conlot.validarIdLote(txtId.getText());
+       	conlot.validarLote(txtLote.getText());
+       	conlot.validarDataValidade(conlot.formataDataBr(txtValidade.getText()));
+       	conlot.validarDataFabricacao(conlot.formataDataBr(txtFabricacao.getText()));
+       	dao.alterarLotes(conlot.lot);
+       	preencherTabelaLote("select * from lotes order by idlotes");
+       
+       	
+       	
+       }
+       protected void btnDeletarActionPerformed(ActionEvent evt) {
+   		lote.setIdlote(Integer.parseInt(txtId.getText()));
+   		dao.deletarLote(lote);
+   		preencherTabelaLote("select * from lotes order by idlotes");
+   		
+   		
+   	}
+
+       private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) throws Exception {                                          
+          
+       	conlot.validarIdLote(txtId.getText());
+       	conlot.validarLote(txtLote.getText());
+       	conlot.validarDataValidade(txtValidade.getText());
+       	conlot.validarDataFabricacao(txtFabricacao.getText());
+       	dao.inserirLote(conlot.lot);
+       	preencherTabelaLote("select * from lotes order by idlotes");
+       	
+       
+       	
+       }                                         
+       
+       private void btnNovoActionPerformed(ActionEvent evt){
+       	
+    	
+    	txtId.setText(dao.pegarProximoId());
+       	txtId.setEnabled(true);
+           txtValidade.setEnabled(true);
+           txtValidade.setText("");
+           txtLote.setEnabled(true);
+           txtLote.setText("");
+           txtFabricacao.setEnabled(true);
+           txtFabricacao.setText("");
+           btnEditar.setEnabled(false);
+       
+       }
+               
+       private void btnPesquisarLotesActionPerformed(java.awt.event.ActionEvent evt) throws Exception {                                                  
+           
+   		
+   		 lote.setLote(txtPesquisarLotes.getText()); 
    		preencherTabelaLote("select * from lotes where lote like '%" + lote.getLote() + "%' " );
-    }                                                 
+      } 
 
-                                                   
-
-    private void JTableLoteMouseClicked(java.awt.event.MouseEvent evt) {                                        
-        int linhaSelecionada = JTableLote.getSelectedRow();
-        if (evt.getButton() == MouseEvent.BUTTON1&& evt.getClickCount() == 2) {
-			if (JTableLote.getSelectedRow() > -1) {
-				if (linhaSelecionada == -1) {
-					JOptionPane.showMessageDialog(null,"Não tem nada selecionado");
-				} else {
-					txtId.setText(JTableLote.getValueAt(linhaSelecionada, 0).toString());
-					try{
-						txtLote.setText(JTableLote.getValueAt(linhaSelecionada, 1).toString());
-					}catch(Exception e){
-						txtLote.setText("");
-					}
-					try{
-						txtValidade.setText(JTableLote.getValueAt(linhaSelecionada, 2).toString());
-					}catch(Exception e){
-						txtValidade.setText("");
-						
-					}
-					try{
-						txtFabricacao.setText(JTableLote.getValueAt(linhaSelecionada, 3).toString());
-					}catch(Exception e){
-						txtFabricacao.setText("");	
-					}
-					
-					txtId.setEnabled(true);
-			        txtValidade.setEnabled(true);
-			        txtLote.setEnabled(true);
-			        txtFabricacao.setEnabled(true);
-			        btnDeletar.setEnabled(true);
-						
-				}
-			}
-		}
-    }                                       
-
-    private void txtLoteActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        // TODO add your handling code here:
-    }                                       
-
-    private void txtValidadeActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
-    
-    
-    
-    private void btnEditarActionPerformed(ActionEvent evt) throws ParseException{
-    	
-    	conlot.validarIdLote(txtId.getText());
-    	conlot.validarLote(txtLote.getText());
-    	conlot.validarDataValidade(conlot.formataDataBr(txtValidade.getText()));
-    	conlot.validarDataFabricacao(conlot.formataDataBr(txtFabricacao.getText()));
-    	dao.alterarLotes(conlot.lot);
-    	preencherTabelaLote("select * from lotes order by idlotes");
-    
-    	
-    	
-    }
-    protected void btnDeletarActionPerformed(ActionEvent evt) {
-		lote.setIdlote(Integer.parseInt(txtId.getText()));
-		dao.deletarLote(lote);
-		preencherTabelaLote("select * from lotes order by idlotes");
-		
-		
-	}
-
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) throws Exception {                                          
+      public void preencherTabelaLote(String sql) {
+           
+           ArrayList dados =  new ArrayList();
        
-    	conlot.validarIdLote(txtId.getText());
-    	conlot.validarLote(txtLote.getText());
-    	conlot.validarDataValidade(txtValidade.getText());
-    	conlot.validarDataFabricacao(txtFabricacao.getText());
-    	dao.inserirLote(conlot.lot);
-    	preencherTabelaLote("select * from lotes order by idlotes");
-    	
-    
-    	
-    }                                         
-    
-    private void btnNovoActionPerformed(ActionEvent evt){
-    	
-    	txtId.setEnabled(true);
-    	txtId.setText("");
-        txtValidade.setEnabled(true);
-        txtValidade.setText("");
-        txtLote.setEnabled(true);
-        txtLote.setText("");
-        txtFabricacao.setEnabled(true);
-        txtFabricacao.setText("");
-    
-    }
-            
-    private void btnPesquisarLotesActionPerformed(java.awt.event.ActionEvent evt) throws Exception {                                                  
-        
-		
-		 lote.setLote(txtPesquisarLotes.getText()); 
-		preencherTabelaLote("select * from lotes where lote like '%" + lote.getLote() + "%' " );
-   } 
+           String [] colunas = new String[]{"idlotes","lote","dataValidade","dataFabricacao"};
 
-   public void preencherTabelaLote(String sql) {
-        
-        ArrayList dados =  new ArrayList();
-    
-        String [] colunas = new String[]{"idlotes","lote","dataValidade","dataFabricacao"};
-
-       conecta.executaSQL(sql);
-        try {
-            conecta.rs.first();
-            do{
-                dados.add(new Object[]{conecta.rs.getInt("idlotes"),conecta.rs.getString("lote"),conecta.rs.getString("dataValidade"),conecta.rs.getString("dataFabricacao")});
-                
-            }while(conecta.rs.next());
-        } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(null, "Erro ao preencher o ArrayList");
-        }
-       ModeloTabela modelo = new ModeloTabela(dados, colunas);
-       JTableLote.setModel(modelo);
-       JTableLote.getColumnModel().getColumn(0).setPreferredWidth(80);
-       JTableLote.getColumnModel().getColumn(0).setResizable(false);
-       JTableLote.getColumnModel().getColumn(1).setPreferredWidth(160);
-       JTableLote.getColumnModel().getColumn(1).setResizable(false);
-       JTableLote.getColumnModel().getColumn(2).setPreferredWidth(80);
-       JTableLote.getColumnModel().getColumn(2).setResizable(false);
-       JTableLote.getColumnModel().getColumn(3).setPreferredWidth(85);
-       JTableLote.getColumnModel().getColumn(3).setResizable(false);
-       JTableLote.getTableHeader().setReorderingAllowed(false);
-       JTableLote.setAutoResizeMode(JTableLote.AUTO_RESIZE_OFF);
-       JTableLote.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-       
-    } 
-
-
+          conecta.executaSQL(sql);
+           try {
+               conecta.rs.first();
+               do{
+                   dados.add(new Object[]{conecta.rs.getInt("idlotes"),conecta.rs.getString("lote"),conecta.rs.getString("dataValidade"),conecta.rs.getString("dataFabricacao")});
+                   
+               }while(conecta.rs.next());
+           } catch (SQLException ex) {
+               JOptionPane.showConfirmDialog(null, "Erro ao preencher o ArrayList");
+           }
+          ModeloTabela modelo = new ModeloTabela(dados, colunas);
+          JTableLote.setModel(modelo);
+          JTableLote.getColumnModel().getColumn(0).setPreferredWidth(80);
+          JTableLote.getColumnModel().getColumn(0).setResizable(false);
+          JTableLote.getColumnModel().getColumn(1).setPreferredWidth(160);
+          JTableLote.getColumnModel().getColumn(1).setResizable(false);
+          JTableLote.getColumnModel().getColumn(2).setPreferredWidth(80);
+          JTableLote.getColumnModel().getColumn(2).setResizable(false);
+          JTableLote.getColumnModel().getColumn(3).setPreferredWidth(85);
+          JTableLote.getColumnModel().getColumn(3).setResizable(false);
+          JTableLote.getTableHeader().setReorderingAllowed(false);
+          JTableLote.setAutoResizeMode(JTableLote.AUTO_RESIZE_OFF);
+          JTableLote.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+          
+       } 
 
 
 }

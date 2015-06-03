@@ -83,7 +83,7 @@ public class DaoLote {
 				conecta.conexao();
 				
 				PreparedStatement pst = conecta.conn.prepareStatement("DELETE FROM lotes WHERE idlotes = ? ");
-				pst.setString(1,String.valueOf( l.getIdlote()));
+				pst.setString(1,String.valueOf(l.getIdlote()));
 				
 				JOptionPane.showMessageDialog(null, "Registro deletado com sucesso!");
 				pst.executeUpdate();
@@ -114,6 +114,40 @@ public class DaoLote {
 			}
 		}
 		
+		public String pegarProximoId(){
+			
+			try{
+				conecta.conexao();
+				
+				/*
+				 * Query SQL comentada:
+				 * SET @idproximo :=     <--Variável que recebe o resultado da query
+				 * ( SELECT AUTO_INCREMENT   <-- pega o valor auto-incremento
+				 * FROM  INFORMATION_SCHEMA.TABLES    
+				 *  WHERE TABLE_SCHEMA = 'spic'  <-- database selecionacdo
+				 *  AND  
+				 *	TABLE_NAME   = 'lotes')"     <-- tabela
+				 * 	select @idproximo   <-- retorna valor da variável
+				 * 
+				 */
+				
+				PreparedStatement pst = conecta.conn.prepareStatement("SET @idproximo :=( SELECT AUTO_INCREMENT FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'spic' AND   TABLE_NAME   = 'lotes')");
+				pst.executeUpdate();
+				pst = conecta.conn.prepareStatement("select @idproximo");
+				rs = pst.executeQuery();
+				rs.next();
+				String id =  rs.getString("@idproximo");
+				return id;
+				
+			}catch(SQLException e){
+				JOptionPane.showMessageDialog(null, "Não foi possível capturar o id!! "+ "/n"+e.getMessage());
+				return null;
+			}
+			
+			
+			
+			
+		}
 		
 	
 
