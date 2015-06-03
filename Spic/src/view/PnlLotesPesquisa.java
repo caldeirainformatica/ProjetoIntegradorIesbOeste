@@ -90,6 +90,8 @@ public class PnlLotesPesquisa extends JPanel {
         btnEditar = new javax.swing.JButton();
         txtValidade = new javax.swing.JFormattedTextField();
         txtFabricacao = new javax.swing.JFormattedTextField();
+        btnSalvar.setEnabled(false);
+        btnEditar.setEnabled(false);
         
         
         txtId.setEnabled(false);
@@ -362,7 +364,7 @@ public class PnlLotesPesquisa extends JPanel {
        
        
        private void btnEditarActionPerformed(ActionEvent evt) throws ParseException{
-       	
+       	btnSalvar.setEnabled(false);
        	conlot.validarIdLote(txtId.getText());
        	conlot.validarLote(txtLote.getText());
        	conlot.validarDataValidade(conlot.formataDataBr(txtValidade.getText()));
@@ -420,7 +422,7 @@ public class PnlLotesPesquisa extends JPanel {
            
            ArrayList dados =  new ArrayList();
        
-           String [] colunas = new String[]{"idlotes","lote","dataValidade","dataFabricacao"};
+           String [] colunas = new String[]{"  ID  ","lote","  Validade  ","  Fabricacao  "};
 
           conecta.executaSQL(sql);
            try {
