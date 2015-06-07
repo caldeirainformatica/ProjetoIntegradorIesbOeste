@@ -46,7 +46,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 	 * Creates new form FrmPrincipal
 	 */
 	public FrmPrincipal() {
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
 		JPanel pnlBotoes = new JPanel();
@@ -96,6 +96,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 				.getResource("/images/domesticos_2141_porta.gif")));
 		btnSair.setBounds(157, 11, 62, 53);
 		pnlBotoes.add(btnSair);
+	   
 		
 		JButton btnLotes = new JButton("New button");
 		btnLotes.addActionListener(new ActionListener() {
@@ -112,7 +113,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 		pnlBotoes.add(btnLotes);
 
 		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
+		setJMenuBar(menuBar); 
 
 		JMenu mnCadastro = new JMenu("Cadastro");
 		menuBar.add(mnCadastro);
