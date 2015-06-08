@@ -14,10 +14,10 @@ import persistencia.ConectaBanco;
  * @author Fiuza
  */
 
-public class PnlLotesPesquisa extends JPanel {
+public class PnlLotes extends JPanel {
 
     ConectaBanco conecta = new ConectaBanco();
-    public PnlLotesPesquisa() {
+    public PnlLotes() {
         
         
         initComponents();
