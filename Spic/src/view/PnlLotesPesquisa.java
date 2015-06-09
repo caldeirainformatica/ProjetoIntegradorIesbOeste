@@ -397,7 +397,8 @@ public class PnlLotesPesquisa extends JPanel {
        }                                         
        
        private void btnNovoActionPerformed(ActionEvent evt){
-       	
+    	   
+       	btnSalvar.setEnabled(true);
     	
     	txtId.setText(dao.pegarProximoId());
        	txtId.setEnabled(true);
