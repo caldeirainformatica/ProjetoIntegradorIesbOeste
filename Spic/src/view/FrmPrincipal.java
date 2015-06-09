@@ -28,6 +28,8 @@ import model.Lotes;
 
 import java.awt.SystemColor;
 import java.awt.Component;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  *
@@ -46,7 +48,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
 	 * Creates new form FrmPrincipal
 	 */
 	public FrmPrincipal() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				fechaTela();
+			}
+		});
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		getContentPane().setLayout(null);
 
 		JPanel pnlBotoes = new JPanel();
@@ -96,24 +104,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
 				.getResource("/images/domesticos_2141_porta.gif")));
 		btnSair.setBounds(157, 11, 62, 53);
 		pnlBotoes.add(btnSair);
-	   
-		
+
 		JButton btnLotes = new JButton("New button");
 		btnLotes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				FrmLoteComMenu l = new FrmLoteComMenu();
 				l.setVisible(true);
 				l.setResizable(false);
-			
+
 			}
 		});
-		btnLotes.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/images/th.jpg")));
+		btnLotes.setIcon(new ImageIcon(FrmPrincipal.class
+				.getResource("/images/th.jpg")));
 		btnLotes.setBounds(229, 11, 89, 53);
 		pnlBotoes.add(btnLotes);
 
 		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar); 
+		setJMenuBar(menuBar);
 
 		JMenu mnCadastro = new JMenu("Cadastro");
 		menuBar.add(mnCadastro);
@@ -141,15 +149,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
 			}
 		});
 		mnMovimentos.add(mnVendas);
-		
+
 		JMenu mnMenu = new JMenu("Menu");
 		mnMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
 		menuBar.add(mnMenu);
-		
+
 		JMenuItem mnSair = new JMenuItem("Sair");
 		mnMenu.add(mnSair);
 		initComponents();
@@ -180,14 +188,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
 	}
 
 	private void chamaVendas() throws Exception {
-	try {
-		FrmVendas vendas = new FrmVendas();
-		vendas.setVisible(true);
-		vendas.setResizable(false);
-		vendas.setExtendedState(MAXIMIZED_BOTH);
-	} catch (Exception e) {
-		// TODO: handle exception
-	}
+		try {
+			FrmVendas vendas = new FrmVendas();
+			vendas.setVisible(true);
+			vendas.setResizable(false);
+			vendas.setExtendedState(MAXIMIZED_BOTH);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	private void fechaTela() {
