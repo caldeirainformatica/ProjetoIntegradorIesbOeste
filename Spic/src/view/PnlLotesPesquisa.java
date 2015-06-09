@@ -331,13 +331,13 @@ public class PnlLotesPesquisa extends JPanel {
    						txtLote.setText("");
    					}
    					try{
-   						txtValidade.setText(JTableLote.getValueAt(linhaSelecionada, 2).toString());
+   						txtValidade.setText(conlot.formataDataBr(JTableLote.getValueAt(linhaSelecionada, 2).toString()));
    					}catch(Exception e){
    						txtValidade.setText("");
    						
    					}
    					try{
-   						txtFabricacao.setText(JTableLote.getValueAt(linhaSelecionada, 3).toString());
+   						txtFabricacao.setText(conlot.formataDataBr(JTableLote.getValueAt(linhaSelecionada, 3).toString()));
    					}catch(Exception e){
    						txtFabricacao.setText("");	
    					}
