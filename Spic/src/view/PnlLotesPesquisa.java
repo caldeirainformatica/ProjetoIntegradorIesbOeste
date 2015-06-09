@@ -413,7 +413,7 @@ public class PnlLotesPesquisa extends JPanel {
                
        private void btnPesquisarLotesActionPerformed(java.awt.event.ActionEvent evt) throws Exception {                                                  
            
-   		
+   		btnEditar.setEnabled(true);
    		 lote.setLote(txtPesquisarLotes.getText()); 
    		preencherTabelaLote("select * from lotes where lote like '%" + lote.getLote() + "%' " );
       } 
