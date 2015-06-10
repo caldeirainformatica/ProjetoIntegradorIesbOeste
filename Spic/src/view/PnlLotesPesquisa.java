@@ -3,6 +3,7 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -26,7 +27,216 @@ import persistencia.DaoLote;
 public class PnlLotesPesquisa extends JPanel {
 	   // Variables declaration - do not modify                     
     private javax.swing.JTable JTableLote;
-    private javax.swing.JButton btnDeletar;
+    public javax.swing.JTable getJTableLote() {
+		return JTableLote;
+	}
+
+
+	public void setJTableLote(javax.swing.JTable jTableLote) {
+		JTableLote = jTableLote;
+	}
+
+
+	public javax.swing.JButton getBtnDeletar() {
+		return btnDeletar;
+	}
+
+
+	public void setBtnDeletar(javax.swing.JButton btnDeletar) {
+		this.btnDeletar = btnDeletar;
+	}
+
+
+	public javax.swing.JButton getBtnEditar() {
+		return btnEditar;
+	}
+
+
+	public void setBtnEditar(javax.swing.JButton btnEditar) {
+		this.btnEditar = btnEditar;
+	}
+
+
+	public javax.swing.JButton getBtnNovo() {
+		return btnNovo;
+	}
+
+
+	public void setBtnNovo(javax.swing.JButton btnNovo) {
+		this.btnNovo = btnNovo;
+	}
+
+
+	public javax.swing.JButton getBtnPesquisarLotes() {
+		return btnPesquisarLotes;
+	}
+
+
+	public void setBtnPesquisarLotes(javax.swing.JButton btnPesquisarLotes) {
+		this.btnPesquisarLotes = btnPesquisarLotes;
+	}
+
+
+	public javax.swing.JButton getBtnSalvar() {
+		return btnSalvar;
+	}
+
+
+	public void setBtnSalvar(javax.swing.JButton btnSalvar) {
+		this.btnSalvar = btnSalvar;
+	}
+
+
+	public javax.swing.JButton getjButton2() {
+		return jButton2;
+	}
+
+
+	public void setjButton2(javax.swing.JButton jButton2) {
+		this.jButton2 = jButton2;
+	}
+
+
+	public javax.swing.JLabel getjLabel2() {
+		return jLabel2;
+	}
+
+
+	public void setjLabel2(javax.swing.JLabel jLabel2) {
+		this.jLabel2 = jLabel2;
+	}
+
+
+	public javax.swing.JLabel getjLabel4() {
+		return jLabel4;
+	}
+
+
+	public void setjLabel4(javax.swing.JLabel jLabel4) {
+		this.jLabel4 = jLabel4;
+	}
+
+
+	public javax.swing.JLabel getjLabel5() {
+		return jLabel5;
+	}
+
+
+	public void setjLabel5(javax.swing.JLabel jLabel5) {
+		this.jLabel5 = jLabel5;
+	}
+
+
+	public javax.swing.JLabel getjLabel6() {
+		return jLabel6;
+	}
+
+
+	public void setjLabel6(javax.swing.JLabel jLabel6) {
+		this.jLabel6 = jLabel6;
+	}
+
+
+	public javax.swing.JLabel getjLabel7() {
+		return jLabel7;
+	}
+
+
+	public void setjLabel7(javax.swing.JLabel jLabel7) {
+		this.jLabel7 = jLabel7;
+	}
+
+
+	public javax.swing.JScrollPane getjScrollPane1() {
+		return jScrollPane1;
+	}
+
+
+	public void setjScrollPane1(javax.swing.JScrollPane jScrollPane1) {
+		this.jScrollPane1 = jScrollPane1;
+	}
+
+
+	public javax.swing.JSeparator getjSeparator1() {
+		return jSeparator1;
+	}
+
+
+	public void setjSeparator1(javax.swing.JSeparator jSeparator1) {
+		this.jSeparator1 = jSeparator1;
+	}
+
+
+	public javax.swing.JLabel getLblId() {
+		return lblId;
+	}
+
+
+	public void setLblId(javax.swing.JLabel lblId) {
+		this.lblId = lblId;
+	}
+
+
+	public javax.swing.JLabel getLblPesquisaLotes() {
+		return lblPesquisaLotes;
+	}
+
+
+	public void setLblPesquisaLotes(javax.swing.JLabel lblPesquisaLotes) {
+		this.lblPesquisaLotes = lblPesquisaLotes;
+	}
+
+
+	public javax.swing.JFormattedTextField getTxtFabricacao() {
+		return txtFabricacao;
+	}
+
+
+	public void setTxtFabricacao(javax.swing.JFormattedTextField txtFabricacao) {
+		this.txtFabricacao = txtFabricacao;
+	}
+
+
+	public javax.swing.JTextField getTxtId() {
+		return txtId;
+	}
+
+
+	public void setTxtId(javax.swing.JTextField txtId) {
+		this.txtId = txtId;
+	}
+
+
+	public javax.swing.JTextField getTxtLote() {
+		return txtLote;
+	}
+
+
+	public void setTxtLote(javax.swing.JTextField txtLote) {
+		this.txtLote = txtLote;
+	}
+
+
+	public javax.swing.JTextField getTxtPesquisarLotes() {
+		return txtPesquisarLotes;
+	}
+
+
+	public void setTxtPesquisarLotes(javax.swing.JTextField txtPesquisarLotes) {
+		this.txtPesquisarLotes = txtPesquisarLotes;
+	}
+
+
+	public javax.swing.JFormattedTextField getTxtValidade() {
+		return txtValidade;
+	}
+
+
+	public void setTxtValidade(javax.swing.JFormattedTextField txtValidade) {
+		this.txtValidade = txtValidade;
+	}
+
+	private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisarLotes;
@@ -57,6 +267,7 @@ public class PnlLotesPesquisa extends JPanel {
 	
 
     ConectaBanco conecta = new ConectaBanco();
+    FacadeLote facade = new FacadeLote();
     public PnlLotesPesquisa() {
         
         
@@ -320,6 +531,8 @@ public class PnlLotesPesquisa extends JPanel {
        private void JTableLoteMouseClicked(java.awt.event.MouseEvent evt) {                                        
            int linhaSelecionada = JTableLote.getSelectedRow();
            if (evt.getButton() == MouseEvent.BUTTON1&& evt.getClickCount() == 2) {
+        	   
+        	   btnEditar.setEnabled(true);
    			if (JTableLote.getSelectedRow() > -1) {
    				if (linhaSelecionada == -1) {
    					JOptionPane.showMessageDialog(null,"Não tem nada selecionado");
@@ -331,13 +544,13 @@ public class PnlLotesPesquisa extends JPanel {
    						txtLote.setText("");
    					}
    					try{
-   						txtValidade.setText(JTableLote.getValueAt(linhaSelecionada, 2).toString());
+   						txtValidade.setText(conlot.formataDataBr(JTableLote.getValueAt(linhaSelecionada, 2).toString()));
    					}catch(Exception e){
    						txtValidade.setText("");
    						
    					}
    					try{
-   						txtFabricacao.setText(JTableLote.getValueAt(linhaSelecionada, 3).toString());
+   						txtFabricacao.setText(conlot.formataDataBr(JTableLote.getValueAt(linhaSelecionada, 3).toString()));
    					}catch(Exception e){
    						txtFabricacao.setText("");	
    					}
@@ -383,16 +596,15 @@ public class PnlLotesPesquisa extends JPanel {
    		
    	}
 
-       private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) throws Exception {                                          
+       private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt ) throws Exception {                                          
           
-       	conlot.validarIdLote(txtId.getText());
-       	conlot.validarLote(txtLote.getText());
-       	conlot.validarDataValidade(txtValidade.getText());
-       	conlot.validarDataFabricacao(txtFabricacao.getText());
-       	dao.inserirLote(conlot.lot);
-       	preencherTabelaLote("select * from lotes order by idlotes");
-       	
-       
+    	   
+  
+    	   
+    	   
+    	   facade.gravarLote(txtLote.getText(), txtValidade.getText(), txtFabricacao.getText());
+    	   preencherTabelaLote("select * from lotes order by idlotes");
+    	   	
        	
        }                                         
        

@@ -20,6 +20,7 @@ public class FrmLoteComMenu extends javax.swing.JFrame {
      */
     public FrmLoteComMenu() {
     	setLocation(new Point(370, 50));
+    	
         initComponents();
     }
 
@@ -38,7 +39,7 @@ public class FrmLoteComMenu extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.CardLayout());
         getContentPane().add(pnlLotesPesquisa1, "card2");
         setTitle("Lote");
-        setResizable(true);
+        setResizable(false);
        pack();
     }// </editor-fold>                        
 
